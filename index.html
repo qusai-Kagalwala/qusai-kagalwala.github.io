@@ -1,26 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Qusai Kagalwala | Full-Stack Developer</title>
-    <meta name="description"
-        content="Portfolio of Qusai Kagalwala - Full-Stack Developer, AI/ML Enthusiast, and Computer Science Student.">
+    <meta name="description" content="Portfolio of Qusai Kagalwala - Full-Stack Developer, AI/ML Enthusiast, and Computer Science Student based in Mumbai.">
+    <meta name="theme-color" content="#0a192f">
+
+    <!-- Open Graph / Social Preview -->
+    <meta property="og:title" content="Qusai Kagalwala | Full-Stack Developer">
+    <meta property="og:description" content="Full-Stack Developer & CS Student based in Mumbai. 60+ projects spanning web, AI/ML, and automation.">
+    <meta property="og:type" content="website">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&family=Poppins:wght@500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 
-    <!-- CSS -->
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body class="loading">
-    <!-- Loading Screen -->
+
+    <!-- ═══════════════════════════════════════
+         LOADING SCREEN
+    ═══════════════════════════════════════ -->
     <div id="loader" class="loader" aria-hidden="false">
         <div class="loader-bg"></div>
         <div class="loader-content">
@@ -28,7 +37,7 @@
                 <svg class="loader-hex" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="loaderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="var(--accent-blue)" />
+                            <stop offset="0%" stop-color="var(--accent)" />
                             <stop offset="100%" stop-color="var(--accent-purple)" />
                         </linearGradient>
                     </defs>
@@ -42,1096 +51,698 @@
         </div>
     </div>
 
+    <!-- Scroll Progress Bar -->
     <div id="scroll-progress" aria-hidden="true"></div>
+
     <!-- Background Canvas -->
     <canvas id="bg-canvas"></canvas>
 
-    <!-- Custom Cursor -->
+    <!-- Custom Cursor (desktop only) -->
     <div class="cursor-dot" data-cursor-dot></div>
     <div class="cursor-outline" data-cursor-outline></div>
 
-    <!-- Navigation -->
+    <!-- ═══════════════════════════════════════
+         NAVIGATION
+    ═══════════════════════════════════════ -->
     <header id="navbar">
-        <nav class="container nav-container">
-            <a href="#" class="logo">QK</a>
-            <ul class="nav-links">
+        <nav class="navbar-inner container-fluid px-3 px-md-4">
+
+            <!-- Logo -->
+            <a href="#" class="nav-logo">QK</a>
+
+            <!-- Desktop Nav Links -->
+            <ul class="nav-links d-none d-lg-flex" id="desktop-nav">
                 <li><a href="#about" class="nav-link"><span class="mono">01.</span> About</a></li>
                 <li><a href="#projects" class="nav-link"><span class="mono">02.</span> Projects</a></li>
                 <li><a href="#skills" class="nav-link"><span class="mono">03.</span> Skills</a></li>
                 <li><a href="#experience" class="nav-link"><span class="mono">04.</span> Experience</a></li>
                 <li><a href="#certifications" class="nav-link"><span class="mono">05.</span> Certifications</a></li>
                 <li><a href="#contact" class="nav-link"><span class="mono">06.</span> Contact</a></li>
-                <li><a href="resume.pdf" class="btn" target="_blank" rel="noopener noreferrer">Resume</a></li>
             </ul>
+
+            <!-- Right Controls -->
+            <div class="nav-controls d-flex align-items-center gap-2 gap-md-3">
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light mode">
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+
+                <!-- Resume Button (desktop) -->
+                <a href="resume.pdf" class="btn-resume d-none d-lg-inline-flex" target="_blank" rel="noopener noreferrer">Resume</a>
+
+                <!-- Hamburger (mobile/tablet) -->
+                <button class="hamburger d-lg-none" id="hamburger-btn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-nav">
+                    <span class="ham-line"></span>
+                    <span class="ham-line"></span>
+                    <span class="ham-line"></span>
+                </button>
+            </div>
         </nav>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-nav" class="mobile-nav" aria-hidden="true">
+            <div class="mobile-nav-inner">
+                <ul class="mobile-nav-links">
+                    <li><a href="#about" class="mobile-nav-link"><span class="mono">01.</span> About</a></li>
+                    <li><a href="#projects" class="mobile-nav-link"><span class="mono">02.</span> Projects</a></li>
+                    <li><a href="#skills" class="mobile-nav-link"><span class="mono">03.</span> Skills</a></li>
+                    <li><a href="#experience" class="mobile-nav-link"><span class="mono">04.</span> Experience</a></li>
+                    <li><a href="#certifications" class="mobile-nav-link"><span class="mono">05.</span> Certifications</a></li>
+                    <li><a href="#contact" class="mobile-nav-link"><span class="mono">06.</span> Contact</a></li>
+                </ul>
+                <a href="resume.pdf" class="btn-outline-accent mt-4 text-center d-block" target="_blank" rel="noopener noreferrer">Resume</a>
+            </div>
+        </div>
     </header>
 
+    <!-- Mobile Nav Overlay -->
+    <div id="nav-overlay" class="nav-overlay d-lg-none" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════
+         MAIN CONTENT
+    ═══════════════════════════════════════ -->
     <main id="main-content" class="main-hidden">
-        <!-- Hero Section -->
-        <section id="hero">
-            <div class="fade-in" style="animation-delay: 100ms;">
-                <span class="mono">Hi, my name is</span>
-            </div>
-            <div class="fade-in" style="animation-delay: 200ms;">
-                <h1>Qusai Kagalwala.</h1>
-            </div>
-            <div class="fade-in" style="animation-delay: 300ms;">
-                <h2 class="text-secondary">I build things for the web & AI.</h2>
-            </div>
-            <div class="fade-in" style="animation-delay: 400ms;">
-                <p>
+
+        <!-- ── HERO ── -->
+        <section id="hero" class="hero-section">
+            <div class="container-content">
+                <p class="mono fade-in" style="--delay:100ms">Hi, my name is</p>
+                <h1 class="hero-name fade-in" style="--delay:200ms">Qusai Kagalwala.</h1>
+                <h2 class="hero-sub fade-in" style="--delay:300ms">I build things for the web & AI.</h2>
+                <p class="hero-desc fade-in" style="--delay:400ms">
                     I'm a Full-Stack Developer and Computer Science Student based in Mumbai. I specialize in building
-                    exception, high-performance web applications and experimenting with AI/ML to solve real-world
-                    problems.
+                    high-performance web applications and experimenting with AI/ML to solve real-world problems.
                 </p>
-            </div>
-            <div class="cta-group fade-in" style="animation-delay: 500ms;">
-                <a href="#projects" class="btn">Check out my work!</a>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about">
-            <h2 class="section-title fade-in"><span class="mono">01.</span> About Me</h2>
-            <div class="about-content">
-                <div class="about-text fade-in">
-                    <p>
-                        Hello! My name is Qusai and I enjoy creating things that live on the internet. My interest in
-                        web development started back in 2024 when I decided to try building a custom theme for a
-                        hackathon project — turns out hacking together HTML & CSS is pretty fun!
-                    </p>
-                    <p>
-                        Fast-forward to today, and I've had the privilege of leading the core team at
-                        <span class="text-accent">Fiestron</span> and building over 60+ projects ranging from AI tools
-                        to web apps. My main focus these days is building accessible, inclusive products and digital
-                        experiences for a variety of clients.
-                    </p>
-                    <p>Here are a few technologies I've been working with recently:</p>
-                    <ul class="skills-list">
-                        <li>Python</li>
-                        <li>JavaScript (ES6+)</li>
-                        <li>React</li>
-                        <li>Node.js</li>
-                        <li>Flask</li>
-                        <li>PostgreSQL</li>
-                    </ul>
+                <div class="hero-cta fade-in" style="--delay:500ms">
+                    <a href="#projects" class="btn-accent">Check out my work</a>
+                    <a href="#contact" class="btn-outline-accent">Get in touch</a>
                 </div>
-                <div class="about-img fade-in">
-                    <div class="img-wrapper">
-                        <!-- Placeholder for user image, using a gradient box for now -->
-                        <div class="img-placeholder"></div>
+
+                <!-- Stats Pills -->
+                <div class="hero-stats fade-in" style="--delay:600ms">
+                    <div class="stat-pill">
+                        <span class="stat-num">60+</span>
+                        <span class="stat-label">Projects</span>
+                    </div>
+                    <div class="stat-pill">
+                        <span class="stat-num">10+</span>
+                        <span class="stat-label">Certifications</span>
+                    </div>
+                    <div class="stat-pill">
+                        <span class="stat-num">2×</span>
+                        <span class="stat-label">Competition Wins</span>
+                    </div>
+                    <div class="stat-pill">
+                        <span class="stat-num">6</span>
+                        <span class="stat-label">Languages Spoken</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Projects Section -->
-        <section id="projects">
-            <h2 class="section-title fade-in"><span class="mono">02.</span> Some Things I've Built</h2>
-
-            <!-- Project Filters -->
-            <div class="filter-container fade-in">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="web">Web</button>
-                <button class="filter-btn" data-filter="ai">AI / ML</button>
-                <button class="filter-btn" data-filter="cli">CLI Tools</button>
-                <button class="filter-btn" data-filter="game">Games</button>
-            </div>
-
-            <!-- Projects Grid -->
-            <ul class="projects-grid">
-
-                <!-- Project 1 -->
-                <li class="project-card fade-in" data-category="web" data-repo="https://github.com/qusai-Kagalwala/DBank">
-                    <div class="project-content">
-                        <div>
-                            <div class="project-top">
-                                <div class="folder-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="1" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path
-                                            d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://github.com/qusai-Kagalwala/DBank" target="_blank" rel="noopener noreferrer" aria-label="GitHub Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path
-                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                            </path>
-                                        </svg></a>
-                                    <a href="https://github.com/qusai-Kagalwala/DBank" target="_blank" rel="noopener noreferrer" aria-label="External Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                            <polyline points="15 3 21 3 21 9"></polyline>
-                                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                                        </svg></a>
-                                </div>
-                            </div>
-                            <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/DBank" target="_blank" rel="noopener noreferrer">DBank</a></h3>
-                            <div class="project-description">
-                                <p>A secure web application for digital banking featuring real-time transactions and
-                                    user authentication.</p>
-                            </div>
-                        </div>
-                        <ul class="project-tech-list">
+        <!-- ── ABOUT ── -->
+        <section id="about" class="section-spacing">
+            <div class="container-content">
+                <h2 class="section-title fade-in"><span class="mono">01.</span> About Me</h2>
+                <div class="row g-4 g-lg-5 align-items-center">
+                    <div class="col-lg-7 fade-in">
+                        <p class="body-text">
+                            Hello! My name is Qusai and I enjoy creating things that live on the internet. My interest in
+                            web development started back in 2024 when I decided to try building a custom theme for a
+                            hackathon project — turns out hacking together HTML & CSS is pretty fun!
+                        </p>
+                        <p class="body-text">
+                            Fast-forward to today, and I've had the privilege of leading the core team at
+                            <span class="text-accent">Fiestron</span> and building over 60+ projects ranging from AI tools
+                            to web apps. I'm currently pursuing a <span class="text-accent">BSc in Computer Science</span>
+                            at KC College, Mumbai (2024–2028).
+                        </p>
+                        <p class="body-text mb-3">Here are a few technologies I've been working with recently:</p>
+                        <ul class="skills-pill-list">
                             <li>Python</li>
-                            <li>Flask</li>
-                            <li>SQL</li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Project 2 -->
-                <li class="project-card fade-in" data-category="ai" data-repo="https://github.com/qusai-Kagalwala/DeepSeek-R1-Local-Runner">
-                    <div class="project-content">
-                        <div>
-                            <div class="project-top">
-                                <div class="folder-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="1" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path
-                                            d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://github.com/qusai-Kagalwala/DeepSeek-R1-Local-Runner" target="_blank" rel="noopener noreferrer" aria-label="GitHub Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path
-                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                            </path>
-                                        </svg></a>
-                                </div>
-                            </div>
-                            <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/DeepSeek-R1-Local-Runner" target="_blank" rel="noopener noreferrer">DeepSeek R1 Runner</a></h3>
-                            <div class="project-description">
-                                <p>Local execution environment for DeepSeek 7B models, optimized for private inference
-                                    and experimentation.</p>
-                            </div>
-                        </div>
-                        <ul class="project-tech-list">
-                            <li>Python</li>
-                            <li>PyTorch</li>
-                            <li>Ollama</li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Project 3 -->
-                <li class="project-card fade-in" data-category="web" data-repo="https://github.com/qusai-Kagalwala/Repo-Vista">
-                    <div class="project-content">
-                        <div>
-                            <div class="project-top">
-                                <div class="folder-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="1" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path
-                                            d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://github.com/qusai-Kagalwala/Repo-Vista" target="_blank" rel="noopener noreferrer" aria-label="GitHub Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path
-                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                            </path>
-                                        </svg></a>
-                                </div>
-                            </div>
-                            <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Repo-Vista" target="_blank" rel="noopener noreferrer">Repo Vista</a></h3>
-                            <div class="project-description">
-                                <p>A tool to visualize GitHub repositories and get insights into code structure and
-                                    contribution stats.</p>
-                            </div>
-                        </div>
-                        <ul class="project-tech-list">
-                            <li>React</li>
-                            <li>GitHub API</li>
-                            <li>Chart.js</li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Project 4 - CLI -->
-                <li class="project-card fade-in" data-category="cli" data-repo="https://github.com/qusai-Kagalwala/Secure-Password-Manager">
-                    <div class="project-content">
-                        <div>
-                            <div class="project-top">
-                                <div class="folder-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="1" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path
-                                            d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://github.com/qusai-Kagalwala/Secure-Password-Manager" target="_blank" rel="noopener noreferrer" aria-label="GitHub Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path
-                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                            </path>
-                                        </svg></a>
-                                </div>
-                            </div>
-                            <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Secure-Password-Manager" target="_blank" rel="noopener noreferrer">Secure Password Manager</a></h3>
-                            <div class="project-description">
-                                <p>A CLI tool for safely storing and retrieving passwords with encryption.</p>
-                            </div>
-                        </div>
-                        <ul class="project-tech-list">
-                            <li>Python</li>
-                            <li>Cryptography</li>
-                            <li>SQLite</li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Project 5 - Games -->
-                <li class="project-card fade-in" data-category="game" data-repo="https://github.com/qusai-Kagalwala/Turtle-Dash">
-                    <div class="project-content">
-                        <div>
-                            <div class="project-top">
-                                <div class="folder-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="1" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path
-                                            d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://github.com/qusai-Kagalwala/Turtle-Dash" target="_blank" rel="noopener noreferrer" aria-label="GitHub Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path
-                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                            </path>
-                                        </svg></a>
-                                </div>
-                            </div>
-                            <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Turtle-Dash" target="_blank" rel="noopener noreferrer">Turtle Dash</a></h3>
-                            <div class="project-description">
-                                <p>A classic arcade-style game built with Python's Turtle library.</p>
-                            </div>
-                        </div>
-                        <ul class="project-tech-list">
-                            <li>Python</li>
-                            <li>Turtle</li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Project 6 - Web -->
-                <li class="project-card fade-in" data-category="web" data-repo="https://github.com/qusai-Kagalwala/Book-Notes-Tracker">
-                    <div class="project-content">
-                        <div>
-                            <div class="project-top">
-                                <div class="folder-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="1" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path
-                                            d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://github.com/qusai-Kagalwala/Book-Notes-Tracker" target="_blank" rel="noopener noreferrer" aria-label="GitHub Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path
-                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                            </path>
-                                        </svg></a>
-                                    <a href="https://github.com/qusai-Kagalwala/Book-Notes-Tracker" target="_blank" rel="noopener noreferrer" aria-label="External Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                            <polyline points="15 3 21 3 21 9"></polyline>
-                                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                                        </svg></a>
-                                </div>
-                            </div>
-                            <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Book-Notes-Tracker" target="_blank" rel="noopener noreferrer">Book Notes Tracker</a></h3>
-                            <div class="project-description">
-                                <p>A web application for organizing and tracking reading notes with search and categorization features.</p>
-                            </div>
-                        </div>
-                        <ul class="project-tech-list">
+                            <li>JavaScript (ES6+)</li>
                             <li>React</li>
                             <li>Node.js</li>
-                            <li>MongoDB</li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Project 7 - Web -->
-                <li class="project-card fade-in" data-category="web" data-repo="https://github.com/qusai-Kagalwala/SecureAuth-Portal">
-                    <div class="project-content">
-                        <div>
-                            <div class="project-top">
-                                <div class="folder-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="1" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path
-                                            d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://github.com/qusai-Kagalwala/SecureAuth-Portal" target="_blank" rel="noopener noreferrer" aria-label="GitHub Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path
-                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                            </path>
-                                        </svg></a>
-                                    <a href="https://github.com/qusai-Kagalwala/SecureAuth-Portal" target="_blank" rel="noopener noreferrer" aria-label="External Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                            <polyline points="15 3 21 3 21 9"></polyline>
-                                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                                        </svg></a>
-                                </div>
-                            </div>
-                            <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/SecureAuth-Portal" target="_blank" rel="noopener noreferrer">SecureAuth Portal</a></h3>
-                            <div class="project-description">
-                                <p>An authentication system with secure login, registration, and session management features.</p>
-                            </div>
-                        </div>
-                        <ul class="project-tech-list">
-                            <li>React</li>
-                            <li>Express.js</li>
+                            <li>Flask</li>
                             <li>PostgreSQL</li>
                         </ul>
                     </div>
-                </li>
-
-                <!-- Project 8 - Web -->
-                <li class="project-card fade-in" data-category="web" data-repo="https://github.com/qusai-Kagalwala/JokeAPI-Express">
-                    <div class="project-content">
-                        <div>
-                            <div class="project-top">
-                                <div class="folder-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="1" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path
-                                            d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://github.com/qusai-Kagalwala/JokeAPI-Express" target="_blank" rel="noopener noreferrer" aria-label="GitHub Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path
-                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                            </path>
-                                        </svg></a>
-                                    <a href="https://github.com/qusai-Kagalwala/JokeAPI-Express" target="_blank" rel="noopener noreferrer" aria-label="External Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                            <polyline points="15 3 21 3 21 9"></polyline>
-                                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                                        </svg></a>
-                                </div>
-                            </div>
-                            <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/JokeAPI-Express" target="_blank" rel="noopener noreferrer">JokeAPI-Express</a></h3>
-                            <div class="project-description">
-                                <p>A RESTful API built with Express.js for fetching and managing jokes with filtering and categorization.</p>
-                            </div>
+                    <div class="col-lg-5 fade-in">
+                        <div class="about-img-wrap">
+                            <div class="img-placeholder"></div>
                         </div>
-                        <ul class="project-tech-list">
-                            <li>Node.js</li>
-                            <li>Express.js</li>
-                            <li>REST API</li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Project 9 - Web -->
-                <li class="project-card fade-in" data-category="web" data-repo="https://github.com/qusai-Kagalwala/Qusai-E-commerce-V1">
-                    <div class="project-content">
-                        <div>
-                            <div class="project-top">
-                                <div class="folder-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="1" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path
-                                            d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://github.com/qusai-Kagalwala/Qusai-E-commerce-V1" target="_blank" rel="noopener noreferrer" aria-label="GitHub Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path
-                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                            </path>
-                                        </svg></a>
-                                    <a href="https://github.com/qusai-Kagalwala/Qusai-E-commerce-V1" target="_blank" rel="noopener noreferrer" aria-label="External Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                            <polyline points="15 3 21 3 21 9"></polyline>
-                                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                                        </svg></a>
-                                </div>
-                            </div>
-                            <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Qusai-E-commerce-V1" target="_blank" rel="noopener noreferrer">Qusai E-commerce V1</a></h3>
-                            <div class="project-description">
-                                <p>A full-featured e-commerce platform with shopping cart, payment integration, and admin dashboard.</p>
-                            </div>
-                        </div>
-                        <ul class="project-tech-list">
-                            <li>React</li>
-                            <li>Node.js</li>
-                            <li>MongoDB</li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Project 10 - Web -->
-                <li class="project-card fade-in" data-category="web" data-repo="https://github.com/qusai-Kagalwala/Interactive-Drum-Kit">
-                    <div class="project-content">
-                        <div>
-                            <div class="project-top">
-                                <div class="folder-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="1" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path
-                                            d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://github.com/qusai-Kagalwala/Interactive-Drum-Kit" target="_blank" rel="noopener noreferrer" aria-label="GitHub Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path
-                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                            </path>
-                                        </svg></a>
-                                    <a href="https://github.com/qusai-Kagalwala/Interactive-Drum-Kit" target="_blank" rel="noopener noreferrer" aria-label="External Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                            <polyline points="15 3 21 3 21 9"></polyline>
-                                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                                        </svg></a>
-                                </div>
-                            </div>
-                            <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Interactive-Drum-Kit" target="_blank" rel="noopener noreferrer">Interactive Drum Kit</a></h3>
-                            <div class="project-description">
-                                <p>An interactive web-based drum kit with keyboard and mouse controls, featuring sound effects and visual feedback.</p>
-                            </div>
-                        </div>
-                        <ul class="project-tech-list">
-                            <li>JavaScript</li>
-                            <li>HTML5</li>
-                            <li>CSS3</li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Project 11 - AI/ML -->
-                <li class="project-card fade-in" data-category="ai" data-repo="https://github.com/qusai-Kagalwala/Movie-Recommender-System">
-                    <div class="project-content">
-                        <div>
-                            <div class="project-top">
-                                <div class="folder-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="1" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path
-                                            d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://github.com/qusai-Kagalwala/Movie-Recommender-System" target="_blank" rel="noopener noreferrer" aria-label="GitHub Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path
-                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                            </path>
-                                        </svg></a>
-                                </div>
-                            </div>
-                            <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Movie-Recommender-System" target="_blank" rel="noopener noreferrer">Movie Recommender System</a></h3>
-                            <div class="project-description">
-                                <p>A content-based movie recommendation system using machine learning algorithms to suggest films based on user preferences.</p>
-                            </div>
-                        </div>
-                        <ul class="project-tech-list">
-                            <li>Python</li>
-                            <li>Scikit-learn</li>
-                            <li>Pandas</li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Project 12 - AI/ML -->
-                <li class="project-card fade-in" data-category="ai" data-repo="https://github.com/qusai-Kagalwala/Certificate-Automation-Tool">
-                    <div class="project-content">
-                        <div>
-                            <div class="project-top">
-                                <div class="folder-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="1" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path
-                                            d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://github.com/qusai-Kagalwala/Certificate-Automation-Tool" target="_blank" rel="noopener noreferrer" aria-label="GitHub Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path
-                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                            </path>
-                                        </svg></a>
-                                </div>
-                            </div>
-                            <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Certificate-Automation-Tool" target="_blank" rel="noopener noreferrer">Certificate Automation Tool</a></h3>
-                            <div class="project-description">
-                                <p>An AI-powered tool that automates certificate generation and personalization using template processing and data extraction.</p>
-                            </div>
-                        </div>
-                        <ul class="project-tech-list">
-                            <li>Python</li>
-                            <li>Automation</li>
-                            <li>Streamlit</li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Project 13 - CLI -->
-                <li class="project-card fade-in" data-category="cli" data-repo="https://github.com/qusai-Kagalwala/TimeCounter">
-                    <div class="project-content">
-                        <div>
-                            <div class="project-top">
-                                <div class="folder-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="1" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path
-                                            d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://github.com/qusai-Kagalwala/TimeCounter" target="_blank" rel="noopener noreferrer" aria-label="GitHub Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path
-                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                            </path>
-                                        </svg></a>
-                                </div>
-                            </div>
-                            <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/TimeCounter" target="_blank" rel="noopener noreferrer">TimeCounter</a></h3>
-                            <div class="project-description">
-                                <p>A command-line time tracking tool for monitoring work sessions and productivity with detailed reports.</p>
-                            </div>
-                        </div>
-                        <ul class="project-tech-list">
-                            <li>Python</li>
-                            <li>CLI</li>
-                            <li>SQLite</li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Project 14 - CLI -->
-                <li class="project-card fade-in" data-category="cli" data-repo="https://github.com/qusai-Kagalwala/Maze-Runner">
-                    <div class="project-content">
-                        <div>
-                            <div class="project-top">
-                                <div class="folder-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="1" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path
-                                            d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://github.com/qusai-Kagalwala/Maze-Runner" target="_blank" rel="noopener noreferrer" aria-label="GitHub Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path
-                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                            </path>
-                                        </svg></a>
-                                </div>
-                            </div>
-                            <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Maze-Runner" target="_blank" rel="noopener noreferrer">Maze-Runner</a></h3>
-                            <div class="project-description">
-                                <p>A terminal-based maze generation and solving tool with multiple algorithms and visualization.</p>
-                            </div>
-                        </div>
-                        <ul class="project-tech-list">
-                            <li>Python</li>
-                            <li>Algorithms</li>
-                            <li>CLI</li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Project 15 - CLI -->
-                <li class="project-card fade-in" data-category="cli" data-repo="https://github.com/qusai-Kagalwala/VocalizeIt">
-                    <div class="project-content">
-                        <div>
-                            <div class="project-top">
-                                <div class="folder-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="1" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path
-                                            d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://github.com/qusai-Kagalwala/VocalizeIt" target="_blank" rel="noopener noreferrer" aria-label="GitHub Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path
-                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                            </path>
-                                        </svg></a>
-                                </div>
-                            </div>
-                            <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/VocalizeIt" target="_blank" rel="noopener noreferrer">VocalizeIt</a></h3>
-                            <div class="project-description">
-                                <p>A text-to-speech CLI tool with multiple voice options and audio format support.</p>
-                            </div>
-                        </div>
-                        <ul class="project-tech-list">
-                            <li>Python</li>
-                            <li>TTS</li>
-                            <li>CLI</li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Project 16 - Games -->
-                <li class="project-card fade-in" data-category="game" data-repo="https://github.com/qusai-Kagalwala/Speed-Keys">
-                    <div class="project-content">
-                        <div>
-                            <div class="project-top">
-                                <div class="folder-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="1" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path
-                                            d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="project-links">
-                                    <a href="#" aria-label="GitHub Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path
-                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                            </path>
-                                        </svg></a>
-                                </div>
-                            </div>
-                            <h3 class="project-title"><a href="#">Speed-Keys</a></h3>
-                            <div class="project-description">
-                                <p>A typing speed test game with real-time WPM calculation and accuracy tracking.</p>
-                            </div>
-                        </div>
-                        <ul class="project-tech-list">
-                            <li>Python</li>
-                            <li>Game</li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Project 17 - Games -->
-                <li class="project-card fade-in" data-category="game" data-repo="https://github.com/qusai-Kagalwala/Rock-Paper-Scissors">
-                    <div class="project-content">
-                        <div>
-                            <div class="project-top">
-                                <div class="folder-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="1" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path
-                                            d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://github.com/qusai-Kagalwala/Rock-Paper-Scissors" target="_blank" rel="noopener noreferrer" aria-label="GitHub Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path
-                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                            </path>
-                                        </svg></a>
-                                </div>
-                            </div>
-                            <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Rock-Paper-Scissors" target="_blank" rel="noopener noreferrer">Rock-Paper-Scissors</a></h3>
-                            <div class="project-description">
-                                <p>An interactive rock-paper-scissors game with AI opponent and score tracking.</p>
-                            </div>
-                        </div>
-                        <ul class="project-tech-list">
-                            <li>Python</li>
-                            <li>Game</li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Project 18 - Games -->
-                <li class="project-card fade-in" data-category="game">
-                    <div class="project-content">
-                        <div>
-                            <div class="project-top">
-                                <div class="folder-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="1" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path
-                                            d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://github.com/qusai-Kagalwala/Choose-Your-Own-Adventure" target="_blank" rel="noopener noreferrer" aria-label="GitHub Link"><svg xmlns="http://www.w3.org/2000/svg"
-                                            role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path
-                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                            </path>
-                                        </svg></a>
-                                </div>
-                            </div>
-                            <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Choose-Your-Own-Adventure" target="_blank" rel="noopener noreferrer">Choose Your Own Adventure</a></h3>
-                            <div class="project-description">
-                                <p>An interactive text-based adventure game with branching storylines and multiple endings.</p>
-                            </div>
-                        </div>
-                        <ul class="project-tech-list">
-                            <li>Python</li>
-                            <li>Game</li>
-                        </ul>
-                    </div>
-                </li>
-
-            </ul>
-
-            <div style="text-align: center; margin-top: 50px;" class="fade-in">
-                <a href="https://github.com/qusai-kagalwala" class="btn" target="_blank" rel="noopener noreferrer">View
-                    Full Project Archive</a>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills">
-            <h2 class="section-title fade-in"><span class="mono">03.</span> Skills & Tech</h2>
-
-            <!-- Top Skills: hexagon radar, 100% scale, labels on 6 vertices -->
-            <div id="skills-stats" class="fade-in">
-                <h3 class="stats-heading">Top Skills <span class="stats-scale">(0–100%)</span></h3>
-                <div id="stats-graph" class="stats-graph">
-                    <div class="stats-radar-wrap">
-                        <svg class="stats-radar-svg" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="statGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="var(--accent-blue)" />
-                                    <stop offset="100%" stop-color="var(--accent-purple)" />
-                                </linearGradient>
-                            </defs>
-                            <!-- Grid: 0–100% in 6 axes. Center 100,100, R=70. Vertices: top, TR, BR, bottom, BL, TL -->
-                            <polygon class="stat-hex-outer" points="100,30 170,65 170,135 100,170 30,135 30,65" fill="none" stroke="currentColor" />
-                            <line class="stat-axis" x1="100" y1="100" x2="100" y2="30" />
-                            <line class="stat-axis" x1="100" y1="100" x2="170" y2="65" />
-                            <line class="stat-axis" x1="100" y1="100" x2="170" y2="135" />
-                            <line class="stat-axis" x1="100" y1="100" x2="100" y2="170" />
-                            <line class="stat-axis" x1="100" y1="100" x2="30" y2="135" />
-                            <line class="stat-axis" x1="100" y1="100" x2="30" y2="65" />
-                            <!-- Filled polygon: each vertex = center + (vertex - center) * (value/100). F85 B90 A75 D80 T85 De70 -->
-                            <polygon class="stat-fill" fill="url(#statGrad)" stroke="url(#statGrad)" stroke-width="1.5" stroke-linejoin="round"
-                                points="100,39.5 163,68.5 152.5,126.25 100,156 40.5,129.75 51,75.5" />
-                            <!-- Labels at 6 vertices (just outside hexagon) -->
-                            <text class="stat-label stat-label-top" x="100" y="18" text-anchor="middle">Frontend</text>
-                            <text class="stat-label stat-label-tr" x="188" y="70" text-anchor="start">Backend</text>
-                            <text class="stat-label stat-label-br" x="188" y="130" text-anchor="start">AI / ML</text>
-                            <text class="stat-label stat-label-bottom" x="100" y="192" text-anchor="middle">Databases</text>
-                            <text class="stat-label stat-label-bl" x="12" y="130" text-anchor="end">Tools</text>
-                            <text class="stat-label stat-label-tl" x="12" y="70" text-anchor="end">Design</text>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Endless horizontal scroll: tech logos (starts when section in view) -->
-            <div class="skills-marquee-wrap">
-                <div id="skills-marquee" class="skills-marquee">
-                    <div class="marquee-group">
-                        <a href="https://www.python.org/" target="_blank" rel="noopener" class="skills-marquee-item" title="Python"><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python" /><span>Python</span></a>
-                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener" class="skills-marquee-item" title="JavaScript"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript" /><span>JavaScript</span></a>
-                        <a href="https://react.dev/" target="_blank" rel="noopener" class="skills-marquee-item" title="React"><img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" /><span>React</span></a>
-                        <a href="https://nodejs.org/" target="_blank" rel="noopener" class="skills-marquee-item" title="Node.js"><img src="https://cdn.simpleicons.org/nodedotjs/339933" alt="Node.js" /><span>Node.js</span></a>
-                        <a href="https://expressjs.com/" target="_blank" rel="noopener" class="skills-marquee-item" title="Express"><img src="https://cdn.simpleicons.org/express/000000" alt="Express" /><span>Express</span></a>
-                        <a href="https://flask.palletsprojects.com/" target="_blank" rel="noopener" class="skills-marquee-item" title="Flask"><img src="https://cdn.simpleicons.org/flask/000000" alt="Flask" /><span>Flask</span></a>
-                        <a href="https://www.postgresql.org/" target="_blank" rel="noopener" class="skills-marquee-item" title="PostgreSQL"><img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="PostgreSQL" /><span>PostgreSQL</span></a>
-                        <a href="https://www.mongodb.com/" target="_blank" rel="noopener" class="skills-marquee-item" title="MongoDB"><img src="https://cdn.simpleicons.org/mongodb/47A248" alt="MongoDB" /><span>MongoDB</span></a>
-                        <a href="https://git-scm.com/" target="_blank" rel="noopener" class="skills-marquee-item" title="Git"><img src="https://cdn.simpleicons.org/git/F05032" alt="Git" /><span>Git</span></a>
-                        <a href="https://www.figma.com/" target="_blank" rel="noopener" class="skills-marquee-item" title="Figma"><img src="https://cdn.simpleicons.org/figma/F24E1E" alt="Figma" /><span>Figma</span></a>
-                        <a href="https://scikit-learn.org/" target="_blank" rel="noopener" class="skills-marquee-item" title="Scikit-learn"><img src="https://cdn.simpleicons.org/scikitlearn/F89939" alt="Scikit-learn" /><span>Scikit-learn</span></a>
-                        <a href="https://pandas.pydata.org/" target="_blank" rel="noopener" class="skills-marquee-item" title="Pandas"><img src="https://cdn.simpleicons.org/pandas/150458" alt="Pandas" /><span>Pandas</span></a>
-                    </div>
-                    <div class="marquee-group" aria-hidden="true">
-                        <a href="https://www.python.org/" target="_blank" rel="noopener" class="skills-marquee-item" title="Python"><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python" /><span>Python</span></a>
-                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener" class="skills-marquee-item" title="JavaScript"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript" /><span>JavaScript</span></a>
-                        <a href="https://react.dev/" target="_blank" rel="noopener" class="skills-marquee-item" title="React"><img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" /><span>React</span></a>
-                        <a href="https://nodejs.org/" target="_blank" rel="noopener" class="skills-marquee-item" title="Node.js"><img src="https://cdn.simpleicons.org/nodedotjs/339933" alt="Node.js" /><span>Node.js</span></a>
-                        <a href="https://expressjs.com/" target="_blank" rel="noopener" class="skills-marquee-item" title="Express"><img src="https://cdn.simpleicons.org/express/000000" alt="Express" /><span>Express</span></a>
-                        <a href="https://flask.palletsprojects.com/" target="_blank" rel="noopener" class="skills-marquee-item" title="Flask"><img src="https://cdn.simpleicons.org/flask/000000" alt="Flask" /><span>Flask</span></a>
-                        <a href="https://www.postgresql.org/" target="_blank" rel="noopener" class="skills-marquee-item" title="PostgreSQL"><img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="PostgreSQL" /><span>PostgreSQL</span></a>
-                        <a href="https://www.mongodb.com/" target="_blank" rel="noopener" class="skills-marquee-item" title="MongoDB"><img src="https://cdn.simpleicons.org/mongodb/47A248" alt="MongoDB" /><span>MongoDB</span></a>
-                        <a href="https://git-scm.com/" target="_blank" rel="noopener" class="skills-marquee-item" title="Git"><img src="https://cdn.simpleicons.org/git/F05032" alt="Git" /><span>Git</span></a>
-                        <a href="https://www.figma.com/" target="_blank" rel="noopener" class="skills-marquee-item" title="Figma"><img src="https://cdn.simpleicons.org/figma/F24E1E" alt="Figma" /><span>Figma</span></a>
-                        <a href="https://scikit-learn.org/" target="_blank" rel="noopener" class="skills-marquee-item" title="Scikit-learn"><img src="https://cdn.simpleicons.org/scikitlearn/F89939" alt="Scikit-learn" /><span>Scikit-learn</span></a>
-                        <a href="https://pandas.pydata.org/" target="_blank" rel="noopener" class="skills-marquee-item" title="Pandas"><img src="https://cdn.simpleicons.org/pandas/150458" alt="Pandas" /><span>Pandas</span></a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Experience Section -->
-        <section id="experience">
-            <h2 class="section-title fade-in"><span class="mono">04.</span> Experience & Leadership</h2>
-            <div class="experience-container">
+        <!-- ── PROJECTS ── -->
+        <section id="projects" class="section-spacing">
+            <div class="container-content">
+                <h2 class="section-title fade-in"><span class="mono">02.</span> Some Things I've Built</h2>
 
-                <!-- Role 1 -->
-                <div class="experience-item fade-in">
-                    <div class="exp-header">
-                        <h3 class="exp-role">Core Team Lead <span class="exp-company">@ Fiestron</span></h3>
-                        <span class="exp-duration">Dec 2024 – Present</span>
-                    </div>
-                    <ul class="exp-list">
-                        <li>Coordinated 20+ events across 24+ departments with 79 team members for KC College’s flagship
-                            tech festival.</li>
-                        <li>Led inter-department communication, streamlined operations, and managed logistics.</li>
-                        <li>Supported event heads in planning and execution to ensure a high-quality participant
-                            experience.</li>
-                    </ul>
+                <!-- Filter Tabs -->
+                <div class="filter-wrap fade-in">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="web">Web</button>
+                    <button class="filter-btn" data-filter="ai">AI / ML</button>
+                    <button class="filter-btn" data-filter="cli">CLI Tools</button>
+                    <button class="filter-btn" data-filter="game">Games</button>
                 </div>
 
-                <!-- Role 2 -->
-                <div class="experience-item fade-in">
-                    <div class="exp-header">
-                        <h3 class="exp-role">Event Head <span class="exp-company">@ Hackathon</span></h3>
-                        <span class="exp-duration">Fiestron 2024</span>
+                <!-- Projects Grid -->
+                <div class="row g-3 projects-grid" id="projects-grid">
+
+                    <!-- Project Cards -->
+                    <div class="col-sm-6 col-xl-4 project-col fade-in" data-category="web">
+                        <div class="project-card h-100" data-repo="https://github.com/qusai-Kagalwala/DBank">
+                            <div class="project-card-inner">
+                                <div class="project-top">
+                                    <div class="project-folder-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                                    </div>
+                                    <div class="project-links-row">
+                                        <a href="https://github.com/qusai-Kagalwala/DBank" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                                    </div>
+                                </div>
+                                <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/DBank" target="_blank" rel="noopener noreferrer">DBank</a></h3>
+                                <p class="project-desc">A secure decentralized web application for digital banking featuring real-time transactions and user authentication on the ICP blockchain.</p>
+                                <ul class="project-tech">
+                                    <li>React</li><li>ICP Blockchain</li><li>Motoko</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <ul class="exp-list">
-                        <li>Organized and managed the flagship Hackathon event.</li>
-                        <li>Oversaw participant support, judging coordination, and event flow.</li>
-                    </ul>
+
+                    <div class="col-sm-6 col-xl-4 project-col fade-in" data-category="ai">
+                        <div class="project-card h-100" data-repo="https://github.com/qusai-Kagalwala/DeepSeek-R1-Local-Runner">
+                            <div class="project-card-inner">
+                                <div class="project-top">
+                                    <div class="project-folder-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                                    </div>
+                                    <div class="project-links-row">
+                                        <a href="https://github.com/qusai-Kagalwala/DeepSeek-R1-Local-Runner" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                                    </div>
+                                </div>
+                                <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/DeepSeek-R1-Local-Runner" target="_blank" rel="noopener noreferrer">DeepSeek R1 Runner</a></h3>
+                                <p class="project-desc">VS Code extension for local execution of DeepSeek 7B models — optimized for private inference and experimentation without cloud dependency.</p>
+                                <ul class="project-tech">
+                                    <li>Python</li><li>Ollama</li><li>VS Code API</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-xl-4 project-col fade-in" data-category="web">
+                        <div class="project-card h-100" data-repo="https://github.com/qusai-Kagalwala/Repo-Vista">
+                            <div class="project-card-inner">
+                                <div class="project-top">
+                                    <div class="project-folder-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                                    </div>
+                                    <div class="project-links-row">
+                                        <a href="https://github.com/qusai-Kagalwala/Repo-Vista" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                                    </div>
+                                </div>
+                                <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Repo-Vista" target="_blank" rel="noopener noreferrer">Repo Vista</a></h3>
+                                <p class="project-desc">A beautiful GitHub repository visualizer with 7 customizable themes — explore code structure, contribution stats and language breakdowns.</p>
+                                <ul class="project-tech">
+                                    <li>React</li><li>GitHub API</li><li>Chart.js</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-xl-4 project-col fade-in" data-category="cli">
+                        <div class="project-card h-100" data-repo="https://github.com/qusai-Kagalwala/Secure-Password-Manager">
+                            <div class="project-card-inner">
+                                <div class="project-top">
+                                    <div class="project-folder-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                                    </div>
+                                    <div class="project-links-row">
+                                        <a href="https://github.com/qusai-Kagalwala/Secure-Password-Manager" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                                    </div>
+                                </div>
+                                <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Secure-Password-Manager" target="_blank" rel="noopener noreferrer">Secure Password Manager</a></h3>
+                                <p class="project-desc">CLI tool for safely storing and retrieving passwords using industry-standard cryptography — encrypted credential storage with SQLite backend.</p>
+                                <ul class="project-tech">
+                                    <li>Python</li><li>Cryptography</li><li>SQLite</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-xl-4 project-col fade-in" data-category="web">
+                        <div class="project-card h-100" data-repo="https://github.com/qusai-Kagalwala/Book-Notes-Tracker">
+                            <div class="project-card-inner">
+                                <div class="project-top">
+                                    <div class="project-folder-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                                    </div>
+                                    <div class="project-links-row">
+                                        <a href="https://github.com/qusai-Kagalwala/Book-Notes-Tracker" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                                    </div>
+                                </div>
+                                <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Book-Notes-Tracker" target="_blank" rel="noopener noreferrer">Book Notes Tracker</a></h3>
+                                <p class="project-desc">Web app for organizing and tracking reading notes. Features Open Library API integration, search, and categorization with a PostgreSQL backend.</p>
+                                <ul class="project-tech">
+                                    <li>Node.js</li><li>PostgreSQL</li><li>Open Library API</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-xl-4 project-col fade-in" data-category="web">
+                        <div class="project-card h-100" data-repo="https://github.com/qusai-Kagalwala/SecureAuth-Portal">
+                            <div class="project-card-inner">
+                                <div class="project-top">
+                                    <div class="project-folder-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                                    </div>
+                                    <div class="project-links-row">
+                                        <a href="https://github.com/qusai-Kagalwala/SecureAuth-Portal" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                                    </div>
+                                </div>
+                                <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/SecureAuth-Portal" target="_blank" rel="noopener noreferrer">SecureAuth Portal</a></h3>
+                                <p class="project-desc">Full-stack authentication system with secure login, registration, session management, and industry-standard security practices.</p>
+                                <ul class="project-tech">
+                                    <li>React</li><li>Express.js</li><li>PostgreSQL</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-xl-4 project-col fade-in" data-category="ai">
+                        <div class="project-card h-100" data-repo="https://github.com/qusai-Kagalwala/Movie-Recommender-System">
+                            <div class="project-card-inner">
+                                <div class="project-top">
+                                    <div class="project-folder-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                                    </div>
+                                    <div class="project-links-row">
+                                        <a href="https://github.com/qusai-Kagalwala/Movie-Recommender-System" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                                    </div>
+                                </div>
+                                <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Movie-Recommender-System" target="_blank" rel="noopener noreferrer">Movie Recommender</a></h3>
+                                <p class="project-desc">Content-based ML recommendation engine using cosine similarity and CountVectorizer — suggests films based on preferences and metadata.</p>
+                                <ul class="project-tech">
+                                    <li>Python</li><li>Scikit-learn</li><li>Pandas</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-xl-4 project-col fade-in" data-category="ai">
+                        <div class="project-card h-100" data-repo="https://github.com/qusai-Kagalwala/Certificate-Automation-Tool">
+                            <div class="project-card-inner">
+                                <div class="project-top">
+                                    <div class="project-folder-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                                    </div>
+                                    <div class="project-links-row">
+                                        <a href="https://github.com/qusai-Kagalwala/Certificate-Automation-Tool" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                                    </div>
+                                </div>
+                                <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Certificate-Automation-Tool" target="_blank" rel="noopener noreferrer">Certificate Automation</a></h3>
+                                <p class="project-desc">Enterprise-grade bulk certificate generation tool. CSV integration + template processing — built & used for real Fiestron events.</p>
+                                <ul class="project-tech">
+                                    <li>Python</li><li>Streamlit</li><li>Automation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-xl-4 project-col fade-in" data-category="cli">
+                        <div class="project-card h-100" data-repo="https://github.com/qusai-Kagalwala/VocalizeIt">
+                            <div class="project-card-inner">
+                                <div class="project-top">
+                                    <div class="project-folder-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                                    </div>
+                                    <div class="project-links-row">
+                                        <a href="https://github.com/qusai-Kagalwala/VocalizeIt" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                                    </div>
+                                </div>
+                                <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/VocalizeIt" target="_blank" rel="noopener noreferrer">VocalizeIt</a></h3>
+                                <p class="project-desc">Text-to-speech CLI tool with multiple voice options and audio format support. Cross-platform compatible with clean terminal UI.</p>
+                                <ul class="project-tech">
+                                    <li>Python</li><li>TTS</li><li>CLI</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-xl-4 project-col fade-in" data-category="cli">
+                        <div class="project-card h-100" data-repo="https://github.com/qusai-Kagalwala/Maze-Runner">
+                            <div class="project-card-inner">
+                                <div class="project-top">
+                                    <div class="project-folder-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                                    </div>
+                                    <div class="project-links-row">
+                                        <a href="https://github.com/qusai-Kagalwala/Maze-Runner" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                                    </div>
+                                </div>
+                                <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Maze-Runner" target="_blank" rel="noopener noreferrer">Maze-Runner</a></h3>
+                                <p class="project-desc">Terminal-based maze generation and BFS solving visualization. Renders the algorithm step-by-step in the terminal with ANSI graphics.</p>
+                                <ul class="project-tech">
+                                    <li>Python</li><li>BFS Algorithm</li><li>CLI</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-xl-4 project-col fade-in" data-category="game">
+                        <div class="project-card h-100" data-repo="https://github.com/qusai-Kagalwala/Turtle-Dash">
+                            <div class="project-card-inner">
+                                <div class="project-top">
+                                    <div class="project-folder-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                                    </div>
+                                    <div class="project-links-row">
+                                        <a href="https://github.com/qusai-Kagalwala/Turtle-Dash" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                                    </div>
+                                </div>
+                                <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Turtle-Dash" target="_blank" rel="noopener noreferrer">Turtle Dash</a></h3>
+                                <p class="project-desc">Arcade-style game built with Python Turtle library. Features collision detection, score tracking, and increasing difficulty curves.</p>
+                                <ul class="project-tech">
+                                    <li>Python</li><li>Turtle Graphics</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-xl-4 project-col fade-in" data-category="game">
+                        <div class="project-card h-100" data-repo="https://github.com/qusai-Kagalwala/Interactive-Drum-Kit">
+                            <div class="project-card-inner">
+                                <div class="project-top">
+                                    <div class="project-folder-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                                    </div>
+                                    <div class="project-links-row">
+                                        <a href="https://github.com/qusai-Kagalwala/Interactive-Drum-Kit" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                                    </div>
+                                </div>
+                                <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Interactive-Drum-Kit" target="_blank" rel="noopener noreferrer">Interactive Drum Kit</a></h3>
+                                <p class="project-desc">Web-based drum kit with keyboard and mouse controls. Features sound effects, visual feedback animations, and responsive layout.</p>
+                                <ul class="project-tech">
+                                    <li>JavaScript</li><li>HTML5 Audio</li><li>CSS3</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
-                <!-- Achievements -->
-                <div class="experience-item fade-in">
-                    <div class="exp-header">
-                        <h3 class="exp-role">Competitions</h3>
-                        <span class="exp-duration">2024 - 2025</span>
-                    </div>
-                    <ul class="exp-list">
-                        <li><strong>1st Place</strong> - Prompt Craft Competition, Cyberstrike'25 (Jan 2025)</li>
-                        <li><strong>2nd Place</strong> - Pitch an App/Website, Fiestron 24–25 (Dec 2024)</li>
-                    </ul>
+                <div class="text-center mt-5 fade-in">
+                    <a href="https://github.com/qusai-Kagalwala" class="btn-accent" target="_blank" rel="noopener noreferrer">View Full Project Archive →</a>
                 </div>
-
             </div>
         </section>
 
-        <!-- Certifications Section -->
-        <section id="certifications">
-            <h2 class="section-title fade-in"><span class="mono">05.</span> Certifications</h2>
-            <div class="cert-grid">
+        <!-- ── SKILLS ── -->
+        <section id="skills" class="section-spacing">
+            <div class="container-content">
+                <h2 class="section-title fade-in"><span class="mono">03.</span> Skills & Tech</h2>
 
-                <!-- Cloud, AI & Data Science -->
-                <div class="cert-card fade-in">
-                    <div class="cert-header">
-                        <div class="cert-icon">☁️</div>
+                <!-- Radar Chart -->
+                <div id="skills-stats" class="fade-in">
+                    <h3 class="stats-heading">Skill Radar <span class="stats-scale">(0–100%)</span></h3>
+                    <div id="stats-graph" class="stats-graph">
+                        <div class="stats-radar-wrap">
+                            <svg class="stats-radar-svg" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="statGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="var(--accent)" />
+                                        <stop offset="100%" stop-color="var(--accent-purple)" />
+                                    </linearGradient>
+                                </defs>
+                                <polygon class="stat-hex-outer" points="100,30 170,65 170,135 100,170 30,135 30,65" fill="none" stroke="currentColor" />
+                                <line class="stat-axis" x1="100" y1="100" x2="100" y2="30" />
+                                <line class="stat-axis" x1="100" y1="100" x2="170" y2="65" />
+                                <line class="stat-axis" x1="100" y1="100" x2="170" y2="135" />
+                                <line class="stat-axis" x1="100" y1="100" x2="100" y2="170" />
+                                <line class="stat-axis" x1="100" y1="100" x2="30" y2="135" />
+                                <line class="stat-axis" x1="100" y1="100" x2="30" y2="65" />
+                                <polygon class="stat-fill" fill="url(#statGrad)" stroke="url(#statGrad)" stroke-width="1.5" stroke-linejoin="round"
+                                    points="100,39.5 163,68.5 152.5,126.25 100,156 40.5,129.75 51,75.5" />
+                                <text class="stat-label" x="100" y="18" text-anchor="middle">Frontend</text>
+                                <text class="stat-label" x="188" y="70" text-anchor="start">Backend</text>
+                                <text class="stat-label" x="188" y="130" text-anchor="start">AI / ML</text>
+                                <text class="stat-label" x="100" y="192" text-anchor="middle">Databases</text>
+                                <text class="stat-label" x="12" y="130" text-anchor="end">Tools</text>
+                                <text class="stat-label" x="12" y="70" text-anchor="end">Design</text>
+                            </svg>
+                        </div>
                     </div>
-                    <h3 class="cert-title">Prompt Design in Vertex AI</h3>
-                    <span class="cert-issuer">Google Cloud</span>
-                    <p class="cert-desc">Advanced prompt engineering techniques for Vertex AI models.</p>
                 </div>
 
-                <div class="cert-card fade-in">
-                    <div class="cert-header">
-                        <div class="cert-icon">🤖</div>
+                <!-- Tech Marquee -->
+                <div class="skills-marquee-wrap">
+                    <div id="skills-marquee" class="skills-marquee">
+                        <div class="marquee-group">
+                            <a href="https://www.python.org/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python" /><span>Python</span></a>
+                            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript" /><span>JavaScript</span></a>
+                            <a href="https://react.dev/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" /><span>React</span></a>
+                            <a href="https://nodejs.org/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/nodedotjs/339933" alt="Node.js" /><span>Node.js</span></a>
+                            <a href="https://expressjs.com/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/express/ffffff" alt="Express" /><span>Express</span></a>
+                            <a href="https://flask.palletsprojects.com/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/flask/ffffff" alt="Flask" /><span>Flask</span></a>
+                            <a href="https://www.postgresql.org/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="PostgreSQL" /><span>PostgreSQL</span></a>
+                            <a href="https://www.mongodb.com/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/mongodb/47A248" alt="MongoDB" /><span>MongoDB</span></a>
+                            <a href="https://git-scm.com/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/git/F05032" alt="Git" /><span>Git</span></a>
+                            <a href="https://www.figma.com/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/figma/F24E1E" alt="Figma" /><span>Figma</span></a>
+                            <a href="https://scikit-learn.org/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/scikitlearn/F89939" alt="Scikit-learn" /><span>Scikit-learn</span></a>
+                            <a href="https://pandas.pydata.org/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/pandas/150458" alt="Pandas" /><span>Pandas</span></a>
+                        </div>
+                        <div class="marquee-group" aria-hidden="true">
+                            <a href="https://www.python.org/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python" /><span>Python</span></a>
+                            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript" /><span>JavaScript</span></a>
+                            <a href="https://react.dev/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" /><span>React</span></a>
+                            <a href="https://nodejs.org/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/nodedotjs/339933" alt="Node.js" /><span>Node.js</span></a>
+                            <a href="https://expressjs.com/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/express/ffffff" alt="Express" /><span>Express</span></a>
+                            <a href="https://flask.palletsprojects.com/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/flask/ffffff" alt="Flask" /><span>Flask</span></a>
+                            <a href="https://www.postgresql.org/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="PostgreSQL" /><span>PostgreSQL</span></a>
+                            <a href="https://www.mongodb.com/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/mongodb/47A248" alt="MongoDB" /><span>MongoDB</span></a>
+                            <a href="https://git-scm.com/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/git/F05032" alt="Git" /><span>Git</span></a>
+                            <a href="https://www.figma.com/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/figma/F24E1E" alt="Figma" /><span>Figma</span></a>
+                            <a href="https://scikit-learn.org/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/scikitlearn/F89939" alt="Scikit-learn" /><span>Scikit-learn</span></a>
+                            <a href="https://pandas.pydata.org/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/pandas/150458" alt="Pandas" /><span>Pandas</span></a>
+                        </div>
                     </div>
-                    <h3 class="cert-title">Introduction to Generative AI</h3>
-                    <span class="cert-issuer">Google Cloud</span>
-                    <p class="cert-desc">Fundamentals of generative AI and its applications.</p>
                 </div>
-
-                <div class="cert-card fade-in">
-                    <div class="cert-header">
-                        <div class="cert-icon">🧠</div>
-                    </div>
-                    <h3 class="cert-title">Introduction to Large Language Models</h3>
-                    <span class="cert-issuer">Google Cloud</span>
-                    <p class="cert-desc">Understanding LLMs, their architecture, and use cases.</p>
-                </div>
-
-                <div class="cert-card fade-in">
-                    <div class="cert-header">
-                        <div class="cert-icon">⚖️</div>
-                    </div>
-                    <h3 class="cert-title">Introduction to Responsible AI</h3>
-                    <span class="cert-issuer">Google Cloud</span>
-                    <p class="cert-desc">Ethical AI practices, fairness, and responsible deployment.</p>
-                </div>
-
-                <div class="cert-card fade-in">
-                    <div class="cert-header">
-                        <div class="cert-icon">📊</div>
-                    </div>
-                    <h3 class="cert-title">Introduction to Data Science</h3>
-                    <span class="cert-issuer">Cisco Networking Academy</span>
-                    <p class="cert-desc">Data analytics, engineering, big data concepts, and ML fundamentals. <em>Issued: Jan 2026</em></p>
-                </div>
-
-                <!-- Cybersecurity -->
-                <div class="cert-card fade-in">
-                    <div class="cert-header">
-                        <div class="cert-icon">🔒</div>
-                    </div>
-                    <h3 class="cert-title">Introduction to Cybersecurity</h3>
-                    <span class="cert-issuer">Cisco (NDG)</span>
-                    <p class="cert-desc">Foundational cybersecurity principles and best practices.</p>
-                </div>
-
-                <!-- Development & Design -->
-                <div class="cert-card fade-in">
-                    <div class="cert-header">
-                        <div class="cert-icon">💻</div>
-                    </div>
-                    <h3 class="cert-title">Complete Full-Stack Web Development Bootcamp</h3>
-                    <span class="cert-issuer">Udemy</span>
-                    <p class="cert-desc">Comprehensive training in modern web development technologies.</p>
-                </div>
-
-                <div class="cert-card fade-in">
-                    <div class="cert-header">
-                        <div class="cert-icon">📱</div>
-                    </div>
-                    <h3 class="cert-title">Responsive Web Design</h3>
-                    <span class="cert-issuer">freeCodeCamp</span>
-                    <p class="cert-desc">Building responsive, mobile-first web applications.</p>
-                </div>
-
-                <div class="cert-card fade-in">
-                    <div class="cert-header">
-                        <div class="cert-icon">🎨</div>
-                    </div>
-                    <h3 class="cert-title">Figma UX/UI Design Essentials</h3>
-                    <span class="cert-issuer">Udemy</span>
-                    <p class="cert-desc">Mastering Figma for professional UI/UX design workflows.</p>
-                </div>
-
-                <div class="cert-card fade-in">
-                    <div class="cert-header">
-                        <div class="cert-icon">🖼️</div>
-                    </div>
-                    <h3 class="cert-title">Graphic Design Essentials</h3>
-                    <span class="cert-issuer">Canva</span>
-                    <p class="cert-desc">Fundamentals of graphic design and visual communication.</p>
-                </div>
-
-                <!-- Soft Skills -->
-                <div class="cert-card fade-in">
-                    <div class="cert-header">
-                        <div class="cert-icon">🤝</div>
-                    </div>
-                    <h3 class="cert-title">Introduction to Soft Skills</h3>
-                    <span class="cert-issuer">TCS iON</span>
-                    <p class="cert-desc">Professional communication, teamwork, and interpersonal skills.</p>
-                </div>
-
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" style="text-align: center; max-width: 600px;">
-            <p class="mono fade-in" style="color: var(--accent-blue); margin-bottom: 20px;"><span class="mono">06.</span> What's Next?</p>
-            <h2 class="title fade-in" style="font-size: 3rem; margin-bottom: 20px;">Get In Touch</h2>
-            <p class="fade-in" style="margin-bottom: 50px;">
-                Although I'm currently looking for new opportunities, my inbox is always open. Whether you have a
-                question or just want to say hi, I'll try my best to get back to you!
-            </p>
-            <div class="cta-group fade-in" style="justify-content: center; margin-bottom: 50px;">
-                <a href="mailto:qusai.kagalwala@example.com" class="btn">Say Hello</a>
-            </div>
+        <!-- ── EXPERIENCE ── -->
+        <section id="experience" class="section-spacing">
+            <div class="container-content">
+                <h2 class="section-title fade-in"><span class="mono">04.</span> Experience & Leadership</h2>
+                <div class="exp-list-wrap">
 
-            <div class="fade-in" style="margin-top: 50px;">
-                <p style="margin-bottom: 20px; color: var(--text-secondary);">Connect with me:</p>
-                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                    <a href="https://github.com/qusai-Kagalwala" target="_blank" rel="noopener noreferrer" class="btn" style="display: inline-flex; align-items: center; gap: 8px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                        </svg>
+                    <div class="exp-item fade-in">
+                        <div class="exp-dot"></div>
+                        <div class="exp-body">
+                            <div class="exp-header-row">
+                                <h3 class="exp-role">Core Team Lead <span class="exp-at">@ Fiestron</span></h3>
+                                <span class="exp-date mono">Dec 2024 – Present</span>
+                            </div>
+                            <ul class="exp-bullets">
+                                <li>Coordinated 20+ events across 24+ departments with 79 team members for KC College's flagship tech festival.</li>
+                                <li>Led inter-department communication, streamlined operations, and managed event logistics end-to-end.</li>
+                                <li>Supported event heads in planning and execution to ensure high-quality participant experience.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="exp-item fade-in">
+                        <div class="exp-dot"></div>
+                        <div class="exp-body">
+                            <div class="exp-header-row">
+                                <h3 class="exp-role">Event Head <span class="exp-at">@ Hackathon, Fiestron</span></h3>
+                                <span class="exp-date mono">Nov–Dec 2024</span>
+                            </div>
+                            <ul class="exp-bullets">
+                                <li>Organized and managed the flagship Hackathon event — full end-to-end ownership.</li>
+                                <li>Oversaw participant support, judging coordination, event flow, and Google Workspace setup.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="exp-item fade-in">
+                        <div class="exp-dot"></div>
+                        <div class="exp-body">
+                            <div class="exp-header-row">
+                                <h3 class="exp-role">Competition Wins</h3>
+                                <span class="exp-date mono">2024 – 2025</span>
+                            </div>
+                            <ul class="exp-bullets">
+                                <li><span class="badge-win">🥇 1st Place</span> Prompt Craft Competition — Cyberstrike'25 (Jan 2025)</li>
+                                <li><span class="badge-win">🥈 2nd Place</span> Pitch an App/Website — Fiestron 24–25 (Dec 2024)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ── CERTIFICATIONS ── -->
+        <section id="certifications" class="section-spacing">
+            <div class="container-content">
+                <h2 class="section-title fade-in"><span class="mono">05.</span> Certifications</h2>
+                <div class="row g-3">
+
+                    <div class="col-sm-6 col-lg-4 fade-in">
+                        <div class="cert-card h-100">
+                            <div class="cert-icon">☁️</div>
+                            <h3 class="cert-title">Prompt Design in Vertex AI</h3>
+                            <span class="cert-issuer">Google Cloud</span>
+                            <p class="cert-desc">Advanced prompt engineering techniques for Vertex AI models.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-4 fade-in">
+                        <div class="cert-card h-100">
+                            <div class="cert-icon">🤖</div>
+                            <h3 class="cert-title">Introduction to Generative AI</h3>
+                            <span class="cert-issuer">Google Cloud</span>
+                            <p class="cert-desc">Fundamentals of generative AI and its real-world applications.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-4 fade-in">
+                        <div class="cert-card h-100">
+                            <div class="cert-icon">🧠</div>
+                            <h3 class="cert-title">Introduction to Large Language Models</h3>
+                            <span class="cert-issuer">Google Cloud</span>
+                            <p class="cert-desc">Understanding LLM architecture, training, and use cases.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-4 fade-in">
+                        <div class="cert-card h-100">
+                            <div class="cert-icon">⚖️</div>
+                            <h3 class="cert-title">Introduction to Responsible AI</h3>
+                            <span class="cert-issuer">Google Cloud</span>
+                            <p class="cert-desc">Ethical AI practices, fairness, and responsible deployment.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-4 fade-in">
+                        <div class="cert-card h-100">
+                            <div class="cert-icon">📊</div>
+                            <h3 class="cert-title">Introduction to Data Science</h3>
+                            <span class="cert-issuer">Cisco Networking Academy</span>
+                            <p class="cert-desc">Data analytics, big data concepts, and ML fundamentals. <em>Jan 2026</em></p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-4 fade-in">
+                        <div class="cert-card h-100">
+                            <div class="cert-icon">🔒</div>
+                            <h3 class="cert-title">Introduction to Cybersecurity</h3>
+                            <span class="cert-issuer">Cisco (NDG)</span>
+                            <p class="cert-desc">Foundational cybersecurity principles and best practices.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-4 fade-in">
+                        <div class="cert-card h-100">
+                            <div class="cert-icon">💻</div>
+                            <h3 class="cert-title">Full-Stack Web Dev Bootcamp</h3>
+                            <span class="cert-issuer">Udemy</span>
+                            <p class="cert-desc">Comprehensive training in modern full-stack web development.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-4 fade-in">
+                        <div class="cert-card h-100">
+                            <div class="cert-icon">📱</div>
+                            <h3 class="cert-title">Responsive Web Design</h3>
+                            <span class="cert-issuer">freeCodeCamp</span>
+                            <p class="cert-desc">Building responsive, mobile-first web applications.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-4 fade-in">
+                        <div class="cert-card h-100">
+                            <div class="cert-icon">🎨</div>
+                            <h3 class="cert-title">Figma UX/UI Design Essentials</h3>
+                            <span class="cert-issuer">Udemy</span>
+                            <p class="cert-desc">Professional UI/UX design workflows in Figma.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-4 fade-in">
+                        <div class="cert-card h-100">
+                            <div class="cert-icon">🖼️</div>
+                            <h3 class="cert-title">Graphic Design Essentials</h3>
+                            <span class="cert-issuer">Canva</span>
+                            <p class="cert-desc">Fundamentals of graphic design and visual communication.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-4 fade-in">
+                        <div class="cert-card h-100">
+                            <div class="cert-icon">🤝</div>
+                            <h3 class="cert-title">Introduction to Soft Skills</h3>
+                            <span class="cert-issuer">TCS iON</span>
+                            <p class="cert-desc">Professional communication, teamwork, and interpersonal skills.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ── CONTACT ── -->
+        <section id="contact" class="section-spacing contact-section">
+            <div class="container-content text-center">
+                <p class="mono fade-in" style="--delay:0ms; color: var(--accent); margin-bottom: 1rem;"><span class="mono">06.</span> What's Next?</p>
+                <h2 class="contact-title fade-in" style="--delay:100ms">Get In Touch</h2>
+                <p class="contact-desc fade-in" style="--delay:200ms">
+                    Currently looking for new opportunities — my inbox is always open. Whether you have a
+                    question or just want to say hi, I'll try my best to get back to you!
+                </p>
+                <div class="fade-in" style="--delay:300ms">
+                    <a href="mailto:qusai.kagalwala@example.com" class="btn-accent">Say Hello</a>
+                </div>
+
+                <div class="contact-socials fade-in" style="--delay:400ms">
+                    <a href="https://github.com/qusai-Kagalwala" target="_blank" rel="noopener noreferrer" class="social-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                         GitHub
                     </a>
-                    <a href="https://www.linkedin.com/in/qusai-kagalwala/" target="_blank" rel="noopener noreferrer" class="btn" style="display: inline-flex; align-items: center; gap: 8px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                            <rect x="2" y="9" width="4" height="12"></rect>
-                            <circle cx="4" cy="4" r="2"></circle>
-                        </svg>
+                    <a href="https://www.linkedin.com/in/qusai-kagalwala/" target="_blank" rel="noopener noreferrer" class="social-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
                         LinkedIn
                     </a>
+                    <a href="https://github.com/qusai-Kagal/DevVault" target="_blank" rel="noopener noreferrer" class="social-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                        DevVault
+                    </a>
                 </div>
-            </div>
 
-            <div style="margin-top: 100px;">
-                <p class="mono" style="font-size: 0.8rem; color: var(--text-secondary);">Designed & Built by Qusai Kagalwala</p>
+                <p class="footer-credit mono">Designed & Built by Qusai Kagalwala · 2026</p>
             </div>
         </section>
+
     </main>
 
-    <footer style="display: none;">
-        <!-- integrated into contact section -->
-    </footer>
-
-    <!-- JS -->
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
     <script src="assets/js/main.js"></script>
 </body>
-
 </html>
