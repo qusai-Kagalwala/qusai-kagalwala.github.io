@@ -1,602 +1,1152 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Qusai Kagalwala | Full-Stack Developer</title>
-  <meta name="description" content="Portfolio of Qusai Kagalwala — Full-Stack Developer, AI/ML Enthusiast, and CS Student based in Mumbai. 60+ projects, 8× competition winner.">
-  <meta name="theme-color" content="#0a192f">
-  <meta name="author" content="Qusai Kagalwala">
-  <meta property="og:title" content="Qusai Kagalwala | Full-Stack Developer">
-  <meta property="og:description" content="Full-Stack Developer & CS Student based in Mumbai. 60+ projects, 8× competition winner spanning web, AI/ML, and automation.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://qusai-kagalwala.github.io/">
-  <meta property="og:image" content="https://qusai-kagalwala.github.io/qusai.jpg">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Qusai Kagalwala | Full-Stack Developer">
-  <meta name="twitter:description" content="Full-Stack Developer & CS Student based in Mumbai. 60+ projects, 8× competition winner.">
-  <meta name="twitter:image" content="https://qusai-kagalwala.github.io/qusai.jpg">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body class="loading">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qusai Kagalwala</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-<!-- LOADER -->
-<div id="loader" class="loader">
-  <div class="loader-bg"></div>
-  <div class="loader-content">
-    <div class="loader-hex-wrap">
-      <svg class="loader-hex" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <defs><linearGradient id="loaderGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="var(--accent)"/><stop offset="100%" stop-color="var(--accent-purple)"/></linearGradient></defs>
-        <polygon class="loader-hex-outline" points="50,5 93,27.5 93,72.5 50,95 7,72.5 7,27.5" fill="none" stroke="url(#loaderGrad)" stroke-width="2" stroke-dasharray="280" stroke-dashoffset="280" stroke-linejoin="round"/>
-        <polygon class="loader-hex-fill" points="50,5 93,27.5 93,72.5 50,95 7,72.5 7,27.5" fill="url(#loaderGrad)" fill-opacity="0.08" opacity="0"/>
-      </svg>
-      <div class="loader-logo">QK</div>
-    </div>
-    <p class="loader-text"><span class="loader-typed">Loading portfolio</span><span class="loader-cursor">|</span></p>
-    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+  :root {
+    --bg: #f5f3ee;
+    --surface: #edeae3;
+    --ink: #1a1916;
+    --ink-muted: #6b6860;
+    --ink-faint: #a8a59e;
+    --accent: #2d5a3d;
+    --accent-light: #e8f0eb;
+    --accent2: #8b4513;
+    --border: rgba(26,25,22,0.12);
+    --card-bg: #faf9f6;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.25rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(245,243,238,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 2.5rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Lora', serif;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.35s forwards;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--ink-muted);
+    max-width: 500px;
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.65s forwards;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.7rem 1.6rem;
+    font-size: 0.8rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  .btn-primary:hover {
+    background: var(--accent);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--border);
+  }
+
+  .btn-outline:hover {
+    background: var(--surface);
+  }
+
+  .hero-scroll {
+    margin-top: 5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.9s forwards;
+  }
+
+  .scroll-line {
+    width: 40px;
+    height: 1px;
+    background: var(--ink-faint);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scroll-line::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--ink);
+    animation: scanLine 2s 1.5s infinite;
+  }
+
+  .scroll-text {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 6rem 2.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Lora', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 3rem;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--ink-muted);
+    margin-bottom: 1.25rem;
+    font-size: 1.05rem;
+  }
+
+  .about-text strong { color: var(--ink); font-weight: 500; }
+
+  .about-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stat-num {
+    font-family: 'Lora', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    text-align: right;
+  }
+
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .badge {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.75rem;
+    border-radius: 2px;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .project-card {
+    background: var(--card-bg);
+    padding: 2rem;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--accent);
+    transition: height 0.3s ease;
+  }
+
+  .project-card:hover { background: #fff; }
+  .project-card:hover::before { height: 100%; }
+
+  .project-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .project-name {
+    font-family: 'Lora', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+
+  .project-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .stack-tag {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.6rem;
+    background: var(--surface);
+    color: var(--ink-muted);
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  .project-link {
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    font-size: 1rem;
+    color: var(--ink-faint);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .project-card:hover .project-link { color: var(--accent); }
+
+  /* SKILLS */
+  .skills-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 2rem;
+  }
+
+  .skill-group h3 {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skill-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .skill-item {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .skill-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* CERTS */
+  .certs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .cert-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .cert-item:hover { border-color: var(--accent); }
+
+  .cert-name {
+    font-size: 0.9rem;
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  .cert-issuer {
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    margin-top: 0.2rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .cert-badge {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    background: var(--accent-light);
+    color: var(--accent);
+    border-radius: 2px;
+  }
+
+  /* CONTACT */
+  #contact {
+    background: var(--ink);
+    max-width: 100%;
+    padding: 6rem 2.5rem;
+    text-align: center;
+  }
+
+  #contact .section-label { color: #6b9e7d; }
+
+  #contact .section-title {
+    color: var(--bg);
+    margin-bottom: 1.5rem;
+  }
+
+  #contact p {
+    color: rgba(245,243,238,0.6);
+    max-width: 450px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-links a {
+    display: inline-block;
+    padding: 0.7rem 1.6rem;
+    font-size: 0.8rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .link-light {
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  .link-light:hover { background: #fff; }
+
+  .link-ghost {
+    background: transparent;
+    color: rgba(245,243,238,0.6);
+    border: 1px solid rgba(245,243,238,0.2);
+  }
+
+  .link-ghost:hover {
+    color: var(--bg);
+    border-color: rgba(245,243,238,0.5);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 1.5rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  footer p {
+    font-size: 0.75rem;
+    color: rgba(245,243,238,0.3);
+    letter-spacing: 0.05em;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* AWARDS */
+  .awards-row {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  .award-card {
+    flex: 1;
+    min-width: 220px;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: var(--card-bg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .award-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--accent);
+  }
+
+  .award-place {
+    font-family: 'Lora', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .award-title {
+    font-size: 0.9rem;
+    color: var(--ink);
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+
+  .award-event {
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scanLine {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* HAMBURGER */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--ink);
+    transition: transform 0.3s, opacity 0.3s;
+    transform-origin: center;
+  }
+
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  /* MOBILE DRAWER */
+  @media (max-width: 700px) {
+    /* Nav */
+    nav { padding: 1rem 1.25rem; }
+
+    .nav-hamburger { display: flex; }
+
+    .nav-links {
+      display: none;
+      position: fixed;
+      top: 57px; left: 0; right: 0;
+      background: rgba(245,243,238,0.97);
+      backdrop-filter: blur(16px);
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      padding: 0;
+      border-bottom: 1px solid var(--border);
+      z-index: 99;
+    }
+
+    .nav-links.open { display: flex; }
+
+    .nav-links li { width: 100%; text-align: center; }
+
+    .nav-links a {
+      display: block;
+      padding: 1rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Hero */
+    #hero {
+      padding: 6rem 1.25rem 3rem;
+      min-height: auto;
+    }
+
+    .hero-name { font-size: 3rem; }
+    .hero-desc { font-size: 1rem; }
+    .hero-scroll { margin-top: 2.5rem; }
+
+    .hero-actions { gap: 0.75rem; }
+    .btn { padding: 0.75rem 1.4rem; font-size: 0.75rem; }
+
+    /* Sections */
+    section { padding: 3.5rem 1.25rem; }
+
+    .section-title { font-size: 1.9rem; margin-bottom: 2rem; }
+
+    /* About */
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+    .stat-num { font-size: 2rem; }
+    .stat-label { font-size: 0.7rem; }
+
+    /* Awards */
+    .awards-row { flex-direction: column; gap: 1rem; }
+    .award-card { min-width: unset; }
+
+    /* Projects */
+    .projects-grid { grid-template-columns: 1fr; gap: 1.5px; }
+    .project-card { padding: 1.5rem; }
+    .project-name { font-size: 1.1rem; }
+
+    /* Skills */
+    .skills-wrapper { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+    /* Certs */
+    .cert-item {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    .cert-badge { align-self: start; width: fit-content; }
+
+    /* Contact */
+    #contact { padding: 4rem 1.25rem; }
+    .contact-links { flex-direction: column; align-items: center; }
+    .contact-links a { width: 100%; max-width: 280px; text-align: center; }
+
+    /* Footer */
+    footer {
+      flex-direction: column;
+      gap: 0.4rem;
+      text-align: center;
+      padding: 1.25rem;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .hero-name { font-size: 2.5rem; }
+    .skills-wrapper { grid-template-columns: 1fr; }
+    .stat-row { flex-direction: column; gap: 0.25rem; }
+    .stat-label { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">QK</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about" class="nav-link">About</a></li>
+    <li><a href="#projects" class="nav-link">Projects</a></li>
+    <li><a href="#skills" class="nav-link">Skills</a></li>
+    <li><a href="#contact" class="nav-link">Contact</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <p class="hero-label">Mumbai, India &nbsp;·&nbsp; CS Student &amp; Developer</p>
+  <h1 class="hero-name">Qusai<br><em>Kagalwala</em></h1>
+  <p class="hero-desc">
+    Building full-stack applications, automation tools, and AI-powered systems.
+    Currently studying BSc Computer Science at KC College.
+  </p>
+  <div class="hero-actions">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="https://github.com/qusai-Kagalwala" target="_blank" class="btn btn-outline">GitHub ↗</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Scroll to explore</span>
   </div>
 </div>
 
-<div id="scroll-progress"></div>
-<canvas id="bg-canvas"></canvas>
-<div class="cursor-dot" data-cursor-dot></div>
-<div class="cursor-outline" data-cursor-outline></div>
 
-<!-- NAVBAR -->
-<header id="navbar">
-  <nav class="navbar-inner container-fluid px-3 px-md-4">
-    <a href="#" class="nav-logo">QK</a>
-    <ul class="nav-links d-none d-lg-flex">
-      <li><a href="#about" class="nav-link"><span class="mono">01.</span> About</a></li>
-      <li><a href="#projects" class="nav-link"><span class="mono">02.</span> Projects</a></li>
-      <li><a href="#skills" class="nav-link"><span class="mono">03.</span> Skills</a></li>
-      <li><a href="#experience" class="nav-link"><span class="mono">04.</span> Experience</a></li>
-      <li><a href="#certifications" class="nav-link"><span class="mono">05.</span> Certifications</a></li>
-      <li><a href="#contact" class="nav-link"><span class="mono">06.</span> Contact</a></li>
-    </ul>
-    <div class="nav-controls d-flex align-items-center gap-2 gap-md-3">
-      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      </button>
-      <a href="Qusai_Kagalwala_Resume_v2.pdf" class="btn-resume d-none d-lg-inline-flex" target="_blank" rel="noopener noreferrer">Resume</a>
-      <button class="hamburger d-lg-none" id="hamburger-btn" aria-label="Toggle navigation" aria-expanded="false">
-        <span class="ham-line"></span><span class="ham-line"></span><span class="ham-line"></span>
-      </button>
+<!-- ABOUT -->
+<div class="divider"></div>
+<section id="about">
+  <p class="section-label reveal">Who I am</p>
+  <h2 class="section-title reveal">Developer.<br>Leader. Builder.</h2>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I'm a second-year Computer Science student at <strong>KC College, Mumbai</strong> with a deep passion for building things that work — and look good doing it.</p>
+      <p>From Python automation tools to full-stack web apps, blockchain dApps, and local AI integrations, I pursue projects that solve real problems. I serve as <strong>Core Team Lead at Fiestron</strong>, managing 79+ members across 20+ events.</p>
+      <p>My toolkit spans React, Node.js, Python, PostgreSQL, ICP blockchain, and more — with a growing focus on AI/ML and developer tooling.</p>
+      <div class="badge-row">
+        <span class="badge">Full-Stack Dev</span>
+        <span class="badge">Python</span>
+        <span class="badge">AI/ML</span>
+        <span class="badge">Blockchain</span>
+        <span class="badge">Team Lead</span>
+      </div>
     </div>
-  </nav>
-  <!-- Mobile Drawer -->
-  <div id="mobile-nav" class="mobile-nav" aria-hidden="true">
-    <div class="mobile-nav-inner">
-      <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
-      <ul class="mobile-nav-links">
-        <li><a href="#about" class="mobile-nav-link"><span class="mono">01.</span> About</a></li>
-        <li><a href="#projects" class="mobile-nav-link"><span class="mono">02.</span> Projects</a></li>
-        <li><a href="#skills" class="mobile-nav-link"><span class="mono">03.</span> Skills</a></li>
-        <li><a href="#experience" class="mobile-nav-link"><span class="mono">04.</span> Experience</a></li>
-        <li><a href="#certifications" class="mobile-nav-link"><span class="mono">05.</span> Certifications</a></li>
-        <li><a href="#contact" class="mobile-nav-link"><span class="mono">06.</span> Contact</a></li>
-      </ul>
-      <a href="Qusai_Kagalwala_Resume_v2.pdf" class="btn-outline-accent mt-4 text-center d-block" target="_blank" rel="noopener noreferrer">Resume</a>
+    <div class="about-stats reveal">
+      <div class="stat-row">
+        <span class="stat-num">60+</span>
+        <span class="stat-label">Projects built<br>across domains</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-num">4×</span>
+        <span class="stat-label">1st Place<br>competition wins</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-num">11+</span>
+        <span class="stat-label">Certifications<br>earned</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-num">6</span>
+        <span class="stat-label">Languages<br>spoken</span>
+      </div>
     </div>
   </div>
-</header>
-<div id="nav-overlay" class="nav-overlay d-lg-none"></div>
 
-<!-- MAIN -->
-<main id="main-content" class="main-hidden">
-
-  <!-- HERO -->
-  <section id="hero" class="hero-section">
-    <div class="container-content">
-      <p class="mono fade-in" style="--delay:100ms">Hi, my name is</p>
-      <h1 class="hero-name fade-in" style="--delay:200ms">Qusai Kagalwala.</h1>
-      <h2 class="hero-sub fade-in" style="--delay:300ms">I build things for the web &amp; AI.</h2>
-      <p class="hero-desc fade-in" style="--delay:400ms">
-        I'm a Full-Stack Developer and CS student at KC College, Mumbai — obsessed with building
-        tools that solve real problems. From AI-powered automation to blockchain apps to developer utilities,
-        I've shipped 60+ projects and won competitions at intercollegiate techfests.
-      </p>
-      <div class="hero-cta fade-in" style="--delay:500ms">
-        <a href="#projects" class="btn-accent">See what I've built</a>
-        <a href="#contact" class="btn-outline-accent">Get in touch</a>
+  <!-- Awards -->
+  <div style="margin-top: 4rem;">
+    <p class="section-label reveal">Recognition</p>
+    <div class="awards-row">
+      <div class="award-card reveal">
+        <div class="award-place">1st</div>
+        <div class="award-title">Prompt Craft — Cyberstrike'25</div>
+        <div class="award-event">Jan 2025</div>
       </div>
-      <div class="hero-stats fade-in" style="--delay:600ms">
-        <div class="stat-pill"><span class="stat-num">60+</span><span class="stat-label">Projects</span></div>
-        <div class="stat-pill"><span class="stat-num">14+</span><span class="stat-label">Certifications</span></div>
-        <div class="stat-pill"><span class="stat-num">8×</span><span class="stat-label">Competition Wins</span></div>
-        <div class="stat-pill"><span class="stat-num">6</span><span class="stat-label">Languages Spoken</span></div>
+      <div class="award-card reveal">
+        <div class="award-place">1st</div>
+        <div class="award-title">Design.exe — UI/UX Challenge</div>
+        <div class="award-event">Fiestron 2025</div>
       </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about" class="section-spacing">
-    <div class="container-content">
-      <h2 class="section-title fade-in"><span class="mono">01.</span> About Me</h2>
-      <div class="row g-4 g-lg-5 align-items-center">
-        <div class="col-lg-7 fade-in">
-          <p class="body-text">
-            I'm a first-year CS student who builds things compulsively. It started with a hackathon in 2024
-            where I hacked together a theme from scratch overnight — the dopamine hit of shipping something
-            real got me hooked. Since then, I haven't really stopped.
-          </p>
-          <p class="body-text">
-            I've led the core team at <span class="text-accent">Fiestron</span>, KC College's flagship techfest,
-            coordinating 79 people across 24+ departments. I've won competitions in UI/UX, AI art &amp; prompt engineering,
-            and frontend development at intercollegiate events. I'm pursuing a
-            <span class="text-accent">BSc in Computer Science</span> (2024–2028) and currently looking for
-            internships where I can build meaningful things with a real team.
-          </p>
-          <p class="body-text mb-3">Things I reach for most often:</p>
-          <ul class="skills-pill-list">
-            <li>Python</li><li>JavaScript (ES6+)</li><li>React</li>
-            <li>Node.js</li><li>Flask</li><li>PostgreSQL</li>
-          </ul>
-        </div>
-        <div class="col-lg-5 fade-in">
-          <div class="about-img-wrap">
-            <img src="qusai.jpg" alt="Qusai Kagalwala" class="about-img-photo">
-          </div>
-        </div>
+      <div class="award-card reveal">
+        <div class="award-place">1st</div>
+        <div class="award-title">Geocities.AI — AI + Frontend</div>
+        <div class="award-event">Fiestron 2025</div>
+      </div>
+      <div class="award-card reveal">
+        <div class="award-place">1st</div>
+        <div class="award-title">Retro Rendered — AI Art &amp; Prompt Eng.</div>
+        <div class="award-event">Fiestron 2025</div>
+      </div>
+      <div class="award-card reveal">
+        <div class="award-place">2nd</div>
+        <div class="award-title">Pitch an App/Website</div>
+        <div class="award-event">Fiestron 2024</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PROJECTS -->
-  <section id="projects" class="section-spacing">
-    <div class="container-content">
-      <h2 class="section-title fade-in"><span class="mono">02.</span> Some Things I've Built</h2>
-      <div class="filter-wrap fade-in">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="web">Web</button>
-        <button class="filter-btn" data-filter="ai">AI / ML</button>
-        <button class="filter-btn" data-filter="cli">CLI Tools</button>
-        <button class="filter-btn" data-filter="game">Games</button>
-      </div>
-      <div class="row g-3 projects-grid" id="projects-grid">
+<!-- PROJECTS -->
+<div class="divider"></div>
+<section id="projects">
+  <p class="section-label reveal">Work</p>
+  <h2 class="section-title reveal">Selected Projects</h2>
+  <div class="projects-grid">
 
-        <!-- DBank -->
-        <div class="col-sm-6 col-xl-4 project-col fade-in" data-category="web">
-          <div class="project-card h-100" data-repo="https://github.com/qusai-Kagalwala/DBank">
-            <div class="project-card-inner">
-              <div class="project-top">
-                <div class="project-folder-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
-                <div class="project-links-row"><a href="https://github.com/qusai-Kagalwala/DBank" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a></div>
-              </div>
-              <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/DBank" target="_blank" rel="noopener noreferrer">DBank</a></h3>
-              <p class="project-desc">Decentralized banking app on the ICP blockchain with real-time transactions. Learned Motoko from scratch to ship it — my first real dive into Web3 architecture.</p>
-              <ul class="project-tech"><li>React</li><li>ICP Blockchain</li><li>Motoko</li></ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- DeepSeek -->
-        <div class="col-sm-6 col-xl-4 project-col fade-in" data-category="ai">
-          <div class="project-card h-100" data-repo="https://github.com/qusai-Kagalwala/DeepSeek-R1-Local-Runner">
-            <div class="project-card-inner">
-              <div class="project-top">
-                <div class="project-folder-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
-                <div class="project-links-row"><a href="https://github.com/qusai-Kagalwala/DeepSeek-R1-Local-Runner" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a></div>
-              </div>
-              <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/DeepSeek-R1-Local-Runner" target="_blank" rel="noopener noreferrer">DeepSeek R1 Runner</a></h3>
-              <p class="project-desc">VS Code extension running DeepSeek 7B models entirely locally via Ollama — zero cloud, zero cost, full privacy. Taught me how the VS Code extension API works end-to-end.</p>
-              <ul class="project-tech"><li>Python</li><li>Ollama</li><li>VS Code API</li></ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Repo Vista -->
-        <div class="col-sm-6 col-xl-4 project-col fade-in" data-category="web">
-          <div class="project-card h-100" data-repo="https://github.com/qusai-Kagalwala/Repo-Vista">
-            <div class="project-card-inner">
-              <div class="project-top">
-                <div class="project-folder-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
-                <div class="project-links-row"><a href="https://github.com/qusai-Kagalwala/Repo-Vista" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a></div>
-              </div>
-              <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Repo-Vista" target="_blank" rel="noopener noreferrer">Repo Vista</a></h3>
-              <p class="project-desc">GitHub repo visualizer with 7 switchable themes, contribution heatmaps, and language breakdowns. Built deep familiarity with GitHub's REST API and rate-limiting strategies.</p>
-              <ul class="project-tech"><li>React</li><li>GitHub API</li><li>Chart.js</li></ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Password Manager -->
-        <div class="col-sm-6 col-xl-4 project-col fade-in" data-category="cli">
-          <div class="project-card h-100" data-repo="https://github.com/qusai-Kagalwala/Secure-Password-Manager">
-            <div class="project-card-inner">
-              <div class="project-top">
-                <div class="project-folder-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
-                <div class="project-links-row"><a href="https://github.com/qusai-Kagalwala/Secure-Password-Manager" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a></div>
-              </div>
-              <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Secure-Password-Manager" target="_blank" rel="noopener noreferrer">Secure Password Manager</a></h3>
-              <p class="project-desc">Terminal password manager using Fernet symmetric encryption and SQLite. Zero plaintext ever touches disk — my first serious implementation of cryptographic principles.</p>
-              <ul class="project-tech"><li>Python</li><li>Cryptography</li><li>SQLite</li></ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Book Notes -->
-        <div class="col-sm-6 col-xl-4 project-col fade-in" data-category="web">
-          <div class="project-card h-100" data-repo="https://github.com/qusai-Kagalwala/Book-Notes-Tracker">
-            <div class="project-card-inner">
-              <div class="project-top">
-                <div class="project-folder-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
-                <div class="project-links-row"><a href="https://github.com/qusai-Kagalwala/Book-Notes-Tracker" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a></div>
-              </div>
-              <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Book-Notes-Tracker" target="_blank" rel="noopener noreferrer">Book Notes Tracker</a></h3>
-              <p class="project-desc">Full-stack reading tracker with live cover data from Open Library API. Clean MVC architecture with PostgreSQL — the project where server-side rendering finally clicked for me.</p>
-              <ul class="project-tech"><li>Node.js</li><li>PostgreSQL</li><li>Open Library API</li></ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- SecureAuth -->
-        <div class="col-sm-6 col-xl-4 project-col fade-in" data-category="web">
-          <div class="project-card h-100" data-repo="https://github.com/qusai-Kagalwala/SecureAuth-Portal">
-            <div class="project-card-inner">
-              <div class="project-top">
-                <div class="project-folder-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
-                <div class="project-links-row"><a href="https://github.com/qusai-Kagalwala/SecureAuth-Portal" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a></div>
-              </div>
-              <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/SecureAuth-Portal" target="_blank" rel="noopener noreferrer">SecureAuth Portal</a></h3>
-              <p class="project-desc">Production-style auth: bcrypt hashing, JWT sessions, rate limiting, SQL injection protection. Built to learn what "secure by default" actually means in practice.</p>
-              <ul class="project-tech"><li>React</li><li>Express.js</li><li>PostgreSQL</li></ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Movie Recommender -->
-        <div class="col-sm-6 col-xl-4 project-col fade-in" data-category="ai">
-          <div class="project-card h-100" data-repo="https://github.com/qusai-Kagalwala/Movie-Recommender-System">
-            <div class="project-card-inner">
-              <div class="project-top">
-                <div class="project-folder-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
-                <div class="project-links-row"><a href="https://github.com/qusai-Kagalwala/Movie-Recommender-System" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a></div>
-              </div>
-              <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Movie-Recommender-System" target="_blank" rel="noopener noreferrer">Movie Recommender</a></h3>
-              <p class="project-desc">Content-based ML engine using cosine similarity on TF-IDF vectors. Understanding why distance metrics work changed how I think about feature representation entirely.</p>
-              <ul class="project-tech"><li>Python</li><li>Scikit-learn</li><li>Pandas</li></ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Certificate Automation -->
-        <div class="col-sm-6 col-xl-4 project-col fade-in" data-category="ai">
-          <div class="project-card h-100" data-repo="https://github.com/qusai-Kagalwala/Certificate-Automation-Tool">
-            <div class="project-card-inner">
-              <div class="project-top">
-                <div class="project-folder-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
-                <div class="project-links-row"><a href="https://github.com/qusai-Kagalwala/Certificate-Automation-Tool" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a></div>
-              </div>
-              <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Certificate-Automation-Tool" target="_blank" rel="noopener noreferrer">Certificate Automation</a></h3>
-              <p class="project-desc">Bulk cert generator that processed 200+ Fiestron participant certificates from a CSV. Replaced hours of manual work — built, deployed, and validated in production the same week.</p>
-              <ul class="project-tech"><li>Python</li><li>Streamlit</li><li>Automation</li></ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Maze Runner -->
-        <div class="col-sm-6 col-xl-4 project-col fade-in" data-category="cli">
-          <div class="project-card h-100" data-repo="https://github.com/qusai-Kagalwala/Maze-Runner">
-            <div class="project-card-inner">
-              <div class="project-top">
-                <div class="project-folder-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
-                <div class="project-links-row"><a href="https://github.com/qusai-Kagalwala/Maze-Runner" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a></div>
-              </div>
-              <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Maze-Runner" target="_blank" rel="noopener noreferrer">Maze-Runner</a></h3>
-              <p class="project-desc">Terminal maze solver stepping through BFS in real-time with ANSI graphics. Wrote the renderer from scratch — making algorithms visible is the best way to actually understand them.</p>
-              <ul class="project-tech"><li>Python</li><li>BFS Algorithm</li><li>CLI</li></ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Drum Kit -->
-        <div class="col-sm-6 col-xl-4 project-col fade-in" data-category="game">
-          <div class="project-card h-100" data-repo="https://github.com/qusai-Kagalwala/Interactive-Drum-Kit">
-            <div class="project-card-inner">
-              <div class="project-top">
-                <div class="project-folder-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
-                <div class="project-links-row"><a href="https://github.com/qusai-Kagalwala/Interactive-Drum-Kit" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a></div>
-              </div>
-              <h3 class="project-title"><a href="https://github.com/qusai-Kagalwala/Interactive-Drum-Kit" target="_blank" rel="noopener noreferrer">Interactive Drum Kit</a></h3>
-              <p class="project-desc">Web-based drum kit responding to keyboard and mouse with visual flash animations. The first time I wired Web Audio API, event listeners, and CSS transitions together simultaneously.</p>
-              <ul class="project-tech"><li>JavaScript</li><li>HTML5 Audio</li><li>CSS3</li></ul>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <div class="text-center mt-5 fade-in">
-        <a href="https://github.com/qusai-Kagalwala" class="btn-accent" target="_blank" rel="noopener noreferrer">View Full Project Archive →</a>
+    <div class="project-card reveal">
+      <span class="project-tag">AI / Automation</span>
+      <h3 class="project-name">Live Translator</h3>
+      <p class="project-desc">Real-time speech translation tool — captures live audio input and translates spoken language on the fly with near-instant output.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span><span class="stack-tag">Speech Recognition</span><span class="stack-tag">Translation API</span>
       </div>
     </div>
-  </section>
 
-  <!-- SKILLS -->
-  <section id="skills" class="section-spacing">
-    <div class="container-content">
-      <h2 class="section-title fade-in"><span class="mono">03.</span> Skills &amp; Tech</h2>
-      <div id="skills-bars" class="skills-bars-wrap fade-in">
-        <div class="skill-bar-item"><div class="skill-bar-label"><span class="skill-bar-name">Frontend Development</span><span class="skill-bar-pct mono">82%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="82"></div></div></div>
-        <div class="skill-bar-item"><div class="skill-bar-label"><span class="skill-bar-name">Backend &amp; APIs</span><span class="skill-bar-pct mono">78%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="78"></div></div></div>
-        <div class="skill-bar-item"><div class="skill-bar-label"><span class="skill-bar-name">AI / ML Integration</span><span class="skill-bar-pct mono">70%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="70"></div></div></div>
-        <div class="skill-bar-item"><div class="skill-bar-label"><span class="skill-bar-name">Databases</span><span class="skill-bar-pct mono">74%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="74"></div></div></div>
-        <div class="skill-bar-item"><div class="skill-bar-label"><span class="skill-bar-name">CLI &amp; Tooling</span><span class="skill-bar-pct mono">80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div></div>
-        <div class="skill-bar-item"><div class="skill-bar-label"><span class="skill-bar-name">UI/UX Design</span><span class="skill-bar-pct mono">68%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="68"></div></div></div>
-      </div>
-      <div class="skills-marquee-wrap">
-        <div id="skills-marquee" class="skills-marquee">
-          <div class="marquee-group">
-            <a href="https://www.python.org/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python"/><span>Python</span></a>
-            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript"/><span>JavaScript</span></a>
-            <a href="https://react.dev/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/react/61DAFB" alt="React"/><span>React</span></a>
-            <a href="https://nodejs.org/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/nodedotjs/339933" alt="Node.js"/><span>Node.js</span></a>
-            <a href="https://expressjs.com/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/express/888888" alt="Express"/><span>Express</span></a>
-            <a href="https://flask.palletsprojects.com/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/flask/888888" alt="Flask"/><span>Flask</span></a>
-            <a href="https://www.postgresql.org/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="PostgreSQL"/><span>PostgreSQL</span></a>
-            <a href="https://www.mongodb.com/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/mongodb/47A248" alt="MongoDB"/><span>MongoDB</span></a>
-            <a href="https://git-scm.com/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/git/F05032" alt="Git"/><span>Git</span></a>
-            <a href="https://www.figma.com/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/figma/F24E1E" alt="Figma"/><span>Figma</span></a>
-            <a href="https://scikit-learn.org/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/scikitlearn/F89939" alt="Scikit-learn"/><span>Scikit-learn</span></a>
-            <a href="https://pandas.pydata.org/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/pandas/150458" alt="Pandas"/><span>Pandas</span></a>
-          </div>
-          <div class="marquee-group" aria-hidden="true">
-            <a href="https://www.python.org/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python"/><span>Python</span></a>
-            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript"/><span>JavaScript</span></a>
-            <a href="https://react.dev/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/react/61DAFB" alt="React"/><span>React</span></a>
-            <a href="https://nodejs.org/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/nodedotjs/339933" alt="Node.js"/><span>Node.js</span></a>
-            <a href="https://expressjs.com/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/express/888888" alt="Express"/><span>Express</span></a>
-            <a href="https://flask.palletsprojects.com/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/flask/888888" alt="Flask"/><span>Flask</span></a>
-            <a href="https://www.postgresql.org/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="PostgreSQL"/><span>PostgreSQL</span></a>
-            <a href="https://www.mongodb.com/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/mongodb/47A248" alt="MongoDB"/><span>MongoDB</span></a>
-            <a href="https://git-scm.com/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/git/F05032" alt="Git"/><span>Git</span></a>
-            <a href="https://www.figma.com/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/figma/F24E1E" alt="Figma"/><span>Figma</span></a>
-            <a href="https://scikit-learn.org/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/scikitlearn/F89939" alt="Scikit-learn"/><span>Scikit-learn</span></a>
-            <a href="https://pandas.pydata.org/" target="_blank" rel="noopener" class="marquee-item"><img src="https://cdn.simpleicons.org/pandas/150458" alt="Pandas"/><span>Pandas</span></a>
-          </div>
-        </div>
+    <div class="project-card reveal">
+      <span class="project-tag">Blockchain</span>
+      <h3 class="project-name">DBank</h3>
+      <p class="project-desc">Full-stack dApp on Internet Computer Protocol with wallet connectivity and automated compound interest logic — entirely on-chain.</p>
+      <div class="project-stack">
+        <span class="stack-tag">React</span><span class="stack-tag">ICP</span><span class="stack-tag">Motoko</span><span class="stack-tag">DFX SDK</span>
       </div>
     </div>
-  </section>
 
-  <!-- EXPERIENCE -->
-  <section id="experience" class="section-spacing">
-    <div class="container-content">
-      <h2 class="section-title fade-in"><span class="mono">04.</span> Experience &amp; Leadership</h2>
-      <div class="exp-list-wrap">
-
-        <div class="exp-item fade-in">
-          <div class="exp-dot"></div>
-          <div class="exp-body">
-            <div class="exp-header-row">
-              <h3 class="exp-role">Core Team Lead <span class="exp-at">@ Fiestron</span></h3>
-              <span class="exp-date mono">Dec 2024 – Present</span>
-            </div>
-            <ul class="exp-bullets">
-              <li>Coordinated 20+ events across 24+ departments with 79 team members for KC College's flagship tech festival.</li>
-              <li>Led inter-department communication, streamlined logistics, and supported 6+ event heads in end-to-end execution.</li>
-              <li>Used Google Workspace and structured planning to reduce coordination overhead and keep a 79-person team aligned.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="exp-item fade-in">
-          <div class="exp-dot"></div>
-          <div class="exp-body">
-            <div class="exp-header-row">
-              <h3 class="exp-role">Event Head <span class="exp-at">@ Hackathon, Fiestron</span></h3>
-              <span class="exp-date mono">Nov–Dec 2024</span>
-            </div>
-            <ul class="exp-bullets">
-              <li>Owned the full event lifecycle — registrations, participant support, judging setup, live coordination, and post-event certificates.</li>
-              <li>Deployed the Certificate Automation Tool at this event, eliminating manual cert generation for 200+ participants.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="exp-item fade-in">
-          <div class="exp-dot"></div>
-          <div class="exp-body">
-            <div class="exp-header-row">
-              <h3 class="exp-role">Competition Wins</h3>
-              <span class="exp-date mono">Dec 2024 – Jan 2025</span>
-            </div>
-            <ul class="exp-bullets">
-              <li><span class="badge-win"><svg class="win-icon" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>1st — Design.exe</span> UI/UX Design Challenge · FIESTRON 25-26, Tech Club KC College</li>
-              <li><span class="badge-win"><svg class="win-icon" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>1st — Geocities.AI</span> AI + Frontend Design Challenge · FIESTRON 25-26, Tech Club KC College</li>
-              <li><span class="badge-win"><svg class="win-icon" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>1st — Retro Rendered</span> AI Art &amp; Prompt Engineering · FIESTRON 25-26, Tech Club KC College</li>
-              <li><span class="badge-win"><svg class="win-icon" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>1st — Prompt Craft</span> Prompt Engineering · Cyberstrike'25, DotCom Club Jai Hind College</li>
-              <li><span class="badge-win badge-silver"><svg class="win-icon" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>2nd — Pitch an App</span> App/Website Pitch · FIESTRON 24-25, HSNC University Mumbai</li>
-            </ul>
-          </div>
-        </div>
-
+    <div class="project-card reveal">
+      <span class="project-tag">Full-Stack</span>
+      <h3 class="project-name">Book Notes Tracker</h3>
+      <p class="project-desc">RESTful backend with Open Library API integration and a responsive frontend for managing reading notes and reviews.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Node.js</span><span class="stack-tag">PostgreSQL</span><span class="stack-tag">Open Library API</span><span class="stack-tag">EJS</span>
       </div>
     </div>
-  </section>
 
-  <!-- CERTIFICATIONS -->
-  <section id="certifications" class="section-spacing">
-    <div class="container-content">
-      <h2 class="section-title fade-in"><span class="mono">05.</span> Certifications</h2>
-      <div class="row g-3">
-
-        <div class="col-sm-6 col-lg-4 fade-in">
-          <div class="cert-card cert-featured h-100">
-            <div class="cert-new-badge">New · Mar 2026</div>
-            <div class="cert-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
-            <h3 class="cert-title">AI Fluency: Framework &amp; Foundations</h3>
-            <span class="cert-issuer">Anthropic</span>
-            <p class="cert-desc">Core concepts of AI, generative systems, and responsible AI usage and deployment.</p>
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-lg-4 fade-in">
-          <div class="cert-card h-100">
-            <div class="cert-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"/></svg></div>
-            <h3 class="cert-title">Prompt Design in Vertex AI</h3>
-            <span class="cert-issuer">Google Cloud</span>
-            <p class="cert-desc">Advanced prompt engineering techniques for production Vertex AI deployments.</p>
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-lg-4 fade-in">
-          <div class="cert-card h-100">
-            <div class="cert-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
-            <h3 class="cert-title">Introduction to Generative AI</h3>
-            <span class="cert-issuer">Google Cloud</span>
-            <p class="cert-desc">Fundamentals of generative AI and real-world application patterns.</p>
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-lg-4 fade-in">
-          <div class="cert-card h-100">
-            <div class="cert-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
-            <h3 class="cert-title">Introduction to Large Language Models</h3>
-            <span class="cert-issuer">Google Cloud</span>
-            <p class="cert-desc">LLM architecture, training processes, and practical deployment use cases.</p>
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-lg-4 fade-in">
-          <div class="cert-card h-100">
-            <div class="cert-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-            <h3 class="cert-title">Introduction to Responsible AI</h3>
-            <span class="cert-issuer">Google Cloud</span>
-            <p class="cert-desc">Ethical AI practices, bias mitigation, and responsible deployment principles.</p>
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-lg-4 fade-in">
-          <div class="cert-card h-100">
-            <div class="cert-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-            <h3 class="cert-title">Introduction to Data Science</h3>
-            <span class="cert-issuer">Cisco Networking Academy</span>
-            <p class="cert-desc">Data analytics, big data concepts, and ML fundamentals.</p>
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-lg-4 fade-in">
-          <div class="cert-card h-100">
-            <div class="cert-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-            <h3 class="cert-title">Introduction to Cybersecurity</h3>
-            <span class="cert-issuer">Cisco (NDG)</span>
-            <p class="cert-desc">Foundational cybersecurity principles, threat landscapes, and best practices.</p>
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-lg-4 fade-in">
-          <div class="cert-card h-100">
-            <div class="cert-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
-            <h3 class="cert-title">Full-Stack Web Dev Bootcamp</h3>
-            <span class="cert-issuer">Udemy</span>
-            <p class="cert-desc">Comprehensive training across modern full-stack: HTML to Node.js to databases.</p>
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-lg-4 fade-in">
-          <div class="cert-card h-100">
-            <div class="cert-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
-            <h3 class="cert-title">Responsive Web Design</h3>
-            <span class="cert-issuer">freeCodeCamp</span>
-            <p class="cert-desc">Building responsive, accessible, mobile-first web applications.</p>
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-lg-4 fade-in">
-          <div class="cert-card h-100">
-            <div class="cert-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-            <h3 class="cert-title">Figma UX/UI Design Essentials</h3>
-            <span class="cert-issuer">Udemy</span>
-            <p class="cert-desc">Professional UI/UX design workflows, components, and prototyping in Figma.</p>
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-lg-4 fade-in">
-          <div class="cert-card h-100">
-            <div class="cert-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
-            <h3 class="cert-title">Graphic Design Essentials</h3>
-            <span class="cert-issuer">Canva</span>
-            <p class="cert-desc">Fundamentals of visual communication, typography, and graphic composition.</p>
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-lg-4 fade-in">
-          <div class="cert-card h-100">
-            <div class="cert-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-            <h3 class="cert-title">Introduction to Soft Skills</h3>
-            <span class="cert-issuer">TCS iON</span>
-            <p class="cert-desc">Professional communication, teamwork, and interpersonal effectiveness.</p>
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-lg-4 fade-in">
-          <div class="cert-card h-100">
-            <div class="cert-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-            <h3 class="cert-title">Python for Data Science</h3>
-            <span class="cert-issuer">Cisco Networking Academy</span>
-            <p class="cert-desc">Practical Python programming for data analysis and scientific computing.</p>
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-lg-4 fade-in">
-          <div class="cert-card h-100">
-            <div class="cert-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></div>
-            <h3 class="cert-title">JavaScript Algorithms &amp; Data Structures</h3>
-            <span class="cert-issuer">freeCodeCamp</span>
-            <p class="cert-desc">Core algorithms, data structures, and functional programming in JavaScript.</p>
-          </div>
-        </div>
-
+    <div class="project-card reveal">
+      <span class="project-tag">React</span>
+      <h3 class="project-name">Repo Vista</h3>
+      <p class="project-desc">GitHub repository preview generator with 7 customizable themes — pulls live repo data and renders shareable preview cards.</p>
+      <div class="project-stack">
+        <span class="stack-tag">React</span><span class="stack-tag">GitHub API</span>
       </div>
     </div>
-  </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="section-spacing contact-section">
-    <div class="container-content text-center">
-      <p class="contact-eyebrow mono fade-in" style="--delay:0ms"><span class="mono">06.</span> What's Next?</p>
-      <h2 class="contact-title fade-in" style="--delay:100ms">Get In Touch</h2>
-      <p class="contact-desc fade-in" style="--delay:200ms">
-        I'm looking for <strong>internship and junior developer roles</strong> — full-stack, backend, or AI/ML.
-        If you're building something interesting and need someone who ships fast and learns faster,
-        I'd love to talk.
-      </p>
-      <div class="fade-in" style="--delay:300ms">
-        <a href="mailto:qusai.kagalwala53@gmail.com" class="btn-accent">Say Hello</a>
+    <div class="project-card reveal">
+      <span class="project-tag">Security</span>
+      <h3 class="project-name">SecureAuth Portal</h3>
+      <p class="project-desc">Industry-standard authentication with Passport.js, bcrypt hashing, session management, and encrypted credential storage.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Node.js</span><span class="stack-tag">Passport.js</span><span class="stack-tag">bcrypt</span><span class="stack-tag">PostgreSQL</span>
       </div>
-      <div class="contact-socials fade-in" style="--delay:400ms">
-        <a href="https://github.com/qusai-Kagalwala" target="_blank" rel="noopener noreferrer" class="social-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-          <span>GitHub</span>
-        </a>
-        <a href="https://www.linkedin.com/in/qusai-kagalwala/" target="_blank" rel="noopener noreferrer" class="social-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          <span>LinkedIn</span>
-        </a>
-        <a href="https://github.com/qusai-Kagal/DevVault" target="_blank" rel="noopener noreferrer" class="social-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          <span>DevVault</span>
-        </a>
-        <a href="mailto:qusai.kagalwala53@gmail.com" class="social-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <span>Email</span>
-        </a>
-      </div>
-      <p class="footer-credit mono">Designed &amp; Built by Qusai Kagalwala · 2026</p>
     </div>
-  </section>
 
-</main>
+    <div class="project-card reveal">
+      <span class="project-tag">AI / VS Code</span>
+      <h3 class="project-name">DeepSeek R1 Extension</h3>
+      <p class="project-desc">VS Code extension running DeepSeek 7B locally via Ollama — full CUI for in-editor AI assistance without cloud dependency.</p>
+      <div class="project-stack">
+        <span class="stack-tag">TypeScript</span><span class="stack-tag">Ollama</span><span class="stack-tag">VS Code API</span>
+      </div>
+    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/main.js"></script>
+    <div class="project-card reveal">
+      <span class="project-tag">AI / NLP</span>
+      <h3 class="project-name">AI NL → SQL Converter</h3>
+      <p class="project-desc">Converts plain English queries to executable SQL using NLP and AI — built as an interactive Streamlit web app.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span><span class="stack-tag">Streamlit</span><span class="stack-tag">NLP</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <span class="project-tag">ML</span>
+      <h3 class="project-name">Movie Recommender</h3>
+      <p class="project-desc">Content-based recommendation engine using cosine similarity and CountVectorizer, enriched with TMDB API metadata.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span><span class="stack-tag">Scikit-learn</span><span class="stack-tag">TMDB API</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <span class="project-tag">Automation</span>
+      <h3 class="project-name">Certificate Automation Tool</h3>
+      <p class="project-desc">Bulk certificate generation from CSV data using OpenCV and Pandas — template-driven, built for real Fiestron event use.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span><span class="stack-tag">OpenCV</span><span class="stack-tag">Pandas</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <span class="project-tag">Web App · Tools</span>
+      <h3 class="project-name">focus.io &amp; budget.io</h3>
+      <p class="project-desc">Personal productivity suite — Kanban + Pomodoro + heatmap study tracker and a Chart.js-powered finance planner. Both live on GitHub Pages.</p>
+      <div class="project-stack">
+        <span class="stack-tag">HTML</span><span class="stack-tag">CSS</span><span class="stack-tag">Vanilla JS</span><span class="stack-tag">Chart.js</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <span class="project-tag">Blockchain</span>
+      <h3 class="project-name">DKeeper Notes</h3>
+      <p class="project-desc">Decentralized note-keeping app on Internet Computer Protocol — fully on-chain CRUD with a clean React frontend.</p>
+      <div class="project-stack">
+        <span class="stack-tag">React</span><span class="stack-tag">ICP</span><span class="stack-tag">Motoko</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <span class="project-tag">Python Games</span>
+      <h3 class="project-name">OOP Games Suite</h3>
+      <p class="project-desc">Pong, Snake, Frogger, and Speed Typing Test — built with Pygame and Turtle using full OOP architecture and game-loop patterns.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span><span class="stack-tag">Pygame</span><span class="stack-tag">Turtle</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="margin-top: 2rem; text-align: center;">
+    <a href="https://github.com/qusai-Kagal/DevVault" target="_blank" class="btn btn-outline">See all 60+ projects on DevVault ↗</a>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<div class="divider"></div>
+<section id="skills">
+  <p class="section-label reveal">Capabilities</p>
+  <h2 class="section-title reveal">Skills &amp; Tools</h2>
+  <div class="skills-wrapper">
+    <div class="skill-group reveal">
+      <h3>Frontend</h3>
+      <div class="skill-list">
+        <span class="skill-item"><span class="skill-dot"></span>React.js</span>
+        <span class="skill-item"><span class="skill-dot"></span>JavaScript / HTML5 / CSS3</span>
+        <span class="skill-item"><span class="skill-dot"></span>Three.js</span>
+        <span class="skill-item"><span class="skill-dot"></span>Bootstrap 5 / Chart.js</span>
+        <span class="skill-item"><span class="skill-dot"></span>Responsive Design</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <h3>Backend</h3>
+      <div class="skill-list">
+        <span class="skill-item"><span class="skill-dot"></span>Node.js + Express</span>
+        <span class="skill-item"><span class="skill-dot"></span>REST API Design</span>
+        <span class="skill-item"><span class="skill-dot"></span>PostgreSQL / MongoDB</span>
+        <span class="skill-item"><span class="skill-dot"></span>EJS / Flask</span>
+        <span class="skill-item"><span class="skill-dot"></span>Passport.js / bcrypt</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <h3>Python</h3>
+      <div class="skill-list">
+        <span class="skill-item"><span class="skill-dot"></span>OOP, Automation, CLI tools</span>
+        <span class="skill-item"><span class="skill-dot"></span>Pandas / NumPy</span>
+        <span class="skill-item"><span class="skill-dot"></span>Scikit-learn</span>
+        <span class="skill-item"><span class="skill-dot"></span>Pygame / Turtle</span>
+        <span class="skill-item"><span class="skill-dot"></span>Streamlit</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <h3>AI / ML</h3>
+      <div class="skill-list">
+        <span class="skill-item"><span class="skill-dot"></span>Generative AI / LLMs</span>
+        <span class="skill-item"><span class="skill-dot"></span>Prompt Engineering</span>
+        <span class="skill-item"><span class="skill-dot"></span>NLP</span>
+        <span class="skill-item"><span class="skill-dot"></span>Ollama / DeepSeek</span>
+        <span class="skill-item"><span class="skill-dot"></span>Responsible AI</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <h3>Blockchain &amp; Security</h3>
+      <div class="skill-list">
+        <span class="skill-item"><span class="skill-dot"></span>Internet Computer Protocol</span>
+        <span class="skill-item"><span class="skill-dot"></span>Motoko / DFX SDK</span>
+        <span class="skill-item"><span class="skill-dot"></span>Authentication &amp; Encryption</span>
+        <span class="skill-item"><span class="skill-dot"></span>Cryptography</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <h3>Tools &amp; APIs</h3>
+      <div class="skill-list">
+        <span class="skill-item"><span class="skill-dot"></span>Git / GitHub</span>
+        <span class="skill-item"><span class="skill-dot"></span>Figma / Canva</span>
+        <span class="skill-item"><span class="skill-dot"></span>OpenCV</span>
+        <span class="skill-item"><span class="skill-dot"></span>TMDB, GitHub, Open Library APIs</span>
+        <span class="skill-item"><span class="skill-dot"></span>Google Workspace</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<div class="divider"></div>
+<section id="certs">
+  <p class="section-label reveal">Credentials</p>
+  <h2 class="section-title reveal">Certifications</h2>
+  <div class="certs-list">
+    <div class="cert-item reveal">
+      <div>
+        <div class="cert-name">100 Days of Code — Complete Python Pro Bootcamp</div>
+        <div class="cert-issuer">Udemy · Dr. Angela Yu · May 2026</div>
+      </div>
+      <span class="cert-badge">Python</span>
+    </div>
+    <div class="cert-item reveal">
+      <div>
+        <div class="cert-name">The Complete Full-Stack Web Development Bootcamp</div>
+        <div class="cert-issuer">Udemy · 2025</div>
+      </div>
+      <span class="cert-badge">Full-Stack</span>
+    </div>
+    <div class="cert-item reveal">
+      <div>
+        <div class="cert-name">Generative AI, LLMs, Responsible AI &amp; Prompt Design in Vertex AI</div>
+        <div class="cert-issuer">Google Cloud · 2024–2025</div>
+      </div>
+      <span class="cert-badge">AI</span>
+    </div>
+    <div class="cert-item reveal">
+      <div>
+        <div class="cert-name">Introduction to Cybersecurity</div>
+        <div class="cert-issuer">Cisco Networking Academy · 2025</div>
+      </div>
+      <span class="cert-badge">Security</span>
+    </div>
+    <div class="cert-item reveal">
+      <div>
+        <div class="cert-name">Introduction to Data Science</div>
+        <div class="cert-issuer">Cisco Networking Academy · Jan 2026</div>
+      </div>
+      <span class="cert-badge">Data</span>
+    </div>
+    <div class="cert-item reveal">
+      <div>
+        <div class="cert-name">Figma UX/UI Design Essentials</div>
+        <div class="cert-issuer">Udemy · 2024</div>
+      </div>
+      <span class="cert-badge">Design</span>
+    </div>
+    <div class="cert-item reveal">
+      <div>
+        <div class="cert-name">Responsive Web Design</div>
+        <div class="cert-issuer">freeCodeCamp · 2024</div>
+      </div>
+      <span class="cert-badge">Web</span>
+    </div>
+    <div class="cert-item reveal">
+      <div>
+        <div class="cert-name">Soft Skills &amp; Time Management</div>
+        <div class="cert-issuer">TCS iON · 2025</div>
+      </div>
+      <span class="cert-badge">Professional</span>
+    </div>
+    <div class="cert-item reveal">
+      <div>
+        <div class="cert-name">Graphic Design Essentials</div>
+        <div class="cert-issuer">Canva · 2024</div>
+      </div>
+      <span class="cert-badge">Design</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="max-width:100%">
+  <p class="section-label">Get in touch</p>
+  <h2 class="section-title">Let's work<br>together.</h2>
+  <p>Open to freelance, collaborations, and interesting conversations about tech, design, or ideas.</p>
+  <div class="contact-links">
+    <a href="https://www.linkedin.com/in/qusai-kagalwala/" target="_blank" class="link-light">LinkedIn ↗</a>
+    <a href="https://github.com/qusai-Kagalwala" target="_blank" class="link-ghost">GitHub ↗</a>
+    <a href="https://github.com/qusai-Kagal/DevVault" target="_blank" class="link-ghost">DevVault ↗</a>
+    <a href="https://qusai-kagalwala.github.io" target="_blank" class="link-ghost">Portfolio ↗</a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Qusai Kagalwala · Mumbai, India</p>
+  <p>Built with Skills &amp; Love</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('.project-card.reveal').forEach((card, i) => {
+    card.style.transitionDelay = `${i * 60}ms`;
+  });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+
+  // Close menu on link click
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('open');
+    });
+  });
+</script>
+
 </body>
 </html>
