@@ -14,6 +14,36 @@ html.loading{overflow:hidden}
 .wave{animation:roll var(--d,10s) ease-in-out infinite alternate}
 @keyframes roll{to{transform:translateX(46px)}}
 
+
+/* sky life */
+.bird{transform:translate(-80px,var(--y));animation:fly var(--d,30s) linear infinite;animation-delay:var(--dl,0s)}
+.bird path{transform-box:fill-box;transform-origin:center;animation:flap .5s ease-in-out infinite alternate}
+@keyframes fly{to{transform:translate(1300px,calc(var(--y) - 60px))}}
+@keyframes flap{to{transform:scaleY(.4)}}
+.glint{opacity:0;animation:glint 2.4s ease-in-out infinite;animation-delay:var(--dl,0s)}
+@keyframes glint{40%{opacity:.85}80%{opacity:0}}
+.band{animation:band var(--d,20s) ease-in-out infinite alternate}
+@keyframes band{to{transform:translateX(-160px)}}
+.refl{animation:fadein 1.4s .5s both}
+@keyframes fadein{from{opacity:0}}
+
+/* walking: legs swing while the walker moves */
+.lg{transform-box:fill-box;transform-origin:50% 0}
+.walking .lg1{animation:step .32s ease-in-out infinite alternate}
+.walking .lg2{animation:step .32s ease-in-out infinite alternate-reverse}
+@keyframes step{from{transform:rotate(-22deg)}to{transform:rotate(22deg)}}
+.walking .fig{animation:hop .32s ease-in-out infinite alternate}
+@keyframes hop{to{translate:0 -2px}}
+.shore .fig{cursor:grab;touch-action:none}
+.shore .fig:active{cursor:grabbing}
+.shore .walker{transition:opacity .3s}
+.shore .water{cursor:crosshair}
+
+/* rider in the intro boat */
+#intro .rider{opacity:0;transform:translateY(-14px);transition:opacity .25s,transform .4s cubic-bezier(.3,1.5,.5,1)}
+#intro .rider.on{opacity:1;transform:none}
+.nut{transform-box:fill-box}
+
 /* the island rises out of the sea */
 .rise .isle{animation:rise 1.1s cubic-bezier(.2,.8,.2,1) both}
 .shore .rise .isle{animation:none;opacity:0}
@@ -43,7 +73,7 @@ html.loading{overflow:hidden}
 .pboat{transition:transform 1.2s cubic-bezier(.6,0,.4,1)}
 .bobber{animation:bob2 2.6s ease-in-out infinite}
 @keyframes bob2{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(3deg)}}
-#intro.sail .pboat{transform:translate(520px,-40px) scale(.6)}
+#intro.sail .pboat{transform:translate(560px,-30px) scale(.55)}
 
 /* terminal-style speech bubble */
 .say{position:absolute;z-index:4;width:max-content;max-width:min(320px,calc(100vw - 32px));background:#13213f;color:#f3eee3;border-radius:14px 14px 14px 4px;padding:12px 15px 12px;
@@ -70,7 +100,7 @@ html.loading{overflow:hidden}
   .shore{margin-top:40px;width:120%;margin-left:-14%}
 }
 @media (prefers-reduced-motion:reduce){
-  .cloud,.wave,.foam,.sway,.sway .fr,.bobber,.fig .arm,.rise .isle{animation:none!important}
+  .cloud,.wave,.foam,.sway,.sway .fr,.bobber,.fig .arm,.rise .isle,.bird,.glint,.band,.lg,.walking .fig{animation:none!important}
   .shore .rise .isle{opacity:1}
   #intro{transition:none}
 }

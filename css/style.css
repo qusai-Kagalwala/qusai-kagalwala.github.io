@@ -33,6 +33,10 @@ button{font:inherit;color:inherit}
 @keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-4px) rotate(2deg)}}
 #boat .v{opacity:0;transition:opacity .45s ease}
 #boat[data-stage="0"] .v0,#boat[data-stage="1"] .v1,#boat[data-stage="2"] .v2{opacity:1}
+#boat .rider{transition:opacity .35s,transform .45s cubic-bezier(.3,1.4,.5,1);transform-box:fill-box;transform-origin:50% 100%}
+#boat.docked .rider{opacity:0;transform:translate(14px,-18px) scale(.8)}
+#boat .rider .arm2{transform-box:fill-box;transform-origin:100% 100%;animation:rwave 2.4s ease-in-out infinite}
+@keyframes rwave{0%,70%,100%{transform:rotate(0)}80%{transform:rotate(-30deg)}90%{transform:rotate(10deg)}}
 #boat .hull{fill:var(--accent);transition:fill .8s}
 #boat .ln{fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round;transition:stroke .8s}
 #splash{position:fixed;inset:0;pointer-events:none;z-index:4;overflow:hidden}
@@ -101,9 +105,12 @@ h1 em{color:var(--accent);transition:color .8s}
 @keyframes nudge{50%{transform:translateY(5px)}}
 
 /* ---- odometer facts ---- */
-.facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:56px 0 50px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:56px 0 50px}
 .facts>div{padding:22px 0 18px}
-.facts>div+div{padding-left:22px;border-left:1px solid var(--line)}
+.facts>div:not(:nth-child(3n+1)){padding-left:22px;border-left:1px solid var(--line)}
+.facts>div:nth-child(n+4){border-top:1px solid var(--line)}
+.facts a{display:block;color:inherit}
+.facts a:hover small{color:var(--accent)}
 .odo{display:flex;font-family:var(--serif);font-size:clamp(46px,5vw,64px);line-height:1;height:1em;overflow:hidden}
 .odo .col{display:flex;flex-direction:column;transition:transform 1.8s cubic-bezier(.16,1,.3,1)}
 .odo .col span,.odo .sfx{height:1em;display:block}
@@ -235,7 +242,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   .piece figcaption,.split.rev .piece figcaption{text-align:left}
   .split.rev>.piece{order:2}
   .facts{grid-template-columns:1fr 1fr}
-  .facts>div:nth-child(3){padding-left:0;border-left:0}
+  .facts>div:nth-child(n){padding-left:0;border-left:0}
+  .facts>div:nth-child(2n){padding-left:18px;border-left:1px solid var(--line)}
   .facts>div:nth-child(n+3){border-top:1px solid var(--line)}
   .row{grid-template-columns:1fr;gap:4px;padding:18px 0}
   .row .meta{text-align:left}

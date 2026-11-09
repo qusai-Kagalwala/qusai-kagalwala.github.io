@@ -85,6 +85,8 @@
     boat.style.transform = `translate(${cur.x - boat.offsetWidth/2}px,${cur.y - boat.offsetHeight*.82}px) rotate(${tilt}deg) scaleX(${face})`;
     ink.style.strokeDashoffset = wash.style.strokeDashoffset = Math.max(0, total - cur.len);
     let s = sections[0]; for (const sec of sections) if (sec.offsetTop <= cur.y + 1) s = sec;
+    const docked = total - cur.len < 26 && !!document.getElementById('shore');   // reached the island?
+    if (docked !== boat.classList.contains('docked')) { boat.classList.toggle('docked', docked); dispatchEvent(new Event(docked ? 'boat:docked' : 'boat:undocked')); }
     setTheme(s, !snap && curSec !== null);
   }
   (function loop(){ update(false); requestAnimationFrame(loop); })();
