@@ -1,0 +1,76 @@
+/* ---------- intro: the island opens the site ---------- */
+html.loading{overflow:hidden}
+.noload #intro{display:none}
+#intro{position:fixed;inset:0;z-index:100;background:#3f7fcf;overflow:hidden;transition:transform .95s cubic-bezier(.7,0,.2,1)}
+#intro.done{transform:translateY(-100%)}
+#intro .scene{position:absolute;inset:0;width:100%;height:100%}
+#intro .skip{position:absolute;top:18px;right:20px;z-index:3;background:rgba(19,33,63,.35);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:99px;
+  padding:8px 16px;font:500 13px var(--sans);cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .2s}
+#intro .skip:hover{background:rgba(19,33,63,.7)}
+
+/* clouds and waves drift */
+.cloud{animation:drift var(--d,80s) linear infinite alternate}
+@keyframes drift{to{transform:translateX(120px)}}
+.wave{animation:roll var(--d,10s) ease-in-out infinite alternate}
+@keyframes roll{to{transform:translateX(46px)}}
+
+/* the island rises out of the sea */
+.rise .isle{animation:rise 1.1s cubic-bezier(.2,.8,.2,1) both}
+.shore .rise .isle{animation:none;opacity:0}
+.shore.in .rise .isle{animation:rise 1.1s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{transform:translateY(60px);opacity:0}to{transform:none;opacity:1}}
+.foam{transform-box:fill-box;transform-origin:center;animation:foam 3.2s ease-in-out infinite}
+@keyframes foam{50%{transform:scale(1.04,1.3);stroke-opacity:.25}}
+
+/* palms sway */
+.sway{transform-box:fill-box;transform-origin:50% 100%;animation:sway 5s ease-in-out infinite}
+.sway.s2{animation-duration:6.2s;animation-delay:-1.5s}
+@keyframes sway{0%,100%{transform:rotate(-1.4deg)}50%{transform:rotate(1.6deg)}}
+.fr{transform-box:fill-box;transform-origin:50% 50%}
+.sway .fr{animation:fronds 4s ease-in-out infinite}
+@keyframes fronds{50%{transform:rotate(3deg)}}
+
+/* the stick figure peeks out from behind the trunk, then waves */
+.fig{transform:translateX(-32px);transition:transform .7s cubic-bezier(.3,1.4,.5,1);cursor:pointer;outline:none}
+.fig.peek{transform:none}
+.fig .arm{transform-box:fill-box;transform-origin:0% 100%}
+.fig.peek .arm{animation:wave .45s ease-in-out 4 alternate .5s}
+.fig.wave .arm{animation:wave .4s ease-in-out 4 alternate}
+@keyframes wave{from{transform:rotate(-24deg)}to{transform:rotate(18deg)}}
+.fig:focus-visible circle{stroke:#f2b01e}
+
+/* paper boat bobs, then sails off to start the journey */
+.pboat{transition:transform 1.2s cubic-bezier(.6,0,.4,1)}
+.bobber{animation:bob2 2.6s ease-in-out infinite}
+@keyframes bob2{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(3deg)}}
+#intro.sail .pboat{transform:translate(520px,-40px) scale(.6)}
+
+/* terminal-style speech bubble */
+.say{position:absolute;z-index:4;width:max-content;max-width:min(320px,calc(100vw - 32px));background:#13213f;color:#f3eee3;border-radius:14px 14px 14px 4px;padding:12px 15px 12px;
+  font:500 14px/1.45 var(--sans);box-shadow:0 18px 40px -16px rgba(0,0,0,.55);transform:translate(0,-100%) scale(.6);transform-origin:0 100%;opacity:0;
+  transition:transform .35s cubic-bezier(.3,1.5,.5,1),opacity .2s;pointer-events:none}
+.say.on{transform:translate(0,-100%);opacity:1;pointer-events:auto}
+.say.wide{max-width:none;border-radius:14px;transform-origin:50% 100%}
+.say p b{color:#f2b01e;font-weight:600}
+.say .caret{display:inline-block;width:7px;height:15px;background:#f2b01e;vertical-align:-2px;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.say .act{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.say .act:not(:empty){margin-top:10px}
+.say .go{display:inline-flex;align-items:center;height:34px;padding:0 15px;border-radius:99px;border:0;background:#f2b01e;color:#13213f;font:600 13.5px var(--sans);cursor:pointer;text-decoration:none}
+.say .go:hover{background:#fff}
+.say small{font-size:12px;color:rgba(243,238,227,.6)}
+
+/* ---------- shore: the journey ends here ---------- */
+.shore{position:relative;width:min(760px,100%);margin:70px auto 0;aspect-ratio:700/300}
+.shore svg{width:100%;height:100%;overflow:visible}
+
+@media (max-width:720px){
+  #intro .scene{transform:scale(1.05)}
+  .say{font-size:13px}
+  .shore{margin-top:40px;width:120%;margin-left:-14%}
+}
+@media (prefers-reduced-motion:reduce){
+  .cloud,.wave,.foam,.sway,.sway .fr,.bobber,.fig .arm,.rise .isle{animation:none!important}
+  .shore .rise .isle{opacity:1}
+  #intro{transition:none}
+}
