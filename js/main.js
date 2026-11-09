@@ -190,13 +190,23 @@
 
   /* ---------- project screenshots: drop an image or short video into media/ and list it here ---------- */
   const SHOTS = {
-    // docly: 'media/docly.webp',
-    // hisaab: 'media/hisaab.mp4',
+    docly: [['media/docly-1.webp', 'Exact size and KB limit for any portal'], ['media/docly-2.webp', 'Swap the background in one click'],
+            ['media/docly-3.webp', 'A clean signature from a phone photo'], ['media/docly-4.webp', 'Merge, reorder and shrink PDFs'],
+            ['media/docly-5.webp', 'Fill and sign forms without printing'], ['media/docly-6.webp', 'Works offline, light and dark']],
+    // hisaab: [['media/hisaab-1.webp', 'caption'], …]   ← add phone screenshots here
   };
   document.querySelectorAll('.shot[data-shot]').forEach(el => {
-    const src = SHOTS[el.dataset.shot]; if (!src) return el.remove();
+    const list = SHOTS[el.dataset.shot]; if (!list) return el.remove();
     el.classList.add('has');
-    el.innerHTML = /\.(mp4|webm)$/.test(src) ? `<video src="${src}" autoplay muted loop playsinline></video>` : `<img src="${src}" alt="" loading="lazy">`;
+    el.innerHTML = `<div class="slides">${list.map(([s, c], i) => `<figure class="${i ? '' : 'on'}"><img src="${s}" alt="${c}" loading="lazy" width="960" height="540"><figcaption>${c}</figcaption></figure>`).join('')}</div>
+      ${list.length > 1 ? `<div class="dots">${list.map((_, i) => `<button aria-label="Screenshot ${i + 1}" class="${i ? '' : 'on'}"></button>`).join('')}</div>` : ''}`;
+    const figs = el.querySelectorAll('figure'), dots = el.querySelectorAll('.dots button'); let k = 0, timer;
+    const show = i => { k = (i + figs.length) % figs.length; figs.forEach((f, j) => f.classList.toggle('on', j === k)); dots.forEach((d, j) => d.classList.toggle('on', j === k)); };
+    dots.forEach((d, i) => d.onclick = e => { e.stopPropagation(); show(i); clearInterval(timer); });
+    const det = el.closest('details');
+    det.addEventListener('toggle', () => { clearInterval(timer); if (det.open && !reduce && figs.length > 1) timer = setInterval(() => show(k + 1), 3200); });
+    let sx = 0; el.addEventListener('touchstart', e => sx = e.touches[0].clientX, {passive: true});
+    el.addEventListener('touchend', e => { const d = e.changedTouches[0].clientX - sx; if (Math.abs(d) > 40) { clearInterval(timer); show(k + (d < 0 ? 1 : -1)); } });
   });
 
   /* ---------- certificate filters ---------- */
