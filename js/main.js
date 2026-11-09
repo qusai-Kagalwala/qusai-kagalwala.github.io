@@ -187,6 +187,33 @@
   })();
 
 
+
+  /* ---------- project screenshots: drop an image or short video into media/ and list it here ---------- */
+  const SHOTS = {
+    // docly: 'media/docly.webp',
+    // hisaab: 'media/hisaab.mp4',
+  };
+  document.querySelectorAll('.shot[data-shot]').forEach(el => {
+    const src = SHOTS[el.dataset.shot]; if (!src) return el.remove();
+    el.classList.add('has');
+    el.innerHTML = /\.(mp4|webm)$/.test(src) ? `<video src="${src}" autoplay muted loop playsinline></video>` : `<img src="${src}" alt="" loading="lazy">`;
+  });
+
+  /* ---------- certificate filters ---------- */
+  document.querySelectorAll('.filters button').forEach(btn => btn.addEventListener('click', () => {
+    document.querySelectorAll('.filters button').forEach(b => b.classList.toggle('on', b === btn));
+    const f = btn.dataset.f, list = document.querySelector('.certs');
+    if (!list.style.minHeight) list.style.minHeight = list.offsetHeight + 'px';   // keep the page from jumping
+    document.querySelectorAll('.certs .row').forEach(r => r.classList.toggle('hide', f !== 'all' && !(r.dataset.cat || '').split(' ').includes(f)));
+  }));
+  document.querySelectorAll('.filters button').forEach(btn => { if (btn.dataset.f === 'all') return;
+    const n = [...document.querySelectorAll('.certs .row')].filter(r => (r.dataset.cat || '').split(' ').includes(btn.dataset.f)).length;
+    btn.insertAdjacentHTML('beforeend', ` <i>${n}</i>`); });
+
+  /* ---------- sketchbook: surprise me ---------- */
+  const rnd = document.getElementById('rnd');
+  if (rnd) rnd.addEventListener('click', () => { let n; do n = 1 + Math.floor(Math.random() * N); while (n === page); go(n); });
+
   /* ---------- the intro (js/island.js) holds the page until the boat sets sail ---------- */
   if (root.classList.contains('loading')) addEventListener('intro:done', startReveal, {once:true});
   else startReveal();

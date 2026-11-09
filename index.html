@@ -82,7 +82,7 @@
   <section id="top" data-side="R" data-bg="#13213f" data-ink="#f3eee3" data-accent="#f2b01e" data-dark="1">
     <div class="wrap split">
       <div class="reveal">
-        <p class="eyebrow"><span class="dot"></span>Mumbai · open to internships</p>
+        <p class="eyebrow"><span class="pill"><span class="dot"></span>Open to internships</span><span>Mumbai, India</span></p>
         <h1><span>Qusai</span><span><em>Kagalwala</em></span></h1>
         <p class="lede">I'm a developer. I build web apps, desktop tools and AI products, and between projects I draw. This site is a bit of both.</p>
         <div class="cta">
@@ -130,17 +130,113 @@
       <div class="split">
         <div class="reveal">
           <h2>Selected <i>work.</i></h2>
-          <p class="lede">Things I've built — some professionally, some for myself.</p>
+          <p class="lede">Things I've built, some professionally and some for myself. Open any project to see how it works.</p>
         </div>
         <figure class="piece reveal"><div class="paper"><img src="art/10.jpg" alt="Sketchbook page 10: cross-hatched ink drawing of a sailing ship" width="1060" height="1500" loading="lazy"></div><figcaption>p. 10</figcaption></figure>
       </div>
-      <ul class="rows reveal" style="margin-top:60px">
-        <li class="row"><span class="n">01</span><div><h3>Docly<span class="tag">Personal</span></h3><p>A Windows app that gets photos, signatures and PDFs ready for government and exam portals in one go.</p></div><span class="meta">Desktop · .exe</span></li>
-        <li class="row"><span class="n">02</span><div><h3>Hisaab<span class="tag">Personal</span></h3><p>Personal finance app that works offline, with allocations, goals and a Gemini-powered assistant.</p></div><span class="meta">Android · AI</span></li>
-        <li class="row"><span class="n">03</span><div><h3>Helpdesk platform<span class="tag">Professional</span></h3><p>Ticketing, inventory, role-based access and analytics for an IT and AV team, with AI built in.</p></div><span class="meta">Full-stack · AI</span></li>
-        <li class="row"><span class="n">04</span><div><h3>Assessment platform<span class="tag">Professional</span></h3><p>Role-based web app that runs school assessments from setup to results.</p></div><span class="meta">Full-stack</span></li>
-        <li class="row"><span class="n">05</span><div><h3>Data sync &amp; API<span class="tag">Professional</span></h3><p>Moves data from SQL Server to PostgreSQL on a schedule, with an API and a jobs dashboard.</p></div><span class="meta">Backend</span></li>
-        <li class="row"><span class="n">06</span><div><h3>Certificate generator<span class="tag">Personal</span></h3><p>Turns a CSV of names into hundreds of event certificates in minutes.</p></div><span class="meta">Python · OpenCV</span></li>
+      <ul class="projects reveal">
+        <li class="proj" data-n="01">
+          <details>
+            <summary>
+              <span class="n">01</span>
+              <div class="pmain"><h3>Docly<span class="tag">Personal</span></h3><p>Offline Windows app that makes photos, signatures and PDFs portal-ready for Indian exam and government forms.</p><div class="pills"><span>Python</span><span>PySide6</span><span>Pillow</span><span>OpenCV</span><span>pypdf</span></div></div>
+              <span class="more-btn" aria-hidden="true"><i>How it works</i><b>+</b></span>
+            </summary>
+            <div class="pdetail">
+              <div class="shot" data-shot="docly"></div>
+              <div class="pcols">
+                <div><h4>What I built</h4><ul><li>Presets for SSC, UPSC, IBPS, Passport Seva, NTA and college portals</li><li>Smart crop and compression to an exact KB limit</li><li>Signature background cleaner</li><li>PDF merge, split, reorder and compress-to-size, with batch mode</li></ul></div>
+                <div><h4>Decisions I made</h4><ul><li>Fully offline, with no uploads and no telemetry, because these are people's ID documents</li><li>Originals are never modified; every output is a new file</li><li>Python + PySide6 to ship a native .exe quickly with mature imaging libraries</li></ul></div>
+              </div>
+              <div class="plinks"><span class="status">v1.0 in development</span><a class="btn fill" href="https://github.com/qusai-Kagalwala/docly"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg> View code</a></div>
+            </div>
+          </details>
+        </li>
+        <li class="proj" data-n="02">
+          <details>
+            <summary>
+              <span class="n">02</span>
+              <div class="pmain"><h3>Hisaab<span class="tag">Personal</span></h3><p>Offline-first money diary for India: log an expense in three taps and see what's safe to spend today.</p><div class="pills"><span>React Native</span><span>Expo</span><span>TypeScript</span><span>SQLite</span><span>Zustand</span><span>Gemini</span></div></div>
+              <span class="more-btn" aria-hidden="true"><i>How it works</i><b>+</b></span>
+            </summary>
+            <div class="pdetail">
+              <div class="shot" data-shot="hisaab"></div>
+              <div class="pcols">
+                <div><h4>What I built</h4><ul><li>Three-tap logging, plus typing "chai 20" or logging from a home-screen widget</li><li>A single "safe to spend today" number with the maths explained</li><li>Buckets, goals, bills, borrow and lend, and monthly insights</li><li>Ask questions in English, Hindi or Hinglish, answered from your own data</li></ul></div>
+                <div><h4>Decisions I made</h4><ul><li>Money is stored as integer paise, never floating point</li><li>History is never edited: changes are corrections, and balances are always recomputed</li><li>AI is optional and only explains; it never invents numbers, and only totals leave the phone</li><li>About 325 unit tests on the money engine, with strict TypeScript</li></ul></div>
+              </div>
+              <div class="plinks"><span class="status">Android APK</span><a class="btn fill" href="https://github.com/qusai-Kagalwala/hisaab"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg> View code</a></div>
+            </div>
+          </details>
+        </li>
+        <li class="proj" data-n="03">
+          <details>
+            <summary>
+              <span class="n">03</span>
+              <div class="pmain"><h3>Helpdesk platform<span class="tag">Professional</span></h3><p>An AI-assisted helpdesk for an IT and AV team: fix it yourself, request equipment, or raise a ticket.</p><div class="pills"><span>React</span><span>Node.js</span><span>PostgreSQL</span><span>Socket.IO</span><span>PWA</span><span>Web Push</span></div></div>
+              <span class="more-btn" aria-hidden="true"><i>How it works</i><b>+</b></span>
+            </summary>
+            <div class="pdetail">
+              <div class="shot" data-shot="helpdesk"></div>
+              <div class="pcols">
+                <div><h4>What I built</h4><ul><li>AI first-level troubleshooting before a ticket is ever raised</li><li>Service requests, tickets and an equipment inventory lifecycle</li><li>Three roles with department-level scoping</li><li>Real-time updates and push notifications, as an installable app</li></ul></div>
+                <div><h4>Decisions I made</h4><ul><li>A real PWA wrapped as a trusted web activity (TWA), not a WebView, so notifications arrive even when the app is closed</li><li>Sign-in goes through the organisation's existing login, so no passwords are stored</li><li>Designed from day one for Windows Server / IIS hosting</li><li>Replaces a desktop-only legacy system that needed too much data entry</li></ul></div>
+              </div>
+              <div class="plinks"><span class="status">Code private · in active development</span><a class="btn" href="mailto:qusai.kagalwala53@gmail.com?subject=Walkthrough%20request">Ask for a walkthrough →</a></div>
+            </div>
+          </details>
+        </li>
+        <li class="proj" data-n="04">
+          <details>
+            <summary>
+              <span class="n">04</span>
+              <div class="pmain"><h3>Assessment platform<span class="tag">Professional</span></h3><p>A role-based web app that runs weekly assessments from setup to results and analytics.</p><div class="pills"><span>React</span><span>Node.js</span><span>Express</span><span>PostgreSQL</span><span>Google OAuth</span></div></div>
+              <span class="more-btn" aria-hidden="true"><i>How it works</i><b>+</b></span>
+            </summary>
+            <div class="pdetail">
+              <div class="shot" data-shot="assessment"></div>
+              <div class="pcols">
+                <div><h4>What I built</h4><ul><li>Six user roles, each with its own views and permissions</li><li>Invigilator assignment, student ordering and PDF export</li><li>Delivered with an SRS, UML diagrams and full documentation</li></ul></div>
+                <div><h4>Decisions I made</h4><ul><li>Google sign-in, so the institution manages access centrally</li><li>One PostgreSQL schema shared by every role, keeping reports consistent</li></ul></div>
+              </div>
+              <div class="plinks"><span class="status">Code private · delivered</span><a class="btn" href="mailto:qusai.kagalwala53@gmail.com?subject=Walkthrough%20request">Ask for a walkthrough →</a></div>
+            </div>
+          </details>
+        </li>
+        <li class="proj" data-n="05">
+          <details>
+            <summary>
+              <span class="n">05</span>
+              <div class="pmain"><h3>Data sync & API<span class="tag">Professional</span></h3><p>A service that keeps a PostgreSQL copy of a SQL Server table in sync and shares it through an API.</p><div class="pills"><span>Node.js</span><span>Express</span><span>SQL Server</span><span>PostgreSQL</span><span>cron</span></div></div>
+              <span class="more-btn" aria-hidden="true"><i>How it works</i><b>+</b></span>
+            </summary>
+            <div class="pdetail">
+              <div class="shot" data-shot="data"></div>
+              <div class="pcols">
+                <div><h4>What I built</h4><ul><li>Scheduled sync every few hours, keyed on a unique member ID</li><li>Rate-limited, IP-restricted API for other internal apps</li><li>A dashboard to switch the scheduled job on and off</li></ul></div>
+                <div><h4>Decisions I made</h4><ul><li>Sync into PostgreSQL rather than querying the source live, so other apps never load the main database</li><li>Upserts on a stable key, so re-runs are safe</li></ul></div>
+              </div>
+              <div class="plinks"><span class="status">Code private</span><a class="btn" href="mailto:qusai.kagalwala53@gmail.com?subject=Walkthrough%20request">Ask for a walkthrough →</a></div>
+            </div>
+          </details>
+        </li>
+        <li class="proj" data-n="06">
+          <details>
+            <summary>
+              <span class="n">06</span>
+              <div class="pmain"><h3>Certificate generator<span class="tag">Personal</span></h3><p>Turns a CSV of names into hundreds of print-ready event certificates in minutes.</p><div class="pills"><span>Python</span><span>OpenCV</span><span>Pandas</span></div></div>
+              <span class="more-btn" aria-hidden="true"><i>How it works</i><b>+</b></span>
+            </summary>
+            <div class="pdetail">
+              <div class="shot" data-shot="certificate"></div>
+              <div class="pcols">
+                <div><h4>What I built</h4><ul><li>Reads names from CSV and places them on any certificate template</li><li>Batch-exports every certificate in one run</li></ul></div>
+                <div><h4>Decisions I made</h4><ul><li>Built it for college events after watching volunteers type names one by one</li></ul></div>
+              </div>
+              <div class="plinks"><a class="btn fill" href="https://github.com/qusai-Kagal/DevVault"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg> View in DevVault</a></div>
+            </div>
+          </details>
+        </li>
       </ul>
       <p class="more reveal">Older experiments and course projects live in <a href="https://github.com/qusai-Kagal/DevVault">DevVault ↗</a></p>
     </div>
@@ -207,6 +303,7 @@
           <div class="ctrl">
             <button class="btn" id="prev" aria-label="Previous page">←</button>
             <button class="btn fill" id="next" aria-label="Next page">→</button>
+            <button class="btn" id="rnd" style="width:auto;padding:0 18px;font-size:14px">Surprise me</button>
           </div>
           <p class="counter" aria-live="polite"><span id="pn">01</span> <small>/ 40</small></p>
         </div>
@@ -220,22 +317,25 @@
       <p class="label reveal"><b>06</b> Certificates</p>
       <h2 class="reveal">Courses &amp; <i>certificates.</i></h2>
       <p class="lede reveal" style="margin-bottom:40px"><span class="hov">Hover over</span><span class="tap">Tap</span> a name with a dot to see the certificate.</p>
+      <div class="filters reveal" role="group" aria-label="Filter certificates">
+        <button class="on" data-f="all">All <i>15</i></button><button data-f="ai">AI &amp; data</button><button data-f="sec">Security</button><button data-f="dev">Development</button><button data-f="design">Design</button>
+      </div>
       <ul class="rows certs peekable reveal">
-        <li class="row" data-img="certs/isc2-cc.jpg"><h3>Certified in Cybersecurity (CC)</h3><span class="meta">ISC2 · May 2026</span></li>
-        <li class="row" data-img="certs/jio-ai-foundation.jpg"><h3>AI Foundation Course</h3><span class="meta">Jio Institute · Oct 2026</span></li>
-        <li class="row" data-img="certs/be10x-ai-tools.jpg"><h3>AI Tools &amp; Claude Workshop</h3><span class="meta">be10x · Sep 2026</span></li>
-        <li class="row" data-img="certs/claude-code-101.jpg"><h3>Claude Code 101</h3><span class="meta">Anthropic · Jun 2026</span></li>
-        <li class="row" data-img="certs/claude-101.jpg"><h3>Claude 101</h3><span class="meta">Anthropic · Jun 2026</span></li>
-        <li class="row" data-img="certs/python-100-days.jpg"><h3>100 Days of Code: The Complete Python Pro Bootcamp</h3><span class="meta">Udemy · May 2026</span></li>
-        <li class="row" data-img="certs/ai-fluency.jpg"><h3>AI Fluency: Framework &amp; Foundations</h3><span class="meta">Anthropic · Mar 2026</span></li>
-        <li class="row" data-img="certs/cisco-data-science.jpg"><h3>Introduction to Data Science</h3><span class="meta">Cisco Networking Academy · Jan 2026</span></li>
-        <li class="row" data-img="certs/fullstack-bootcamp.jpg"><h3>The Complete Full-Stack Web Development Bootcamp</h3><span class="meta">Udemy · May 2025</span></li>
-        <li class="row" data-img="certs/cisco-cybersecurity.jpg"><h3>Introduction to Cybersecurity</h3><span class="meta">Cisco Networking Academy · Jan 2025</span></li>
-        <li class="row" data-img="certs/google-cloud.jpg"><h3>Generative AI, LLMs, Responsible AI &amp; Prompt Design in Vertex AI</h3><span class="meta">Google Cloud · 4 badges · 2024–25</span></li>
-        <li class="row"><h3>Soft Skills &amp; Time Management</h3><span class="meta">TCS iON · 2025</span></li>
-        <li class="row" data-img="certs/figma-udemy.jpg"><h3>Figma UI/UX Design Essentials</h3><span class="meta">Udemy · Aug 2024</span></li>
-        <li class="row"><h3>Responsive Web Design</h3><span class="meta">freeCodeCamp · 2024</span></li>
-        <li class="row"><h3>Graphic Design Essentials</h3><span class="meta">Canva · 2024</span></li>
+        <li class="row" data-cat="sec" data-img="certs/isc2-cc.jpg"><h3>Certified in Cybersecurity (CC)</h3><span class="meta">ISC2 · May 2026</span></li>
+        <li class="row" data-cat="ai" data-img="certs/jio-ai-foundation.jpg"><h3>AI Foundation Course</h3><span class="meta">Jio Institute · Oct 2026</span></li>
+        <li class="row" data-cat="ai" data-img="certs/be10x-ai-tools.jpg"><h3>AI Tools &amp; Claude Workshop</h3><span class="meta">be10x · Sep 2026</span></li>
+        <li class="row" data-cat="ai dev" data-img="certs/claude-code-101.jpg"><h3>Claude Code 101</h3><span class="meta">Anthropic · Jun 2026</span></li>
+        <li class="row" data-cat="ai" data-img="certs/claude-101.jpg"><h3>Claude 101</h3><span class="meta">Anthropic · Jun 2026</span></li>
+        <li class="row" data-cat="dev" data-img="certs/python-100-days.jpg"><h3>100 Days of Code: The Complete Python Pro Bootcamp</h3><span class="meta">Udemy · May 2026</span></li>
+        <li class="row" data-cat="ai" data-img="certs/ai-fluency.jpg"><h3>AI Fluency: Framework &amp; Foundations</h3><span class="meta">Anthropic · Mar 2026</span></li>
+        <li class="row" data-cat="ai" data-img="certs/cisco-data-science.jpg"><h3>Introduction to Data Science</h3><span class="meta">Cisco Networking Academy · Jan 2026</span></li>
+        <li class="row" data-cat="dev" data-img="certs/fullstack-bootcamp.jpg"><h3>The Complete Full-Stack Web Development Bootcamp</h3><span class="meta">Udemy · May 2025</span></li>
+        <li class="row" data-cat="sec" data-img="certs/cisco-cybersecurity.jpg"><h3>Introduction to Cybersecurity</h3><span class="meta">Cisco Networking Academy · Jan 2025</span></li>
+        <li class="row" data-cat="ai" data-img="certs/google-cloud.jpg"><h3>Generative AI, LLMs, Responsible AI &amp; Prompt Design in Vertex AI</h3><span class="meta">Google Cloud · 4 badges · 2024–25</span></li>
+        <li class="row" data-cat="other"><h3>Soft Skills &amp; Time Management</h3><span class="meta">TCS iON · 2025</span></li>
+        <li class="row" data-cat="design" data-img="certs/figma-udemy.jpg"><h3>Figma UI/UX Design Essentials</h3><span class="meta">Udemy · Aug 2024</span></li>
+        <li class="row" data-cat="dev design"><h3>Responsive Web Design</h3><span class="meta">freeCodeCamp · 2024</span></li>
+        <li class="row" data-cat="design"><h3>Graphic Design Essentials</h3><span class="meta">Canva · 2024</span></li>
       </ul>
     </div>
   </section>
@@ -249,8 +349,8 @@
           <p class="lede">Internship, a project, or just an idea you want to talk through. My inbox is open.</p>
           <a class="mail" href="mailto:qusai.kagalwala53@gmail.com">qusai.kagalwala53@gmail.com</a>
           <div class="links">
-            <a class="btn" href="https://www.linkedin.com/in/qusai-kagalwala/">LinkedIn ↗</a>
-            <a class="btn" href="https://github.com/qusai-Kagalwala">GitHub ↗</a>
+            <a class="btn ico" href="https://www.linkedin.com/in/qusai-kagalwala/"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M7 10v7M7 7v.01M11 17v-7M11 13a3 3 0 0 1 6 0v4" stroke="var(--bg)" stroke-width="2" stroke-linecap="round" fill="none"/></svg> LinkedIn</a>
+            <a class="btn ico" href="https://github.com/qusai-Kagalwala"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg> GitHub</a>
             <a class="btn fill" href="resume.pdf">Résumé ↓</a>
           </div>
         </div>

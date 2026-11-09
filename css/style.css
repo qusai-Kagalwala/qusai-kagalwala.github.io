@@ -270,3 +270,62 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   .reel{overflow-x:auto}
   .bookwrap{transition:none}
 }
+
+/* ---- project cards (expandable) ---- */
+.projects{list-style:none;margin-top:60px;border-top:1px solid var(--line)}
+.proj{border-bottom:1px solid var(--line)}
+.proj summary{list-style:none;display:grid;grid-template-columns:56px 1fr auto;gap:20px;align-items:start;padding:24px 0;cursor:pointer;position:relative}
+.proj summary::-webkit-details-marker{display:none}
+.proj summary::after{content:'';position:absolute;left:0;bottom:-1px;height:1px;width:0;background:var(--accent);transition:width .5s ease}
+.proj summary:hover::after,.proj details[open] summary::after{width:100%}
+.proj .n{font-size:12px;color:var(--mute);padding-top:10px}
+.proj h3{font-family:var(--serif);font-weight:400;font-size:clamp(26px,2.8vw,34px);line-height:1.1}
+.proj .pmain p{color:var(--mute);font-size:15px;margin-top:6px;max-width:62ch}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.pills span{font-size:12px;padding:3px 10px;border-radius:99px;background:color-mix(in srgb,var(--ink) 7%,transparent);color:var(--ink)}
+.more-btn{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--mute);padding-top:10px;white-space:nowrap}
+.more-btn i{font-style:normal}
+.more-btn b{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);font-weight:400;font-size:20px;color:var(--ink);transition:transform .35s,background .2s,border-color .2s}
+.proj summary:hover .more-btn b{border-color:var(--accent)}
+.proj details[open] .more-btn b{transform:rotate(45deg);background:var(--accent);border-color:var(--accent);color:#fff}
+.pdetail{padding:0 0 30px 76px;animation:open .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes open{from{opacity:0;transform:translateY(-8px)}}
+.pcols{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+.pcols h4{font-family:var(--hand);font-size:22px;font-weight:700;color:var(--accent);margin-bottom:6px;transition:color .8s}
+.pcols ul{list-style:none}
+.pcols li{position:relative;padding-left:18px;font-size:14.5px;color:var(--mute);margin-bottom:7px;line-height:1.5}
+.pcols li::before{content:'';position:absolute;left:0;top:.62em;width:8px;height:1.5px;background:var(--accent)}
+.plinks{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:20px}
+.plinks .status{font-size:12.5px;color:var(--mute);margin-right:auto;display:inline-flex;align-items:center;gap:8px}
+.plinks .status::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.btn svg{width:16px;height:16px;fill:currentColor}
+.shot{display:none}
+.shot.has{display:block;margin-bottom:24px;border-radius:10px;overflow:hidden;border:1px solid var(--line);box-shadow:0 24px 50px -30px rgba(0,0,0,.5)}
+.shot img,.shot video{display:block;width:100%;height:auto}
+
+/* ---- hero status pill ---- */
+.eyebrow{gap:14px;flex-wrap:wrap}
+.eyebrow .pill{display:inline-flex;align-items:center;gap:9px;padding:7px 14px 7px 12px;border-radius:99px;background:rgba(70,195,138,.14);border:1px solid rgba(70,195,138,.4);color:var(--ink);font-weight:500}
+.eyebrow .dot{animation:pulse 2s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(70,195,138,.6)}100%{box-shadow:0 0 0 10px rgba(70,195,138,0)}}
+
+/* ---- certificate filters ---- */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:-14px 0 26px}
+.filters button{height:36px;padding:0 15px;border-radius:99px;border:1px solid var(--line);background:none;cursor:pointer;font-size:13.5px;color:var(--mute);transition:all .2s}
+.filters button i{font-style:normal;opacity:.6;margin-left:4px}
+.filters button:hover{color:var(--ink);border-color:var(--ink)}
+.filters button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.certs .row.hide{display:none}
+
+/* ---- contact icons ---- */
+.btn.ico svg{width:17px;height:17px}
+
+@media (max-width:720px){
+  .proj summary{grid-template-columns:1fr auto;gap:12px}
+  .proj .n{display:none}
+  .more-btn i{display:none}
+  .pdetail{padding:0 0 24px}
+  .pcols{grid-template-columns:1fr;gap:18px}
+  .plinks .status{width:100%}
+}
+@media (prefers-reduced-motion:reduce){.pdetail{animation:none}.eyebrow .dot{animation:none}}
