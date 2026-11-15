@@ -27,16 +27,31 @@
 <link rel="manifest" href="site.webmanifest">
 <link rel="preload" href="fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/caveat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
-<script>try{var d=document.documentElement;if(sessionStorage.getItem('seen')||matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('noload');else{d.classList.add('loading')}}catch(e){}</script>
+<script>
+/* which of the three modes? URL (?mode=pro) > saved choice > ask on first visit */
+(function(){var d=document.documentElement,m,known=false;try{
+  var q=(location.search.match(/[?&]mode=(pro|voyage|gallery)/)||[])[1]||(location.hash.match(/^#(pro|voyage|gallery)$/)||[])[1];
+  if(q){m=q;known=true;localStorage.setItem('mode',m)}else{m=localStorage.getItem('mode');known=!!m}
+}catch(e){}
+  if(!/^(pro|voyage|gallery)$/.test(m||''))m='voyage';
+  d.setAttribute('data-mode',known?m:'pro');
+  if(!known){d.classList.add('choosing','noload');return}
+  var seen=false;try{seen=!!sessionStorage.getItem('seen')}catch(e){}
+  if(m!=='voyage'||seen||matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('noload');else d.classList.add('loading');
+})();
+</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Qusai Kagalwala","url":"https://qusai-kagalwala.github.io/","jobTitle":"Software Developer","address":{"@type":"PostalAddress","addressLocality":"Mumbai","addressCountry":"IN"},"alumniOf":{"@type":"CollegeOrUniversity","name":"KC College, Mumbai"},"sameAs":["https://www.linkedin.com/in/qusai-kagalwala/","https://github.com/qusai-Kagalwala"]}
 </script>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/island.css">
+<link rel="stylesheet" href="css/modes.css">
 
 </head>
 <body>
 <div id="intro" aria-label="Intro" role="dialog"></div>
+<div id="gallery" aria-label="Sketchbook gallery"></div>
+<div id="islets" aria-hidden="true"></div>
 
 <svg id="route" aria-hidden="true">
   <path id="r-ghost" fill="none" style="stroke:var(--ink)" stroke-opacity=".22" stroke-width="1.2" stroke-dasharray="2 8" stroke-linecap="round"/>
@@ -70,9 +85,11 @@
 
 <header>
   <a class="mark" href="#top" aria-label="Qusai Kagalwala, back to top">qusai<span>.</span></a>
+  <div class="modes"></div>
   <button id="menuBtn" aria-expanded="false" aria-controls="nav" aria-label="Open menu"><i></i><i></i></button>
   <nav id="nav">
     <a href="#about"><span class="n">01</span>About</a><a href="#work"><span class="n">02</span>Work</a><a href="#toolkit"><span class="n">03</span>Toolkit</a><a href="#awards"><span class="n">04</span>Awards</a><a href="#sketchbook"><span class="n">05</span>Sketchbook</a><a href="#certs"><span class="n">06</span>Certificates</a><a href="#contact"><span class="n">07</span>Contact</a>
+    <div class="modes"></div>
     <p class="menu-foot">Write to me at <a href="mailto:qusai.kagalwala53@gmail.com">qusai.kagalwala53@gmail.com</a></p>
   </nav>
   <div id="bar"></div>
@@ -84,10 +101,18 @@
       <div class="reveal">
         <p class="eyebrow"><span class="pill"><span class="dot"></span>Open to internships</span><span>Mumbai, India</span></p>
         <h1><span>Qusai</span><span><em>Kagalwala</em></span></h1>
-        <p class="lede">I'm a developer. I build web apps, desktop tools and AI products, and between projects I draw. This site is a bit of both.</p>
+        <p class="lede voy-only">I'm a developer. I build web apps, desktop tools and AI products, and between projects I draw. This site is a bit of both.</p>
+        <p class="lede pro-only">Software developer building AI-powered products for web, desktop and mobile. I take ideas from a blank page to something people install and use.</p>
         <div class="cta">
           <a class="btn fill" href="#work">See my work</a>
+          <a class="btn pro-only" href="resume.pdf">Résumé</a>
           <a class="btn" href="#contact">Say hello</a>
+        </div>
+        <div class="prokpis pro-only">
+          <div><b>Live on Microsoft Store</b><span>Docly, a Windows desktop app</span></div>
+          <div><b>3 apps in public use</b><span>Cue, Docly and Hisaab</span></div>
+          <div><b>17 certificates</b><span>ISC2, Google Cloud, Anthropic, Cisco</span></div>
+          <div><b>4× first place</b><span>AI, UI/UX and prompt contests</span></div>
         </div>
         <p class="follow note"><svg width="16" height="22" viewBox="0 0 16 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 2v16M2 12l6 7 6-7"/></svg>follow the paper boat</p>
       </div>
@@ -107,8 +132,8 @@
       </div>
       <div class="facts reveal">
         <div><span class="odo" data-value="4" data-suffix="×"></span><small>first-place finishes</small></div>
-        <div><a href="#certs"><span class="odo" data-value="14"></span><small>certificates earned ↓</small></a></div>
-        <div><a href="#certs"><span class="odo" data-value="4"></span><small>Google Cloud badges ↓</small></a></div>
+        <div><a href="#certs"><span class="odo" data-value="15"></span><small>certificates earned ↓</small></a></div>
+        <div><a href="#certs"><span class="odo" data-value="5"></span><small>Google Cloud badges ↓</small></a></div>
         <div><span class="odo" data-value="79" data-suffix="+"></span><small>people on the team I led</small></div>
         <div><span class="odo" data-value="20" data-suffix="+"></span><small>events organised</small></div>
         <div><span class="odo" data-value="40"></span><small>sketchbook pages</small></div>
@@ -139,6 +164,23 @@
           <details>
             <summary>
               <span class="n">01</span>
+              <div class="pmain"><h3><img class="appicon" src="media/cue-icon.svg" alt="" width="34" height="34">Cue<span class="tag cap">Capstone</span><span class="tag live">● Live</span></h3><p>A free web app that teaches anyone to write better prompts for AI, through practice instead of theory. Your cue to ask better.</p><div class="pills"><span>React 19</span><span>Vite</span><span>Tailwind v4</span><span>Gemini Flash</span><span>Vercel</span><span>Vitest</span></div></div>
+              <span class="more-btn" aria-hidden="true"><i>How it works</i><b>+</b></span>
+            </summary>
+            <div class="pdetail">
+              <div class="shot" data-shot="cue"></div>
+              <div class="pcols">
+                <div><h4>What I built</h4><ul><li>Ten stages of prompt craft, from text and images to briefing coding agents and reading an AI's answer critically</li><li>Every lesson climbs three rungs: guided warm-up, assisted rehearsal with a live checklist, then an AI-scored assessment with a rewrite</li><li>An on-device scoring rubric, so practice is instant and costs no API quota</li><li>XP, theatre ranks, streaks, a prompt library and voice input in English and Hindi, built around everyday Indian scenarios</li></ul></div>
+                <div><h4>Decisions I made</h4><ul><li>Each new stage is one data file and zero new screens; the same engine has now shipped ten times</li><li>No backend, database or login: everything lives on the device, with one-button export and import</li><li>The API key sits in a single stateless serverless function and never reaches the browser</li><li>Pasted text is treated as data, never instructions, so prompt-injection attempts get judged, not obeyed</li><li>Gemini Flash-Lite with a Flash fallback and a strict JSON schema, covered by 21 unit tests</li></ul></div>
+              </div>
+              <div class="plinks"><span class="status">Final-year capstone · built solo</span><a class="btn" href="https://cue-orpin-five.vercel.app/">Open the live app →</a><a class="btn fill" href="https://github.com/qusai-Kagalwala/cue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg> View code</a></div>
+            </div>
+          </details>
+        </li>
+        <li class="proj" data-n="02">
+          <details>
+            <summary>
+              <span class="n">02</span>
               <div class="pmain"><h3><img class="appicon" src="media/docly-icon.webp" alt="" width="34" height="34">Docly<span class="tag">Personal</span><span class="tag live">● Live</span></h3><p>Windows app on the Microsoft Store that makes photos, signatures and PDFs portal-ready for Indian exam and government forms.</p><div class="pills"><span>Python</span><span>PySide6</span><span>Pillow</span><span>OpenCV</span><span>pypdf</span></div></div>
               <span class="more-btn" aria-hidden="true"><i>How it works</i><b>+</b></span>
             </summary>
@@ -152,10 +194,10 @@
             </div>
           </details>
         </li>
-        <li class="proj" data-n="02">
+        <li class="proj" data-n="03">
           <details>
             <summary>
-              <span class="n">02</span>
+              <span class="n">03</span>
               <div class="pmain"><h3><img class="appicon" src="media/hisaab-icon.webp" alt="" width="34" height="34">Hisaab<span class="tag">Personal</span><span class="tag live">● Released</span></h3><p>Offline-first money diary for India: log an expense in three taps and see what's safe to spend today.</p><div class="pills"><span>React Native</span><span>Expo</span><span>TypeScript</span><span>SQLite</span><span>Zustand</span><span>Gemini</span></div></div>
               <span class="more-btn" aria-hidden="true"><i>How it works</i><b>+</b></span>
             </summary>
@@ -169,10 +211,10 @@
             </div>
           </details>
         </li>
-        <li class="proj" data-n="03">
+        <li class="proj" data-n="04">
           <details>
             <summary>
-              <span class="n">03</span>
+              <span class="n">04</span>
               <div class="pmain"><h3>Helpdesk platform<span class="tag">Professional</span></h3><p>An AI-assisted helpdesk for an IT and AV team: fix it yourself, request equipment, or raise a ticket.</p><div class="pills"><span>React</span><span>Node.js</span><span>PostgreSQL</span><span>Socket.IO</span><span>PWA</span><span>Web Push</span></div></div>
               <span class="more-btn" aria-hidden="true"><i>How it works</i><b>+</b></span>
             </summary>
@@ -186,10 +228,10 @@
             </div>
           </details>
         </li>
-        <li class="proj" data-n="04">
+        <li class="proj" data-n="05">
           <details>
             <summary>
-              <span class="n">04</span>
+              <span class="n">05</span>
               <div class="pmain"><h3>Assessment platform<span class="tag">Professional</span></h3><p>A role-based web app that runs weekly assessments from setup to results and analytics.</p><div class="pills"><span>React</span><span>Node.js</span><span>Express</span><span>PostgreSQL</span><span>Google OAuth</span></div></div>
               <span class="more-btn" aria-hidden="true"><i>How it works</i><b>+</b></span>
             </summary>
@@ -203,10 +245,10 @@
             </div>
           </details>
         </li>
-        <li class="proj" data-n="05">
+        <li class="proj" data-n="06">
           <details>
             <summary>
-              <span class="n">05</span>
+              <span class="n">06</span>
               <div class="pmain"><h3>Data sync & API<span class="tag">Professional</span></h3><p>A service that keeps a PostgreSQL copy of a SQL Server table in sync and shares it through an API.</p><div class="pills"><span>Node.js</span><span>Express</span><span>SQL Server</span><span>PostgreSQL</span><span>cron</span></div></div>
               <span class="more-btn" aria-hidden="true"><i>How it works</i><b>+</b></span>
             </summary>
@@ -220,10 +262,10 @@
             </div>
           </details>
         </li>
-        <li class="proj" data-n="06">
+        <li class="proj" data-n="07">
           <details>
             <summary>
-              <span class="n">06</span>
+              <span class="n">07</span>
               <div class="pmain"><h3>Certificate generator<span class="tag">Personal</span></h3><p>Turns a CSV of names into hundreds of print-ready event certificates in minutes.</p><div class="pills"><span>Python</span><span>OpenCV</span><span>Pandas</span></div></div>
               <span class="more-btn" aria-hidden="true"><i>How it works</i><b>+</b></span>
             </summary>
@@ -253,6 +295,7 @@
     <div class="wrap">
       <p class="sub reveal" style="margin-top:64px">Built so far</p>
       <ol class="built reveal">
+        <li><b>An AI tutor</b><span>Cue — ten stages of prompt practice with instant, AI-scored feedback</span><em>React · Gemini</em></li>
         <li><b>An API</b><span>Rate-limited, IP-restricted data API over a scheduled SQL Server → PostgreSQL sync</span><em>Node · Express</em></li>
         <li><b>A progressive web app</b><span>Helpdesk with AI troubleshooting, roles, inventory and push notifications</span><em>React · PostgreSQL</em></li>
         <li><b>A web app</b><span>Assessment platform with six user roles, from setup to results</span><em>React · Node · OAuth</em></li>
@@ -316,26 +359,28 @@
     <div class="wrap">
       <p class="label reveal"><b>06</b> Certificates</p>
       <h2 class="reveal">Courses &amp; <i>certificates.</i></h2>
-      <p class="lede reveal" style="margin-bottom:40px"><span class="hov">Hover over</span><span class="tap">Tap</span> a name with a dot to see the certificate.</p>
+      <p class="lede reveal" style="margin-bottom:40px"><span class="hov">Hover over</span><span class="tap">Tap</span> any name to see the certificate.</p>
       <div class="filters reveal" role="group" aria-label="Filter certificates">
-        <button class="on" data-f="all">All <i>15</i></button><button data-f="ai">AI &amp; data</button><button data-f="sec">Security</button><button data-f="dev">Development</button><button data-f="design">Design</button>
+        <button class="on" data-f="all">All</button><button data-f="ai">AI &amp; data</button><button data-f="sec">Security</button><button data-f="dev">Development</button><button data-f="design">Design</button>
       </div>
       <ul class="rows certs peekable reveal">
-        <li class="row" data-cat="sec" data-img="certs/isc2-cc.jpg"><h3>Certified in Cybersecurity (CC)</h3><span class="meta">ISC2 · May 2026</span></li>
+        <li class="row" data-cat="sec" data-img="certs/isc2-course.jpg"><h3>Certified in Cybersecurity (CC)</h3><span class="meta">ISC2 · May 2026 · 5 domains + final assessment</span></li>
+        <li class="row" data-cat="sec" data-img="certs/isc2-candidate.jpg"><h3>ISC2 Candidate</h3><span class="meta">ISC2 · Apr 2026</span></li>
         <li class="row" data-cat="ai" data-img="certs/jio-ai-foundation.jpg"><h3>AI Foundation Course</h3><span class="meta">Jio Institute · Oct 2026</span></li>
         <li class="row" data-cat="ai" data-img="certs/be10x-ai-tools.jpg"><h3>AI Tools &amp; Claude Workshop</h3><span class="meta">be10x · Sep 2026</span></li>
         <li class="row" data-cat="ai dev" data-img="certs/claude-code-101.jpg"><h3>Claude Code 101</h3><span class="meta">Anthropic · Jun 2026</span></li>
         <li class="row" data-cat="ai" data-img="certs/claude-101.jpg"><h3>Claude 101</h3><span class="meta">Anthropic · Jun 2026</span></li>
         <li class="row" data-cat="dev" data-img="certs/python-100-days.jpg"><h3>100 Days of Code: The Complete Python Pro Bootcamp</h3><span class="meta">Udemy · May 2026</span></li>
         <li class="row" data-cat="ai" data-img="certs/ai-fluency.jpg"><h3>AI Fluency: Framework &amp; Foundations</h3><span class="meta">Anthropic · Mar 2026</span></li>
+        <li class="row" data-cat="dev" data-img="certs/cisco-networking-basics.jpg"><h3>Networking Basics</h3><span class="meta">Cisco Networking Academy · Nov 2026</span></li>
         <li class="row" data-cat="ai" data-img="certs/cisco-data-science.jpg"><h3>Introduction to Data Science</h3><span class="meta">Cisco Networking Academy · Jan 2026</span></li>
         <li class="row" data-cat="dev" data-img="certs/fullstack-bootcamp.jpg"><h3>The Complete Full-Stack Web Development Bootcamp</h3><span class="meta">Udemy · May 2025</span></li>
         <li class="row" data-cat="sec" data-img="certs/cisco-cybersecurity.jpg"><h3>Introduction to Cybersecurity</h3><span class="meta">Cisco Networking Academy · Jan 2025</span></li>
-        <li class="row" data-cat="ai" data-img="certs/google-cloud.jpg"><h3>Generative AI, LLMs, Responsible AI &amp; Prompt Design in Vertex AI</h3><span class="meta">Google Cloud · 4 badges · 2024–25</span></li>
-        <li class="row" data-cat="other"><h3>Soft Skills &amp; Time Management</h3><span class="meta">TCS iON · 2025</span></li>
+        <li class="row" data-cat="ai" data-img="certs/google-cloud.jpg"><h3>Generative AI, LLMs, Responsible AI, AI Principles &amp; Prompt Design in Vertex AI</h3><span class="meta">Google Cloud · 5 badges · 2024–25</span></li>
+        <li class="row" data-cat="other" data-img="certs/tcs-softskills.jpg"><h3>Introduction to Soft Skills</h3><span class="meta">TCS iON · Jan 2025 · scored 10/10</span></li>
         <li class="row" data-cat="design" data-img="certs/figma-udemy.jpg"><h3>Figma UI/UX Design Essentials</h3><span class="meta">Udemy · Aug 2024</span></li>
-        <li class="row" data-cat="dev design"><h3>Responsive Web Design</h3><span class="meta">freeCodeCamp · 2024</span></li>
-        <li class="row" data-cat="design"><h3>Graphic Design Essentials</h3><span class="meta">Canva · 2024</span></li>
+        <li class="row" data-cat="dev design" data-img="certs/freecodecamp-rwd.jpg"><h3>Responsive Web Design</h3><span class="meta">freeCodeCamp · Dec 2024 · ~300 hours</span></li>
+        <li class="row" data-cat="design" data-img="certs/canva-design.jpg"><h3>Graphic Design Essentials</h3><span class="meta">Canva · 2024</span></li>
       </ul>
     </div>
   </section>
@@ -357,6 +402,7 @@
         <figure class="piece reveal"><div class="paper"><img src="art/30.jpg" alt="Sketchbook page 30: top-down painting of a rowboat among lily pads" width="1035" height="1500" loading="lazy"></div><figcaption>p. 30</figcaption></figure>
       </div>
       <div class="shore" id="shore"></div>
+      <p class="playrow"><button class="btn" id="playBtn" type="button">Play a round: defend the island →</button></p>
     </div>
   </section>
 </main>
@@ -367,9 +413,12 @@
   <div class="wrap"><span>© 2026 Qusai Kagalwala · Mumbai</span><span>Built and drawn by hand. Fan-art pages are tributes; the characters belong to their owners.</span></div>
 </footer>
 
+<script src="js/gallery.js" defer></script>
+<script src="js/modes.js" defer></script>
 <script src="js/tech.js" defer></script>
 <script src="js/island.js" defer></script>
 <script src="js/main.js" defer></script>
+<script src="js/pirates.js" defer></script>
 
 </body>
 </html>

@@ -4,6 +4,7 @@
   const sections = [...document.querySelectorAll('main section')];
   const navLinks = [...document.querySelectorAll('nav > a')];
   const boat = document.getElementById('boat');
+  const MODE = root.dataset.mode || 'voyage', voyage = MODE === 'voyage';   // the river, boat and colour changes belong to Voyage only
 
   /* ---------- theme per section + a soft splash of colour ---------- */
   const splash = document.getElementById('splash');
@@ -42,7 +43,9 @@
   const svg = document.getElementById('route'), ghost = document.getElementById('r-ghost'),
         wash = document.getElementById('r-wash'), ink = document.getElementById('r-ink'), bar = document.getElementById('bar');
   let LUT = [], total = 1, docH = 0, cur = null, tilt = 0, face = 1;
+  const isletBox = document.getElementById('islets');
   function build(){
+    if (!voyage) return;
     const W = root.clientWidth; docH = root.scrollHeight;
     svg.setAttribute('width', W); svg.setAttribute('height', docH); svg.setAttribute('viewBox', `0 0 ${W} ${docH}`);
     const mobile = W <= 720, m = mobile ? 24 : Math.max(34, (W - 1060)/4 + 12), pts = [];
@@ -50,6 +53,7 @@
       const top = s.offsetTop, h = s.offsetHeight, x = mobile ? m : (s.dataset.side === 'L' ? m : W - m), wob = mobile ? 5 : 18;
       if (i === 0) pts.push([mobile ? m : W*.72, 70]);
       pts.push([x, top + Math.min(150, h*.2)]);
+      if (i) islet(i, x, top + Math.min(150, h*.2), s);
       pts.push([x + (i % 2 ? wob : -wob), top + h*.5]);
       if (!(s.dataset.end && document.getElementById('shore'))) pts.push([x, top + h - 90]);
     });
@@ -70,6 +74,26 @@
     LUT = []; for (let l = 0; l <= total; l += 5) { const q = ink.getPointAtLength(l); LUT.push([l, q.x, q.y]); }
     update(true);
   }
+  // every section is an island on the route, flying a flag with its name
+  function islet(i, x, y, s){
+    if (!isletBox) return;
+    let el = isletBox.children[i - 1];
+    if (!el) { el = document.createElement('div'); el.className = 'islet';
+      const name = (navLinks.find(a => a.hash === '#' + s.id) || {childNodes: []}).childNodes; const label = name.length ? name[name.length - 1].textContent : '';
+      el.innerHTML = `<svg viewBox="0 0 150 110">
+        <ellipse cx="75" cy="92" rx="72" ry="15" fill="#55d0cf" opacity=".35"/><ellipse cx="75" cy="90" rx="60" ry="11" fill="#9fe9df" opacity=".6"/>
+        <ellipse cx="75" cy="89" rx="52" ry="8" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="2"/>
+        <path d="M22 88C40 66 110 66 128 88 104 96 46 96 22 88z" fill="#f6e5b8"/><path d="M22 88c24 8 82 8 106 0" stroke="#caa66a" stroke-width="2" fill="none"/>
+        <path d="M46 78c16-9 44-9 60 0-18-4-42-4-60 0z" fill="#6fb04f"/>
+        <ellipse cx="38" cy="86" rx="7" ry="4" fill="#9aa3ad"/><ellipse cx="45" cy="88" rx="4" ry="2.5" fill="#b9c1c9"/>
+        <g transform="translate(98 80)"><path d="M0 0C3-18 1-34-6-48" stroke="#8f6a4f" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M-1-12h5M-2-24h5M-4-36h5" stroke="#5e4130" stroke-width="1.4"/>
+          <g transform="translate(-6 -48)"><path d="M0 0C12-16 36-16 50-2 34-8 18-6 0 0z" fill="#1f9a50"/><path d="M0 0C-12-16-36-16-50-2-34-8-18-6 0 0z" fill="#46a83f"/><path d="M0 0C-4-18 4-30 16-36 10-22 8-10 0 0z" fill="#7cc043"/>
+            <path d="M0 0C10 4 24 16 26 32 16 20 8 10 0 0z" fill="#c9dc3c"/><path d="M0 0C-10 4-24 16-26 32-16 20-8 10 0 0z" fill="#1f9a50"/><circle cx="-3" cy="4" r="4" fill="#8d6640"/><circle cx="4" cy="5" r="4" fill="#7a5634"/></g></g>
+        <g transform="translate(56 80)"><path d="M0 0V-34" stroke="#7a5230" stroke-width="3.4" stroke-linecap="round"/>
+          <g transform="rotate(-4 0 -30)"><rect x="-30" y="-44" width="60" height="18" rx="3" fill="#c79a5e" stroke="#7a5230" stroke-width="1.6"/><path d="M-26-38h52" stroke="#a97c44" stroke-width=".8"/>
+          <text x="0" y="-31" text-anchor="middle">${label}</text></g></g></svg>`; isletBox.appendChild(el); }
+    el.style.left = x + 'px'; el.style.top = y + 'px';
+  }
   const at = y => { let lo = 0, hi = LUT.length - 1; while (lo < hi) { const mid = (lo+hi) >> 1; if (LUT[mid][2] < y) lo = mid + 1; else hi = mid; } return lo; };
   function update(snap){
     if (!LUT.length) return;
@@ -89,7 +113,13 @@
     if (docked !== boat.classList.contains('docked')) { boat.classList.toggle('docked', docked); dispatchEvent(new Event(docked ? 'boat:docked' : 'boat:undocked')); }
     setTheme(s, !snap && curSec !== null);
   }
-  (function loop(){ update(false); requestAnimationFrame(loop); })();
+  if (voyage) (function loop(){ update(false); requestAnimationFrame(loop); })();
+  else {   // Professional: no boat, just a progress line and the current section in the nav
+    const onScroll = () => { bar.style.width = Math.min(1, scrollY / Math.max(1, root.scrollHeight - innerHeight)) * 100 + '%'; };
+    addEventListener('scroll', onScroll, {passive: true}); onScroll();
+    const spy = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) navLinks.forEach(a => a.classList.toggle('on', a.hash === '#' + e.target.id)); }), {rootMargin: '-45% 0px -50% 0px'});
+    sections.forEach(s => spy.observe(s));
+  }
 
   /* ---------- reveal + rolling numbers ---------- */
   document.querySelectorAll('.odo').forEach(el => {
@@ -164,7 +194,7 @@
   book.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy0 = e.touches[0].clientY; swiped = false; }, {passive:true});
   book.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy0;
     if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { swiped = true; e.preventDefault(); flip(dx < 0 ? 1 : -1); } });
-  paint();
+  if (voyage) paint();
 
   /* ---------- hover to peek at certificates (tap on phones) ---------- */
   const peek = document.getElementById('peek'), peekImg = peek.querySelector('img');
@@ -175,7 +205,7 @@
     r.addEventListener('mouseenter', e => { peekImg.src = r.dataset.img; peekImg.alt = inline.alt; showing = true; peek.classList.add('on'); px = tx = e.clientX; py = ty = e.clientY; });
     r.addEventListener('mouseleave', () => { showing = false; peek.classList.remove('on'); });
     r.addEventListener('click', () => { if (!inline.src) inline.src = r.dataset.img; r.classList.toggle('open'); });
-    new Image().src = r.dataset.img;
+    if (MODE !== 'gallery') (window.requestIdleCallback || setTimeout)(() => { new Image().src = r.dataset.img; });
   });
   addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; });
   (function follow(){
@@ -190,6 +220,7 @@
 
   /* ---------- project screenshots: drop an image or short video into media/ and list it here ---------- */
   const SHOTS = {
+    cue: [['media/cue-1.webp', 'A guided lesson: fill in the blanks, then check your prompt'], ['media/cue-2.webp', 'Ten stages, from everyday prompts to directing AI agents']],
     docly: [['media/docly-1.webp', 'Exact size and KB limit for any portal'], ['media/docly-2.webp', 'Swap the background in one click'],
             ['media/docly-3.webp', 'A clean signature from a phone photo'], ['media/docly-4.webp', 'Merge, reorder and shrink PDFs'],
             ['media/docly-5.webp', 'Fill and sign forms without printing'], ['media/docly-6.webp', 'Works offline, light and dark']],
@@ -209,6 +240,23 @@
     el.addEventListener('touchend', e => { const d = e.changedTouches[0].clientX - sx; if (Math.abs(d) > 40) { clearInterval(timer); show(k + (d < 0 ? 1 : -1)); } });
   });
 
+  /* ---------- project cards open and close smoothly ---------- */
+  document.querySelectorAll('.proj details').forEach(d => {
+    const sum = d.querySelector('summary'), panel = d.querySelector('.pdetail'); let a = null;
+    sum.addEventListener('click', e => {
+      e.preventDefault(); if (a) a.cancel();
+      const opening = !d.classList.contains('is-open');
+      d.classList.toggle('is-open', opening);
+      if (reduce) { d.open = opening; return; }
+      if (opening) { d.open = true; const h = panel.offsetHeight, pb = getComputedStyle(panel).paddingBottom;
+        a = panel.animate([{height: '0px', paddingBottom: '0px', opacity: 0}, {height: h + 'px', paddingBottom: pb, opacity: 1}], {duration: 520, easing: 'cubic-bezier(.22,.9,.24,1)'}); }
+      else { const h = panel.offsetHeight, pb = getComputedStyle(panel).paddingBottom;
+        a = panel.animate([{height: h + 'px', paddingBottom: pb, opacity: 1}, {height: '0px', paddingBottom: '0px', opacity: 0}], {duration: 360, easing: 'cubic-bezier(.5,0,.3,1)'});
+        a.onfinish = () => { d.open = false; }; }
+      a.addEventListener('finish', () => { a = null; });
+    });
+  });
+
   /* ---------- certificate filters ---------- */
   document.querySelectorAll('.filters button').forEach(btn => btn.addEventListener('click', () => {
     document.querySelectorAll('.filters button').forEach(b => b.classList.toggle('on', b === btn));
@@ -216,8 +264,8 @@
     if (!list.style.minHeight) list.style.minHeight = list.offsetHeight + 'px';   // keep the page from jumping
     document.querySelectorAll('.certs .row').forEach(r => r.classList.toggle('hide', f !== 'all' && !(r.dataset.cat || '').split(' ').includes(f)));
   }));
-  document.querySelectorAll('.filters button').forEach(btn => { if (btn.dataset.f === 'all') return;
-    const n = [...document.querySelectorAll('.certs .row')].filter(r => (r.dataset.cat || '').split(' ').includes(btn.dataset.f)).length;
+  document.querySelectorAll('.filters button').forEach(btn => { const rows = [...document.querySelectorAll('.certs .row')];
+    const n = btn.dataset.f === 'all' ? rows.length : rows.filter(r => (r.dataset.cat || '').split(' ').includes(btn.dataset.f)).length;
     btn.insertAdjacentHTML('beforeend', ` <i>${n}</i>`); });
 
   /* ---------- sketchbook: surprise me ---------- */
