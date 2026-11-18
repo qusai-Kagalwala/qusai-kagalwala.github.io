@@ -48,12 +48,21 @@
       }
     });
 
-    /* ---------- floating hover peek logic (direct video on hover) ---------- */
+    /* ---------- floating hover peek logic (direct video on hover, 5-second loop) ---------- */
     const cPeek = c.querySelector('#chooser-peek');
     const cpVideo = cPeek.querySelector('video');
     const cpTitle = cPeek.querySelector('.cp-title');
     const cpTag = cPeek.querySelector('.cp-tag');
     let cpx = 0, cpy = 0, ctx = 0, cty = 0, cShowing = false;
+    const LOOP_SECONDS = 5.0; // Snappy 5-second trimmed loop
+
+    // Seamless 5-second loop constraint
+    cpVideo.addEventListener('timeupdate', () => {
+      if (cpVideo.currentTime >= LOOP_SECONDS) {
+        cpVideo.currentTime = 0;
+        cpVideo.play().catch(() => {});
+      }
+    });
 
     c.querySelectorAll('.opt').forEach(opt => {
       opt.addEventListener('mouseenter', e => {
@@ -65,7 +74,7 @@
         if (videoSrc) {
           if (cpVideo.dataset.src !== videoSrc) {
             cpVideo.dataset.src = videoSrc;
-            cpVideo.src = videoSrc;
+            cpVideo.src = videoSrc + '#t=0,5';
             cpVideo.load();
           }
           cpVideo.currentTime = 0;
@@ -81,7 +90,10 @@
       opt.addEventListener('mouseleave', () => {
         cShowing = false;
         cPeek.classList.remove('on');
-        try { cpVideo.pause(); } catch (e) {}
+        try {
+          cpVideo.pause();
+          cpVideo.currentTime = 0;
+        } catch (e) {}
       });
     });
 
