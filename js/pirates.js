@@ -2,14 +2,35 @@
 // Pirate ships cross the sea after the coconuts. Tap the water to fire the cannon; shots take time to land, so aim ahead.
 (() => {
   const btn = document.getElementById('playBtn'); if (!btn) return;
-  const SHIP = `<svg viewBox="0 0 104 92"><g stroke="#0c0c10" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
-      <path d="M8 60h88l-10 20c-2 4-5 6-9 6H27c-4 0-7-2-9-6z" fill="#4a2c18"/><path d="M12 66h80" stroke="#f2b01e" stroke-width="2.5"/>
-      <path d="M52 6v54M30 22v38" fill="none"/>
-      <path d="M54 12c16 4 24 14 26 40H54z" fill="#17171c"/><path d="M50 14C36 20 26 32 22 54h28z" fill="#24242c"/>
-      <path d="M52 6l16 5-16 5z" fill="#b3261e"/>
-      <circle cx="66" cy="33" r="6" fill="#f3eee3"/><path d="M58 43l16 7M74 43l-16 7" stroke="#f3eee3" stroke-width="2.6"/>
-      <circle cx="30" cy="73" r="3" fill="#0c0c10"/><circle cx="52" cy="73" r="3" fill="#0c0c10"/><circle cx="74" cy="73" r="3" fill="#0c0c10"/>
+
+  // Clean hand-drawn nautical vector sloop — no loose sticks or detached paths
+  const SHIP = `<svg viewBox="0 0 104 92"><g stroke="#16120e" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+      <!-- Wooden hull with curved bow and stern -->
+      <path d="M12 58 C20 58 84 58 94 58 C90 74 80 84 68 84 L26 84 C16 84 12 74 12 58 Z" fill="#462715"/>
+      <path d="M16 66 C42 67 68 67 90 66" stroke="#c99738" stroke-width="2" fill="none"/>
+      <path d="M20 74 C44 75 66 75 82 74" stroke="#2c170d" stroke-width="1.6" fill="none"/>
+      <!-- Angled bowsprit at bow -->
+      <path d="M86 58 L100 46" stroke="#5a3418" stroke-width="3"/>
+      <!-- Center Mast & Yardarms -->
+      <path d="M52 14 L52 58" stroke="#381f0d" stroke-width="3"/>
+      <path d="M34 22 L70 22" stroke="#381f0d" stroke-width="2.2"/>
+      <path d="M28 38 L76 38" stroke="#381f0d" stroke-width="2.4"/>
+      <!-- Fore staysail / Jib connected to bowsprit -->
+      <path d="M52 24 L94 48 C78 50 66 52 52 52 Z" fill="#2d303a"/>
+      <!-- Top Square Sail -->
+      <path d="M36 22 C44 20 60 20 68 22 C65 30 65 33 68 35 C58 36 46 36 36 35 C39 33 39 30 36 22 Z" fill="#242630"/>
+      <!-- Main Lower Sail -->
+      <path d="M30 38 C42 36 62 36 74 38 C70 48 70 51 74 55 C60 56 44 56 30 55 C34 51 34 48 30 38 Z" fill="#181a22"/>
+      <!-- White skull emblem on main sail -->
+      <circle cx="52" cy="45" r="4.2" fill="#f4efe4"/>
+      <path d="M48 51 L56 51 M50 53 L54 53" stroke="#f4efe4" stroke-width="1.4"/>
+      <circle cx="50.5" cy="44.5" r="1.1" fill="#181a22"/><circle cx="53.5" cy="44.5" r="1.1" fill="#181a22"/>
+      <!-- Red Pirate Pennant Flag -->
+      <path d="M52 14 L68 18 L52 22 Z" fill="#b3261e"/>
+      <!-- Portholes -->
+      <circle cx="34" cy="72" r="2.8" fill="#16120e"/><circle cx="53" cy="72" r="2.8" fill="#16120e"/><circle cx="72" cy="72" r="2.8" fill="#16120e"/>
     </g></svg>`;
+
   const ISLE = `<svg viewBox="0 0 320 150">
       <ellipse cx="160" cy="132" rx="158" ry="22" fill="#8fe6dc" opacity=".55"/>
       <path d="M22 132C60 92 260 92 298 132 240 146 80 146 22 132z" fill="#f4e2b4" stroke="#caa66a" stroke-width="2"/>
@@ -20,6 +41,13 @@
       <g transform="translate(160 104)"><g class="barrel"><rect x="-9" y="-58" width="18" height="52" rx="6" fill="#23252d" stroke="#0c0c10" stroke-width="2"/><rect x="-11" y="-60" width="22" height="8" rx="3" fill="#3a3d48" stroke="#0c0c10" stroke-width="2"/></g>
         <path d="M-22 0a22 22 0 0 1 44 0z" fill="#7a5230" stroke="#3d2814" stroke-width="2"/><circle cx="-16" cy="2" r="8" fill="#3d2814"/><circle cx="16" cy="2" r="8" fill="#3d2814"/></g>
     </svg>`;
+
+  // Pure SVG icons (no unicode emojis)
+  const NUT_LIVE = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" style="vertical-align:-4px;margin:0 1px"><circle cx="12" cy="12" r="9" fill="#8d6640" stroke="#3d2412" stroke-width="1.8"/><circle cx="9.5" cy="10" r="1.8" fill="#543318"/><circle cx="14.5" cy="10" r="1.8" fill="#543318"/><circle cx="12" cy="14.5" r="1.8" fill="#543318"/></svg>`;
+  const NUT_LOST = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" style="vertical-align:-4px;margin:0 1px"><circle cx="12" cy="12" r="9" stroke="rgba(243,238,227,.3)" stroke-width="1.8" stroke-dasharray="3 3"/><path d="M9 15 L15 9 M9 9 L15 15" stroke="rgba(243,238,227,.35)" stroke-width="1.8" stroke-linecap="round"/></svg>`;
+  const SND_ON = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>`;
+  const SND_OFF = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>`;
+  const TROPHY_SVG = `<svg viewBox="0 0 24 24" width="46" height="46" fill="none" stroke="#f2b01e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 10px;display:block"><path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2"></path><path d="M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"></path><path d="M4 3h16v6a8 8 0 0 1-16 0V3z"></path><path d="M12 17v4"></path><path d="M8 21h8"></path></svg>`;
 
   let g, sea, hudScore, hudTime, hudNuts, layer, barrel, raf = 0, S = null;
   let audioCtx = null, soundOn = true;
@@ -81,8 +109,8 @@
       <div class="gm-hud">
         <span>Score <b class="sc">0</b></span>
         <span>Time <b class="tm">45</b></span>
-        <span class="nt" aria-label="Coconuts left">🥥🥥🥥</span>
-        <button class="gm-mute" type="button" aria-label="Toggle sound" title="Sound">${soundOn ? '🔊' : '🔇'}</button>
+        <span class="nt" aria-label="Coconuts left">${NUT_LIVE.repeat(3)}</span>
+        <button class="gm-mute" type="button" aria-label="Toggle sound" title="Sound">${soundOn ? SND_ON : SND_OFF}</button>
         <button class="gm-x" aria-label="Close game">×</button>
       </div>
       <div class="gm-card"></div>`;
@@ -93,7 +121,7 @@
     const muteBtn = g.querySelector('.gm-mute');
     muteBtn.onclick = () => {
       soundOn = !soundOn;
-      muteBtn.textContent = soundOn ? '🔊' : '🔇';
+      muteBtn.innerHTML = soundOn ? SND_ON : SND_OFF;
     };
     sea.addEventListener('pointerdown', shoot);
     addEventListener('keydown', esc);
@@ -112,7 +140,7 @@
   }
   const hud = () => {
     hudScore.textContent = S.score;
-    hudNuts.textContent = '🥥'.repeat(S.nuts) + '💔'.repeat(Math.max(0, 3 - S.nuts));
+    hudNuts.innerHTML = NUT_LIVE.repeat(S.nuts) + NUT_LOST.repeat(Math.max(0, 3 - S.nuts));
   };
   const LANES = [{ y: .16, s: .5, v: 72, pts: 30 }, { y: .36, s: .75, v: 108, pts: 20 }, { y: .58, s: 1, v: 144, pts: 10 }];
   function spawn(elapsed){
@@ -226,8 +254,8 @@
           puff(b.tx, b.ty, '#f2b01e', 12, 48);
           puff(b.tx, b.ty + 14, '#d6f1fb', 10, 56);
           splinters(b.tx, b.ty);
-          float(b.tx, b.ty - 12, '+' + earned + (hit.pts >= 30 ? ' (Long Shot!)' : ''));
-          if (S.combo > 1) float(b.tx, b.ty - 34, `COMBO ×${S.combo}! 🔥`, true);
+          float(b.tx, b.ty - 12, '+' + earned + (hit.pts >= 30 ? ' (Long Shot)' : ''));
+          if (S.combo > 1) float(b.tx, b.ty - 34, `COMBO x${S.combo}!`, true);
           hit.el.animate([
             { translate: '0 0', rotate: '0deg', opacity: 1 },
             { translate: '0 14px', rotate: `${hit.dir * 14}deg`, opacity: 1, offset: .45 },
@@ -248,10 +276,10 @@
     S.over = true; const sc = S.score, prev = best(), record = sc > prev;
     if (record) { try { localStorage.setItem('pirateBest', sc); } catch (e) {} }
     card(`
-      ${record && sc ? '<div class="trophy">🏆</div><span class="record-pill">New Personal Best!</span>' : ''}
-      <p class="k">${survived ? 'Island Defended!' : 'The Coconuts Were Taken'}</p>
+      ${record && sc ? `${TROPHY_SVG}<span class="record-pill">New Personal Best</span>` : ''}
+      <p class="k">${survived ? 'Island Defended' : 'The Coconuts Were Taken'}</p>
       <h3>${sc} <i>points</i></h3>
-      <p>${record && sc ? 'Incredible accuracy! You set a brand-new high score record.' : survived ? 'Splendid shooting! The coconuts and island remain safe.' : 'They grabbed the haul. Aim slightly ahead of moving ships to lead your shots!'}${prev && !record ? ` Your all-time record is <b>${prev} pts</b>.` : ''}</p>
+      <p>${record && sc ? 'Incredible accuracy. You set a brand-new high score record.' : survived ? 'Splendid shooting. The coconuts and island remain safe.' : 'They grabbed the haul. Aim slightly ahead of moving ships to lead your shots.'}${prev && !record ? ` Your all-time record is <b>${prev} pts</b>.` : ''}</p>
       <div class="acts">
         <button class="btn fill" data-a="start">Play Again</button>
         <button class="btn" data-a="close">Back to Portfolio</button>

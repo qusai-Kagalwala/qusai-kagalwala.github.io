@@ -95,23 +95,45 @@
     el.style.left = x + 'px'; el.style.top = y + 'px';
   }
   const at = y => { let lo = 0, hi = LUT.length - 1; while (lo < hi) { const mid = (lo+hi) >> 1; if (LUT[mid][2] < y) lo = mid + 1; else hi = mid; } return lo; };
+
+  let navJumping = false;
+  navLinks.forEach(a => {
+    a.addEventListener('click', () => {
+      navJumping = true;
+      setTimeout(() => { navJumping = false; update(true); }, 400);
+    });
+  });
+
   function update(snap){
     if (!LUT.length) return;
     const vh = innerHeight, sy = scrollY, p = Math.min(1, sy / Math.max(1, docH - vh));
     bar.style.width = p*100 + '%';
     const [len, x, y] = LUT[at(sy + vh*(.4 + .45*p))];
-    if (!cur || snap || reduce) cur = {len, x, y};
-    else { cur.len += (len-cur.len)*.1; cur.x += (x-cur.x)*.1; cur.y += (y-cur.y)*.1; }
+    if (!cur || snap || reduce || navJumping) {
+      cur = {len, x, y};
+    } else {
+      const dLen = Math.abs(len - cur.len);
+      const f = dLen > 800 ? 0.45 : dLen > 300 ? 0.32 : 0.22;
+      cur.len += (len - cur.len) * f;
+      cur.x += (x - cur.x) * f;
+      cur.y += (y - cur.y) * f;
+    }
     const j = Math.min(LUT.length-1, at(cur.y)+3), k = Math.max(0, j-6);
     const dx = LUT[j][1]-LUT[k][1], dy = (LUT[j][2]-LUT[k][2]) || 1;
     if (Math.abs(dx) > 4) face = dx > 0 ? 1 : -1;
-    tilt += (Math.max(-14, Math.min(14, dx/dy*11)) - tilt)*.1;
-    boat.style.transform = `translate(${cur.x - boat.offsetWidth/2}px,${cur.y - boat.offsetHeight*.82}px) rotate(${tilt}deg) scaleX(${face})`;
+    tilt += (Math.max(-14, Math.min(14, dx/dy*11)) - tilt)*.2;
+    boat.style.transform = `translate3d(${cur.x - boat.offsetWidth/2}px,${cur.y - boat.offsetHeight*.82}px,0) rotate(${tilt}deg) scaleX(${face})`;
     ink.style.strokeDashoffset = wash.style.strokeDashoffset = Math.max(0, total - cur.len);
-    let s = sections[0]; for (const sec of sections) if (sec.offsetTop <= cur.y + 1) s = sec;
+    
+    // Viewport-based section detection for instant responsiveness
+    const viewCenter = sy + vh * 0.45;
+    let s = sections[0];
+    for (const sec of sections) if (sec.offsetTop <= viewCenter) s = sec;
+    
     const docked = total - cur.len < 26 && !!document.getElementById('shore');   // reached the island?
     if (docked !== boat.classList.contains('docked')) { boat.classList.toggle('docked', docked); dispatchEvent(new Event(docked ? 'boat:docked' : 'boat:undocked')); }
-    setTheme(s, !snap && curSec !== null);
+    const allowSplash = !snap && !navJumping && curSec !== null && Math.abs(len - cur.len) < 160;
+    setTheme(s, allowSplash);
   }
   if (voyage) (function loop(){ update(false); requestAnimationFrame(loop); })();
   else {   // Professional: no boat, just a progress line and the current section in the nav

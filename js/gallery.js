@@ -26,11 +26,12 @@
       <div class="g-wall"><div class="g-track">${bays.map((b, i) => `<section class="g-bay" data-i="${i}" aria-hidden="${i ? 'true' : 'false'}"><div class="g-glow"></div><div class="g-lamp"></div>${b}</section>`).join('')}</div></div>
       <div class="g-skirt"></div><div class="g-floor"></div><div class="g-shine"></div>
     </div>
-    <div class="g-top"><span class="mark">qusai<span>.</span></span><div class="modes"></div></div>
+    <div class="g-top"><a class="mark" href="#top" aria-label="Qusai Kagalwala — home">qusai<span>.</span></a></div>
     <button class="g-side l" aria-label="Previous drawing">←</button><button class="g-side r" aria-label="Next drawing">→</button>
     <div class="g-hud">
       <div class="g-ticks" role="group" aria-label="Jump to a drawing">${PAGES.map((p, i) => `<button data-i="${i + 1}" aria-label="No. ${i + 1}"></button>`).join('')}</div>
       <div class="g-ctrl"><button class="prev" aria-label="Previous">←</button><span class="n" aria-live="polite"></span><button class="next" aria-label="Next">→</button><button class="tour">Guided tour</button></div>
+      <div class="modes"></div>
     </div>`;
 
   const track = el.querySelector('.g-track'), floor = el.querySelector('.g-floor'), bayEls = [...el.querySelectorAll('.g-bay')];

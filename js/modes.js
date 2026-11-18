@@ -4,11 +4,21 @@
   const root = document.documentElement, MODE = root.dataset.mode || 'voyage';
   const NAMES = { pro: 'Professional', voyage: 'Voyage', gallery: 'Gallery' };
 
+  if (MODE === 'voyage' || MODE === 'gallery') {
+    try {
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    } catch (e) {}
+  }
+
   const setMode = m => {
     let saved = false;
     try { localStorage.setItem('mode', m); saved = localStorage.getItem('mode') === m; } catch (e) {}
     if (saved) { try { history.replaceState(null, '', location.pathname); } catch (e) {} }
     else location.hash = m;            // no storage (private mode, embeds): carry the choice in the address instead
+    try {
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);
+    } catch (e) {}
     location.reload();
   };
   window.__setMode = setMode;
@@ -20,10 +30,105 @@
     el.addEventListener('click', e => { const b = e.target.closest('button'); if (b && b.dataset.m !== MODE) setMode(b.dataset.m); });
   });
 
-  // first visit: ask
-  if (root.classList.contains('choosing')) {
-    const c = document.createElement('div'); c.id = 'chooser'; c.setAttribute('role', 'dialog'); c.setAttribute('aria-label', 'Choose how to look around');
+  // Clicking "qusai." logo opens the role/mode picker
+  document.querySelectorAll('.mark').forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      openChooser();
+    });
+  });
+
+  function initChooser(c) {
+    c.addEventListener('click', e => {
+      const b = e.target.closest('.opt');
+      if (b) setMode(b.dataset.m);
+      if (e.target.closest('.chooser-close')) {
+        root.classList.remove('choosing');
+        c.remove();
+      }
+    });
+
+    /* ---------- floating hover peek logic (direct video on hover) ---------- */
+    const cPeek = c.querySelector('#chooser-peek');
+    const cpVideo = cPeek.querySelector('video');
+    const cpTitle = cPeek.querySelector('.cp-title');
+    const cpTag = cPeek.querySelector('.cp-tag');
+    let cpx = 0, cpy = 0, ctx = 0, cty = 0, cShowing = false;
+
+    c.querySelectorAll('.opt').forEach(opt => {
+      opt.addEventListener('mouseenter', e => {
+        const m = opt.dataset.m;
+        const videoSrc = opt.dataset.video;
+        cpTitle.textContent = 'Actual Site · ' + (m === 'pro' ? 'Professional' : m === 'voyage' ? 'Voyage' : 'Gallery');
+        cpTag.textContent = m === 'voyage' ? 'Story' : m === 'pro' ? 'Work' : 'Art';
+
+        if (videoSrc) {
+          if (cpVideo.dataset.src !== videoSrc) {
+            cpVideo.dataset.src = videoSrc;
+            cpVideo.src = videoSrc;
+            cpVideo.load();
+          }
+          cpVideo.currentTime = 0;
+          cpVideo.play().catch(() => {});
+        }
+
+        cShowing = true;
+        cPeek.classList.add('on');
+        cpx = ctx = e.clientX;
+        cpy = cty = e.clientY;
+      });
+
+      opt.addEventListener('mouseleave', () => {
+        cShowing = false;
+        cPeek.classList.remove('on');
+        try { cpVideo.pause(); } catch (e) {}
+      });
+    });
+
+    window.addEventListener('mousemove', e => {
+      ctx = e.clientX;
+      cty = e.clientY;
+    });
+
+    (function cFollow(){
+      if (cShowing) {
+        cpx += (ctx - cpx) * 0.25;
+        cpy += (cty - cpy) * 0.25;
+        const w = cPeek.offsetWidth || 400, h = cPeek.offsetHeight || 280;
+        let x = cpx - w / 2;
+        let y = cpy - h - 22;
+        if (y < 20) y = cpy + 26;
+        if (x < 16) x = 16;
+        if (x + w > window.innerWidth - 16) x = window.innerWidth - w - 16;
+        cPeek.style.transform = `translate(${x}px,${y}px) rotate(${(ctx - cpx) * 0.035}deg)`;
+      }
+      requestAnimationFrame(cFollow);
+    })();
+
+    // Keyboard shortcuts
+    window.addEventListener('keydown', e => {
+      if (!root.classList.contains('choosing')) return;
+      const k = e.key.toLowerCase();
+      if (k === 'escape') {
+        root.classList.remove('choosing');
+        c.remove();
+      } else if (k === '1' || k === 'p') setMode('pro');
+      else if (k === '2' || k === 'v') setMode('voyage');
+      else if (k === '3' || k === 'g') setMode('gallery');
+    });
+
+    const first = c.querySelector('.opt'); if (first) first.focus({ preventScroll: true });
+  }
+
+  function openChooser() {
+    let c = document.getElementById('chooser');
+    if (c) c.remove();
+    c = document.createElement('div');
+    c.id = 'chooser';
+    c.setAttribute('role', 'dialog');
+    c.setAttribute('aria-label', 'Choose how to look around');
     c.innerHTML = `
+      <button class="chooser-close" aria-label="Close" type="button" style="position:absolute;top:20px;right:24px;background:none;border:0;color:#f3eee3;font-size:28px;cursor:pointer;line-height:1;z-index:10;opacity:.7;transition:opacity .2s">&times;</button>
       <p class="hi">qusai.</p>
       <h2>How would you like to <i>look around?</i></h2>
       <p>I'm a developer who also draws, so this site comes three ways. Hover over an option to preview the actual site.</p>
@@ -70,7 +175,7 @@
         </button>
       </div>
 
-      <small>Switch any time from the top navigation · Press <kbd>1</kbd> for Pro, <kbd>2</kbd> for Voyage, <kbd>3</kbd> for Gallery</small>
+      <small>Switch any time from the navigation · Press <kbd>1</kbd> for Pro, <kbd>2</kbd> for Voyage, <kbd>3</kbd> for Gallery</small>
 
       <!-- Floating video peek popover (shows actual site on hover, direct video) -->
       <div id="chooser-peek" aria-hidden="true">
@@ -81,86 +186,19 @@
             <span class="cp-tag">Live</span>
           </div>
           <div class="cp-media">
-            <video muted loop playsinline preload="auto"></video>
+            <video muted loop playsinline></video>
           </div>
         </div>
       </div>`;
 
     document.body.appendChild(c);
-    c.addEventListener('click', e => { const b = e.target.closest('.opt'); if (b) setMode(b.dataset.m); });
+    root.classList.add('choosing');
+    initChooser(c);
+  }
+  window.__openChooser = openChooser;
 
-    // Preload preview videos in background for instantaneous hover playback
-    ['media/preview-pro.mp4', 'media/preview-voyage.mp4', 'media/preview-gallery.mp4'].forEach(url => {
-      const v = document.createElement('video');
-      v.preload = 'auto';
-      v.src = url;
-    });
-
-    /* ---------- floating hover peek logic (direct video) ---------- */
-    const cPeek = c.querySelector('#chooser-peek');
-    const cpVideo = cPeek.querySelector('video');
-    const cpTitle = cPeek.querySelector('.cp-title');
-    const cpTag = cPeek.querySelector('.cp-tag');
-    let cpx = 0, cpy = 0, ctx = 0, cty = 0, cShowing = false;
-
-    c.querySelectorAll('.opt').forEach(opt => {
-      opt.addEventListener('mouseenter', e => {
-        const m = opt.dataset.m;
-        const videoSrc = opt.dataset.video;
-        cpTitle.textContent = 'Actual Site · ' + (m === 'pro' ? 'Professional' : m === 'voyage' ? 'Voyage' : 'Gallery');
-        cpTag.textContent = m === 'voyage' ? 'Story' : m === 'pro' ? 'Work' : 'Art';
-
-        if (videoSrc) {
-          if (cpVideo.dataset.src !== videoSrc) {
-            cpVideo.dataset.src = videoSrc;
-            cpVideo.src = videoSrc;
-          }
-          cpVideo.currentTime = 0;
-          cpVideo.play().catch(() => {});
-        }
-
-        cShowing = true;
-        cPeek.classList.add('on');
-        cpx = ctx = e.clientX;
-        cpy = cty = e.clientY;
-      });
-
-      opt.addEventListener('mouseleave', () => {
-        cShowing = false;
-        cPeek.classList.remove('on');
-        try { cpVideo.pause(); } catch (e) {}
-      });
-    });
-
-    window.addEventListener('mousemove', e => {
-      ctx = e.clientX;
-      cty = e.clientY;
-    });
-
-    (function cFollow(){
-      if (cShowing) {
-        cpx += (ctx - cpx) * 0.2;
-        cpy += (cty - cpy) * 0.2;
-        const w = cPeek.offsetWidth || 400, h = cPeek.offsetHeight || 280;
-        let x = cpx - w / 2;
-        let y = cpy - h - 22;
-        if (y < 20) y = cpy + 26;
-        if (x < 16) x = 16;
-        if (x + w > window.innerWidth - 16) x = window.innerWidth - w - 16;
-        cPeek.style.transform = `translate(${x}px,${y}px) rotate(${(ctx - cpx) * 0.035}deg)`;
-      }
-      requestAnimationFrame(cFollow);
-    })();
-
-    // Keyboard shortcuts
-    window.addEventListener('keydown', e => {
-      if (!root.classList.contains('choosing')) return;
-      const k = e.key.toLowerCase();
-      if (k === '1' || k === 'p') setMode('pro');
-      else if (k === '2' || k === 'v') setMode('voyage');
-      else if (k === '3' || k === 'g') setMode('gallery');
-    });
-
-    const first = c.querySelector('.opt'); if (first) first.focus({ preventScroll: true });
+  // first visit: ask
+  if (root.classList.contains('choosing')) {
+    openChooser();
   }
 })();

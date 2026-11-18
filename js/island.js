@@ -121,7 +121,7 @@
     b.type = (text, done) => {
       clearInterval(timer); b.classList.add('on'); span.textContent = ''; b.querySelector('.act').innerHTML = '';
       if (reduce) { span.textContent = text; done && done(); return; }
-      let i = 0; timer = setInterval(() => { span.textContent = text.slice(0, ++i); if (i >= text.length) { clearInterval(timer); done && done(); } }, 32);
+      let i = 0; timer = setInterval(() => { span.textContent = text.slice(0, ++i); if (i >= text.length) { clearInterval(timer); done && done(); } }, 14);
     };
     b.hide = () => b.classList.remove('on');
     return b;
@@ -185,37 +185,38 @@
       intro.classList.add('done'); root.classList.remove('loading');
       try { sessionStorage.setItem('seen', '1'); } catch (e) {}
       dispatchEvent(new Event('intro:done'));
-      setTimeout(() => intro.remove(), 1200);
+      setTimeout(() => intro.remove(), 800);
     }, delay);
     async function board(){
       if (gone) return; gone = true; b.hide();
       clip.removeAttribute('clip-path'); fig.classList.add('peek');
-      // walk down the beach…
+      // walk briskly down the beach…
       walker.classList.add('walking');
-      await anim(walker, [{transform:'translate(0,0)'}, {transform:'translate(132px,8px)'}], {duration: 1300, easing: 'cubic-bezier(.4,0,.6,1)'});
+      await anim(walker, [{transform:'translate(0,0)'}, {transform:'translate(132px,8px)'}], {duration: 680, easing: 'cubic-bezier(.25,.8,.25,1)'});
       walker.classList.remove('walking');
-      // …hop into the boat…
-      await anim(walker, [{transform:'translate(132px,8px)'}, {transform:'translate(158px,-46px)', offset:.45}, {transform:'translate(176px,18px)', opacity:1, offset:.85}, {transform:'translate(178px,24px)', opacity:0}], {duration: 650, easing: 'ease-in-out'});
+      // …fluidly hop into the boat…
+      await anim(walker, [{transform:'translate(132px,8px)'}, {transform:'translate(158px,-46px)', offset:.45}, {transform:'translate(176px,18px)', opacity:1, offset:.85}, {transform:'translate(178px,24px)', opacity:0}], {duration: 380, easing: 'ease-in-out'});
       riderEl.classList.add('on');
-      anim(boatG, [{transform:'translateY(0)'}, {transform:'translateY(6px)'}, {transform:'translateY(0)'}], {duration: 420, easing: 'ease-out'});
-      // …and sail.
-      setTimeout(() => intro.classList.add('sail'), 450);
-      curtain(1500);
+      anim(boatG, [{transform:'translateY(0)'}, {transform:'translateY(5px)'}, {transform:'translateY(0)'}], {duration: 250, easing: 'ease-out'});
+      // …and sail immediately.
+      setTimeout(() => intro.classList.add('sail'), 150);
+      curtain(750);
     }
-    function skip(){ if (gone) return; gone = true; b.hide(); riderEl.classList.add('on'); intro.classList.add('sail'); curtain(reduce ? 0 : 650); }
+    function skip(){ if (gone) return; gone = true; b.hide(); riderEl.classList.add('on'); intro.classList.add('sail'); curtain(reduce ? 0 : 450); }
     intro.querySelector('.skip').onclick = skip;
+    intro.addEventListener('click', e => { if (!e.target.closest('.fig') && !e.target.closest('.skip') && !gone) board(); });
     addEventListener('keydown', e => { if (e.key === 'Escape') skip(); });
-    setTimeout(() => fig.classList.add('peek'), reduce ? 0 : 1200);
+    setTimeout(() => fig.classList.add('peek'), reduce ? 0 : 350);
     setTimeout(() => {
       if (gone) return; placeBubble(b, fig, intro);
       b.type("Need a break? Hop on the boat — let's sail through Qusai's journey.", () => {
         const go = document.createElement('button'); go.className = 'go'; go.type = 'button'; go.textContent = 'Set sail →'; go.onclick = board;
-        const hint = document.createElement('small'); hint.textContent = 'or click me for more';
+        const hint = document.createElement('small'); hint.textContent = 'or click anywhere to sail';
         b.querySelector('.act').append(go, hint); go.focus({preventScroll: true});
       });
-    }, reduce ? 0 : 1900);
+    }, reduce ? 0 : 550);
     addEventListener('resize', () => !gone && placeBubble(b, fig, intro));
-    setTimeout(board, 14000);   // don't hold anyone hostage
+    setTimeout(board, 7000);   // don't hold anyone hostage
   } else if (intro) intro.remove();
 
   /* ---------- 2. the shore at the end of the page ---------- */
