@@ -162,6 +162,7 @@
     topImg.src = src(page); topImg.alt = `Sketchbook page ${page} of ${N}`; underImg.src = src(Math.min(N, page + 1));
     pn.textContent = pad(page); thumbs.forEach(([n, b]) => b.classList.toggle('on', n === page));
     wrap.classList.toggle('land', LAND.has(page));
+    wrap.classList.add('loaded');
     load(page + 1); load(page + 2); load(page - 1);
   }
   const ease = 'cubic-bezier(.45,.05,.2,1)', D = 850;
@@ -229,8 +230,9 @@
   document.querySelectorAll('.shot[data-shot]').forEach(el => {
     const list = SHOTS[el.dataset.shot]; if (!list) return el.remove();
     el.classList.add('has');
-    el.innerHTML = `<div class="slides">${list.map(([s, c], i) => `<figure class="${i ? '' : 'on'}"><img src="${s}" alt="${c}" loading="lazy" width="960" height="540"><figcaption>${c}</figcaption></figure>`).join('')}</div>
+    el.innerHTML = `<div class="slides">${list.map(([s, c], i) => `<figure class="${i ? '' : 'on'}"><img src="${s}" alt="${c}" loading="lazy" decoding="async" width="960" height="540" onload="this.parentElement.classList.add('loaded')"><figcaption>${c}</figcaption></figure>`).join('')}</div>
       ${list.length > 1 ? `<div class="dots">${list.map((_, i) => `<button aria-label="Screenshot ${i + 1}" class="${i ? '' : 'on'}"></button>`).join('')}</div>` : ''}`;
+    el.querySelectorAll('figure img').forEach(im => { if (im.complete) im.parentElement.classList.add('loaded'); });
     const figs = el.querySelectorAll('figure'), dots = el.querySelectorAll('.dots button'); let k = 0, timer;
     const show = i => { k = (i + figs.length) % figs.length; figs.forEach((f, j) => f.classList.toggle('on', j === k)); dots.forEach((d, j) => d.classList.toggle('on', j === k)); };
     dots.forEach((d, i) => d.onclick = e => { e.stopPropagation(); show(i); clearInterval(timer); });

@@ -72,7 +72,7 @@
 
       <small>Switch any time from the top navigation · Press <kbd>1</kbd> for Pro, <kbd>2</kbd> for Voyage, <kbd>3</kbd> for Gallery</small>
 
-      <!-- Floating video peek popover (shows actual site on hover, like certificate peek) -->
+      <!-- Floating video peek popover (shows actual site on hover, direct video) -->
       <div id="chooser-peek" aria-hidden="true">
         <div class="cp-frame">
           <div class="cp-bar">
@@ -82,26 +82,6 @@
           </div>
           <div class="cp-media">
             <video muted loop playsinline preload="auto"></video>
-            <div class="cp-fallback">
-              <div class="cp-fb-pro">
-                <div class="cp-mock-hero">
-                  <b>qusai.</b><span class="cp-pill">Open to internships</span>
-                  <h3>Qusai Kagalwala</h3>
-                  <p>Developer building AI web, desktop &amp; mobile tools.</p>
-                  <div class="cp-mock-kpis"><span>Microsoft Store</span><span>3 Live Apps</span><span>18 Certs</span><span>4× 1st Place</span></div>
-                </div>
-              </div>
-              <div class="cp-fb-voyage">
-                <div class="cp-mock-sky"><span class="cp-mock-moon"></span><i class="cp-s1"></i><i class="cp-s2"></i></div>
-                <svg class="cp-mock-river" viewBox="0 0 200 100"><path d="M10 30 Q 70 80 120 40 T 190 70" fill="none" stroke="#f2b01e" stroke-width="12" stroke-opacity=".2"/><path d="M10 30 Q 70 80 120 40 T 190 70" fill="none" stroke="#f2b01e" stroke-width="2" stroke-dasharray="3 4"/></svg>
-                <div class="cp-mock-boat"><svg viewBox="0 0 60 50"><path d="M5 25h40l-8 10H14z" fill="#f2b01e"/><path d="M26 4v21H12z" fill="#fff"/><path d="M26 4v21h14z" fill="#1f4fa3"/><circle cx="16" cy="15" r="3" fill="#fff8ec"/></svg></div>
-              </div>
-              <div class="cp-fb-gallery">
-                <div class="cp-mock-spot"></div>
-                <div class="cp-mock-wall"><img src="art/t/40.jpg" alt=""><img src="art/t/20.jpg" alt=""><img src="art/t/10.jpg" alt=""><img src="art/t/23.jpg" alt=""></div>
-                <div class="cp-mock-floor"></div>
-              </div>
-            </div>
           </div>
         </div>
       </div>`;
@@ -109,12 +89,18 @@
     document.body.appendChild(c);
     c.addEventListener('click', e => { const b = e.target.closest('.opt'); if (b) setMode(b.dataset.m); });
 
-    /* ---------- floating hover peek logic (like certificate peek) ---------- */
+    // Preload preview videos in background for instantaneous hover playback
+    ['media/preview-pro.mp4', 'media/preview-voyage.mp4', 'media/preview-gallery.mp4'].forEach(url => {
+      const v = document.createElement('video');
+      v.preload = 'auto';
+      v.src = url;
+    });
+
+    /* ---------- floating hover peek logic (direct video) ---------- */
     const cPeek = c.querySelector('#chooser-peek');
     const cpVideo = cPeek.querySelector('video');
     const cpTitle = cPeek.querySelector('.cp-title');
     const cpTag = cPeek.querySelector('.cp-tag');
-    const cpFallback = cPeek.querySelector('.cp-fallback');
     let cpx = 0, cpy = 0, ctx = 0, cty = 0, cShowing = false;
 
     c.querySelectorAll('.opt').forEach(opt => {
@@ -123,9 +109,6 @@
         const videoSrc = opt.dataset.video;
         cpTitle.textContent = 'Actual Site · ' + (m === 'pro' ? 'Professional' : m === 'voyage' ? 'Voyage' : 'Gallery');
         cpTag.textContent = m === 'voyage' ? 'Story' : m === 'pro' ? 'Work' : 'Art';
-        
-        // Show correct mode preview fallback
-        cpFallback.setAttribute('data-show', m);
 
         if (videoSrc) {
           if (cpVideo.dataset.src !== videoSrc) {
@@ -133,14 +116,7 @@
             cpVideo.src = videoSrc;
           }
           cpVideo.currentTime = 0;
-          const playPromise = cpVideo.play();
-          if (playPromise !== undefined) {
-            playPromise.then(() => {
-              cpVideo.style.display = 'block';
-            }).catch(() => {
-              cpVideo.style.display = 'none';
-            });
-          }
+          cpVideo.play().catch(() => {});
         }
 
         cShowing = true;

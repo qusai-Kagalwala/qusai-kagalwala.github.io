@@ -62,7 +62,7 @@ body.menu #menuBtn i:nth-child(2){top:21.5px;transform:rotate(-45deg)}
 
 /* ---- layout ---- */
 .wrap{max-width:1060px;margin:0 auto;padding:0 var(--gutter)}
-section{padding:130px 0;min-height:70vh}
+section{padding:130px 0;min-height:70vh;scroll-margin-top:76px}
 .label{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);margin-bottom:26px}
 .label b{font-weight:600;color:var(--accent);transition:color .8s}
 .label::after{content:'';flex:1;height:1px;background:var(--line)}
@@ -344,3 +344,34 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 .dots button{width:8px;height:8px;padding:0;border-radius:50%;border:0;background:rgba(19,33,63,.3);cursor:pointer;transition:all .25s}
 .dots button.on{background:#13213f;width:20px;border-radius:4px}
 @media (max-width:720px){.dots{display:none}.slides figcaption{font-size:11.5px}}
+
+/* ---- skeleton loading & progressive image fade ---- */
+@keyframes skeleton-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton-box,
+.slides figure:not(.loaded),
+.bookwrap:not(.loaded) .pg,
+.peek-skeleton {
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--ink) 4%, transparent) 25%,
+    color-mix(in srgb, var(--ink) 12%, transparent) 37%,
+    color-mix(in srgb, var(--ink) 4%, transparent) 63%
+  ) !important;
+  background-size: 300% 100% !important;
+  animation: skeleton-shimmer 1.8s ease-in-out infinite !important;
+}
+.slides figure img {
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+.slides figure.loaded img {
+  opacity: 1;
+}
+.piece img, .reel img {
+  content-visibility: auto;
+}
+#peek {
+  transition: opacity .2s, transform .08s ease-out;
+}
